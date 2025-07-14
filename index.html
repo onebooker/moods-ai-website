@@ -3,87 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moods.AI - Design 2: The Storyteller</title>
+    <title>Moods.AI - Design 1: The Analyst</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: 'Source Sans 3', sans-serif; background-color: #ffffff; }
-        .font-serif { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #f0f2f5; }
+        .font-mono { font-family: 'Roboto Mono', monospace; }
         .page-section { display: none; }
-        .active-nav-link { color: #db2777; border-bottom: 2px solid #db2777; padding-bottom: 2px;}
-        #modal-story { transition: opacity 300ms ease-in-out; }
-        #modal-content-story { transition: transform 300ms ease-in-out; }
+        .active-nav-link { color: #1d4ed8; font-weight: 600; }
+        .modal { transition: opacity 300ms ease-in-out; }
+        .modal-content { transition: transform 300ms ease-in-out; }
+        .spinner { border-top-color: #3498db; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="text-gray-700 antialiased">
+<body class="text-gray-800 antialiased">
 
-    <header class="py-5 px-6 md:px-8 flex justify-between items-center border-b">
-        <nav id="main-nav-story" class="flex items-center space-x-8 text-md font-medium"><a href="#" class="nav-link" onclick="event.preventDefault(); showPage('home', 'story')">Latest Reviews</a><a href="#" class="nav-link" onclick="event.preventDefault(); showPage('categories', 'story')">Categories</a><a href="#" class="nav-link" onclick="event.preventDefault(); showPage('mission', 'story')">Our Mission</a></nav>
-        <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('home', 'story')"><svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1m-1.636 6.364l-.707-.707M12 20v-1m-6.364-1.636l.707-.707M3 12H4m1.636-6.364l.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="font-serif font-bold text-3xl text-gray-900">Moods.AI</span></div>
-        <a href="#youtube" class="bg-red-600 text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-red-700 transition-colors duration-200 shadow-lg hidden md:inline-flex items-center gap-2"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.904 3.43 0 4.948 0 12s.904 8.57 4.385 8.816c3.599.245 11.626.246 15.23 0C23.096 20.57 24 19.052 24 12s-.904-8.57-4.385-8.816zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg><span>Subscribe</span></a>
+    <header class="bg-white/90 backdrop-blur-lg shadow-sm py-3 px-6 md:px-8 flex justify-between items-center sticky top-0 z-40">
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('home', 'analyst')">
+            <svg class="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1m-1.636 6.364l-.707-.707M12 20v-1m-6.364-1.636l.707-.707M3 12H4m1.636-6.364l.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="font-bold text-2xl text-gray-900">Moods.<span class="text-blue-700">AI</span></span>
+        </div>
+        <nav id="main-nav-analyst" class="hidden md:flex items-center space-x-8 text-sm">
+            <a href="#" class="nav-link text-gray-600 hover:text-blue-700 font-medium" onclick="event.preventDefault(); showPage('home', 'analyst')">Dashboard</a>
+            <a href="#" class="nav-link text-gray-600 hover:text-blue-700 font-medium" onclick="event.preventDefault(); showPage('categories', 'analyst')">Categories</a>
+            <a href="#" class="nav-link text-gray-600 hover:text-blue-700 font-medium" onclick="event.preventDefault(); showPage('methodology', 'analyst')">Methodology</a>
+        </nav>
+        <button onclick="showHelpModal()" class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors duration-200 shadow-md inline-flex items-center gap-2">
+            <span class="text-yellow-300">✨</span> Help Me Choose
+        </button>
     </header>
 
     <main class="container mx-auto px-4 py-10">
-        <div id="page-home-story" class="page-section">
-            <section class="mb-16">
-                <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden bg-gray-900 cursor-pointer group mb-6 shadow-2xl">
-                    <video class="w-full h-full object-cover" autoplay loop muted controls playsinline>
-                        <source src="https://moods-ai-media-assets.s3.eu-north-1.amazonaws.com/Video_Script_Generation_Complete.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="text-center max-w-4xl mx-auto">
-                    <p class="text-sm font-semibold text-pink-600">WELCOME TO MOODS.AI</p>
-                    <h1 class="font-serif text-5xl md:text-6xl font-extrabold text-gray-900 mt-2 mb-4">Stop Guessing. Start Understanding.</h1>
-                    <p class="text-lg text-gray-600">We analyze millions of real user reviews so you don't have to. Get the true mood of any product before you buy.</p>
-                </div>
-            </section>
-            <section>
-                <h2 class="font-serif text-4xl font-bold text-gray-900 mb-8 text-center">Top Rated Products by Mood</h2>
-                <div id="product-grid-story" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-            </section>
-        </div>
-        <div id="page-categories-story" class="page-section"><section class="text-center mb-12"><h1 class="font-serif text-5xl font-extrabold text-gray-900 mt-2 mb-4">Find Your Next Obsession</h1><p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore our curated categories to uncover the true sentiment behind the products you're interested in.</p></section><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><div class="relative rounded-2xl overflow-hidden h-80 group cursor-pointer"><img src="https://placehold.co/800x600/3b82f6/ffffff?text=Projectors" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-0 left-0 p-8"><h3 class="font-serif text-4xl font-bold text-white">Smart Projectors</h3></div></div><div class="relative rounded-2xl overflow-hidden h-80 group cursor-pointer"><img src="https://placehold.co/800x600/10b981/ffffff?text=Smartphones" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-0 left-0 p-8"><h3 class="font-serif text-4xl font-bold text-white">Smartphones</h3></div></div><div class="relative rounded-2xl overflow-hidden h-80 group cursor-pointer"><img src="https://placehold.co/800x600/8b5cf6/ffffff?text=Laptops" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-0 left-0 p-8"><h3 class="font-serif text-4xl font-bold text-white">Laptops</h3></div></div><div class="relative rounded-2xl overflow-hidden h-80 group cursor-pointer"><img src="https://placehold.co/800x600/f59e0b/ffffff?text=Wearables" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-0 left-0 p-8"><h3 class="font-serif text-4xl font-bold text-white">Wearables</h3></div></div></div></div>
-        <div id="page-mission-story" class="page-section"><section class="text-center mb-12"><h1 class="font-serif text-5xl font-extrabold text-gray-900 mt-2 mb-4">Our Mission</h1><p class="text-lg text-gray-600 max-w-2xl mx-auto">We started Moods.AI with a simple idea: what if buying decisions were based on real experiences, not just marketing?</p></section><div class="max-w-2xl mx-auto space-y-6 text-lg text-gray-700"><p>Every day, thousands of people share their honest thoughts about the products they use. They talk about the features they love, the quirks that drive them crazy, and the details that make a product worth it. These are powerful stories, but they're scattered across the internet.</p><p class="font-semibold text-gray-900">Our mission is to find those stories, understand their collective meaning, and share them with you in a way that's clear, concise, and trustworthy.</p><p>We use technology to listen at scale, but we use our human judgment to find the narrative. We believe this combination of data and storytelling is the best way to help you feel confident in your next purchase. Thank you for being a part of our community.</p></div></div>
+        <div id="page-home-analyst" class="page-section"><section class="text-center mb-16"><h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">Data-Driven Product Insights.</h1><p class="text-lg text-gray-600 max-w-3xl mx-auto">We process millions of user comments to generate objective, unbiased sentiment scores. No hype. Just data.</p></section><section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16"><div class="lg:col-span-2 bg-white rounded-2xl shadow-lg p-8"><h2 class="text-2xl font-bold text-gray-900 mb-4">Projector Sentiment Analysis</h2><div id="product-grid-analyst" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div></div><div class="bg-gray-800 text-white rounded-2xl shadow-lg p-8"><h2 class="text-2xl font-bold mb-6">Market Movers</h2><div class="space-y-5"><div class="flex items-center justify-between"><p class="font-medium">Anker Nebula Capsule 3</p><div class="flex items-center gap-2 text-green-400 font-mono text-lg">▲ <span>+5.2%</span></div></div><div class="flex items-center justify-between"><p class="font-medium">BenQ GS50</p><div class="flex items-center gap-2 text-red-400 font-mono text-lg">▼ <span>-1.8%</span></div></div><div class="flex items-center justify-between"><p class="font-medium">Samsung Freestyle</p><div class="flex items-center gap-2 text-green-400 font-mono text-lg">▲ <span>+3.1%</span></div></div></div></div></section></div>
+        <div id="page-categories-analyst" class="page-section"><section class="text-center mb-12"><h1 class="text-5xl font-extrabold text-gray-900 mb-4">Product Categories</h1><p class="text-lg text-gray-600 max-w-3xl mx-auto">Drill down into specific product categories to compare sentiment scores across the board.</p></section><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"><div class="bg-white rounded-xl shadow-lg p-6 flex flex-col hover:shadow-xl hover:border-blue-500 border-2 border-transparent transition-all duration-300"><h3 class="text-lg font-bold text-gray-900 mb-2">Smart Projectors</h3><p class="text-gray-600 text-sm mb-4 flex-grow">Brightness, portability, and more.</p><p class="font-mono text-blue-600">14 Products</p></div><div class="bg-white rounded-xl shadow-lg p-6 flex flex-col hover:shadow-xl hover:border-blue-500 border-2 border-transparent transition-all duration-300"><h3 class="text-lg font-bold text-gray-900 mb-2">Smartphones</h3><p class="text-gray-600 text-sm mb-4 flex-grow">Battery life, camera, and software.</p><p class="font-mono text-blue-600">38 Products</p></div><div class="bg-white rounded-xl shadow-lg p-6 flex flex-col hover:shadow-xl hover:border-blue-500 border-2 border-transparent transition-all duration-300"><h3 class="text-lg font-bold text-gray-900 mb-2">Laptops</h3><p class="text-gray-600 text-sm mb-4 flex-grow">Keyboards, screens, and performance.</p><p class="font-mono text-blue-600">52 Products</p></div><div class="bg-white rounded-xl shadow-lg p-6 flex flex-col hover:shadow-xl hover:border-blue-500 border-2 border-transparent transition-all duration-300"><h3 class="text-lg font-bold text-gray-900 mb-2">Wearables</h3><p class="text-gray-600 text-sm mb-4 flex-grow">Accuracy, battery, and app support.</p><p class="font-mono text-blue-600">21 Products</p></div></div></div>
+        <div id="page-methodology-analyst" class="page-section"><section class="text-center mb-12"><h1 class="text-5xl font-extrabold text-gray-900 mb-4">Our Methodology</h1><p class="text-lg text-gray-600 max-w-3xl mx-auto">Transparency is core to our mission. Here’s how we turn raw data into reliable insights.</p></section><div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12 space-y-8"><div class="flex items-start gap-6"><div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-lg w-16 h-16 flex items-center justify-center text-2xl font-bold">1</div><div><h3 class="text-xl font-bold text-gray-900 mb-2">Ethical Data Aggregation</h3><p class="text-gray-700">We collect publicly available data from high-volume discussion platforms like Reddit using official APIs. We respect all `robots.txt` directives and platform terms of service. No private data is ever collected.</p></div></div><div class="flex items-start gap-6"><div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-lg w-16 h-16 flex items-center justify-center text-2xl font-bold">2</div><div><h3 class="text-xl font-bold text-gray-900 mb-2">NLP Sentiment Analysis</h3><p class="text-gray-700">Each comment is processed by a Natural Language Processing model to determine its sentiment and identify the specific product features being discussed (e.g., "battery life," "screen brightness").</p></div></div><div class="flex items-start gap-6"><div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-lg w-16 h-16 flex items-center justify-center text-2xl font-bold">3</div><div><h3 class="text-xl font-bold text-gray-900 mb-2">Weighted Scoring Algorithm</h3><p class="text-gray-700">Our proprietary algorithm applies weights based on engagement (upvotes, replies), recency, and source authority to generate the final, reliable Moods.AI Score.</p></div></div></div></div>
     </main>
 
-    <div id="modal-story" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 hidden opacity-0">
-        <div id="modal-content-story" class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-8 relative scale-95"></div>
+    <div id="modal-analyst" class="modal fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 hidden opacity-0"><div id="modal-content-analyst" class="modal-content bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-8 relative scale-95"></div></div>
+    
+    <div id="help-modal" class="modal fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <div id="help-modal-content" class="modal-content bg-white rounded-xl shadow-2xl w-full max-w-lg p-8 relative scale-95">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-light" onclick="hideHelpModal()">&times;</button>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">AI Product Assistant</h2>
+            <p class="text-gray-600 mb-6">Describe what you're looking for, and our AI will recommend the best product based on real user sentiment.</p>
+            <form id="help-form">
+                <textarea id="help-input" class="w-full border border-gray-300 rounded-lg p-3 text-base" rows="4" placeholder="e.g., 'I need a small, portable projector for outdoor movie nights with good battery life.'"></textarea>
+                <button type="submit" class="mt-4 w-full bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 flex items-center justify-center gap-2">
+                    <span class="text-yellow-300">✨</span> Get Recommendation
+                </button>
+            </form>
+            <div id="help-response" class="mt-6"></div>
+        </div>
     </div>
 
     <script>
-        let detailChartStory = null;
-        const mockDataStory = { 'B089NB2T1T': { productName: 'xGIMI Horizon Pro', category: '4K Smart Projector', image: 'https://placehold.co/400x300/e0e7ff/3b82f6?text=xGIMI', description: 'A premium 4K smart projector known for its bright image and intelligent screen adaptation.', moodScore: 8.7, summary: 'Users rave about its stunning 4K clarity and automatic keystone correction.', topPros: ['Stunning 4K picture quality', 'Excellent auto-focus', 'Intuitive smart features'], topCons: ['Black levels in bright rooms', 'Fan noise can be noticeable', 'High price point'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [8.2, 8.4, 8.5, 8.8, 8.6, 8.7] } }, 'B0C1J2K3L4': { productName: 'Anker Nebula Capsule 3', category: 'Portable Mini Projector', image: 'https://placehold.co/400x300/e0e7ff/3b82f6?text=Nebula', description: 'An ultra-portable mini projector with built-in Android TV, perfect for on-the-go entertainment.', moodScore: 7.9, summary: 'Highly praised for its ultra-portability and built-in Android TV.', topPros: ['Ultra-portable and compact', 'Built-in Android TV', 'Good sound for its size'], topCons: ['Battery life could be longer', 'Brightness is limited', 'Not 4K resolution'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [7.5, 7.6, 7.8, 8.0, 7.8, 7.9] } }, 'B0M5N6O7P8': { productName: 'BenQ GS50', category: 'Outdoor Projector', image: 'https://placehold.co/400x300/e0e7ff/3b82f6?text=BenQ', description: 'A durable, splash-resistant portable projector designed for outdoor use with vibrant colors.', moodScore: 8.5, summary: 'Users love its robust build and splash resistance for outdoor use.', topPros: ['Robust and splash-resistant', 'Vibrant colors', 'Strong built-in speaker'], topCons: ['Lower native resolution', 'A bit bulky for some', 'Limited smart features'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [8.0, 8.1, 8.3, 8.4, 8.5, 8.5] } } };
+        let detailChartAnalyst = null;
+        const mockData = { 'B089NB2T1T': { productName: 'xGIMI Horizon Pro', category: '4K Smart Projector', image: 'https://placehold.co/150x100/e0e7ff/3b82f6?text=xGIMI', description: 'A premium 4K smart projector known for its bright image and intelligent screen adaptation.', moodScore: 8.7, topPros: ['Stunning 4K picture quality', 'Excellent auto-focus', 'Intuitive smart features'], topCons: ['Black levels in bright rooms', 'Fan noise can be noticeable', 'High price point'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [8.2, 8.4, 8.5, 8.8, 8.6, 8.7] } }, 'B0C1J2K3L4': { productName: 'Anker Nebula Capsule 3', category: 'Portable Mini Projector', image: 'https://placehold.co/150x100/e0e7ff/3b82f6?text=Nebula', description: 'An ultra-portable mini projector with built-in Android TV, perfect for on-the-go entertainment.', moodScore: 7.9, topPros: ['Ultra-portable and compact', 'Built-in Android TV', 'Good sound for its size'], topCons: ['Battery life could be longer', 'Brightness is limited', 'Not 4K resolution'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [7.5, 7.6, 7.8, 8.0, 7.8, 7.9] } }, 'B0M5N6O7P8': { productName: 'BenQ GS50', category: 'Outdoor Projector', image: 'https://placehold.co/150x100/e0e7ff/3b82f6?text=BenQ', description: 'A durable, splash-resistant portable projector designed for outdoor use with vibrant colors.', moodScore: 8.5, topPros: ['Robust and splash-resistant', 'Vibrant colors', 'Strong built-in speaker'], topCons: ['Lower native resolution', 'A bit bulky for some', 'Limited smart features'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [8.0, 8.1, 8.3, 8.4, 8.5, 8.5] } } };
 
         function showPage(pageId, prefix) { document.querySelectorAll('.page-section').forEach(s => s.style.display = 'none'); document.getElementById(`page-${pageId}-${prefix}`).style.display = 'block'; document.querySelectorAll(`#main-nav-${prefix} .nav-link`).forEach(l => { l.classList.remove('active-nav-link'); const o = l.getAttribute('onclick'); if (o && o.includes(`'${pageId}'`)) l.classList.add('active-nav-link'); }); window.scrollTo(0,0); }
+        function createProductCardAnalyst(id, product) { const card = document.createElement('div'); card.className = 'bg-gray-50 rounded-xl p-4 flex items-center gap-4 border border-gray-200 hover:border-blue-500 hover:bg-white transition-all duration-200 cursor-pointer'; card.onclick = () => showProductDetailAnalyst(id); const score = parseFloat(product.moodScore); let scoreColor = score >= 8.0 ? 'text-green-600' : score >= 6.0 ? 'text-yellow-600' : 'text-red-600'; card.innerHTML = `<div class="flex-shrink-0 w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm"><img src="${product.image}" alt="${product.productName}" class="w-full h-full object-contain p-1 rounded-lg"></div><div class="flex-grow"><h3 class="font-semibold text-gray-900">${product.productName}</h3><p class="text-sm text-gray-500">${product.category}</p></div><div class="text-right"><p class="font-mono text-2xl font-semibold ${scoreColor}">${score.toFixed(1)}</p><p class="text-xs text-gray-500">Mood Score</p></div>`; return card; }
         
-        function createProductCardStory(id, product) {
-            const card = document.createElement('div');
-            card.className = 'bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer';
-            card.onclick = () => showProductDetailStory(id);
-            const score = parseFloat(product.moodScore);
-            let scoreBg = score >= 8.0 ? 'bg-green-600' : score >= 6.0 ? 'bg-yellow-500' : 'bg-red-600';
-            card.innerHTML = `<div class="relative"><img src="${product.image}" alt="${product.productName}" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute top-4 right-4 ${scoreBg} text-white text-xl font-bold font-serif rounded-full w-16 h-16 flex items-center justify-center shadow-lg">${score.toFixed(1)}</div></div><div class="p-6"><h3 class="font-serif text-2xl font-bold text-gray-900 mb-2">${product.productName}</h3><p class="text-gray-600 text-sm mb-4 line-clamp-2">${product.summary}</p><span class="font-semibold text-pink-600 hover:underline">Read the Data Breakdown →</span></div>`;
-            return card;
-        }
-
-        function hideProductDetailStory() { const modal = document.getElementById('modal-story'); const modalContent = document.getElementById('modal-content-story'); modal.classList.add('opacity-0'); modalContent.classList.add('scale-95'); setTimeout(() => modal.classList.add('hidden'), 300); if (detailChartStory) detailChartStory.destroy(); }
+        function hideProductDetailAnalyst() { const modal = document.getElementById('modal-analyst'); const modalContent = document.getElementById('modal-content-analyst'); modal.classList.add('opacity-0'); modalContent.classList.add('scale-95'); setTimeout(() => modal.classList.add('hidden'), 300); if (detailChartAnalyst) detailChartAnalyst.destroy(); }
         
-        function showProductDetailStory(productId) {
-            const product = mockDataStory[productId];
+        function showProductDetailAnalyst(productId) {
+            const product = mockData[productId];
             if (!product) return;
-            const modal = document.getElementById('modal-story');
-            const modalContent = document.getElementById('modal-content-story');
-            modalContent.innerHTML = `<button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-light" onclick="hideProductDetailStory()">&times;</button><div class="grid md:grid-cols-2 gap-8"><div class="text-center md:text-left"><img src="${product.image}" class="rounded-lg shadow-md mx-auto mb-4 w-full max-w-sm"><h2 class="font-serif text-3xl font-bold text-gray-900">${product.productName}</h2><p class="text-gray-500 mb-4">${product.description}</p><a href="${product.affiliateLink}" target="_blank" class="bg-pink-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-pink-700 w-full md:w-auto inline-block text-center">View Prices</a></div><div><div class="mb-6"><canvas id="sentimentChartStory"></canvas></div><div class="grid grid-cols-2 gap-6 text-sm"><div class="space-y-2"><h4 class="font-bold text-gray-800 mb-2">Key Pros</h4><ul class="space-y-1 list-inside">${product.topPros.map(p => `<li class="flex items-start"><span class="text-green-500 mr-2">✓</span><span>${p}</span></li>`).join('')}</ul></div><div class="space-y-2"><h4 class="font-bold text-gray-800 mb-2">Common Cons</h4><ul class="space-y-1 list-inside">${product.topCons.map(c => `<li class="flex items-start"><span class="text-red-500 mr-2">✗</span><span>${c}</span></li>`).join('')}</ul></div></div></div></div>`;
+            const modal = document.getElementById('modal-analyst');
+            const modalContent = document.getElementById('modal-content-analyst');
+            const score = parseFloat(product.moodScore);
+            let scoreColor = score >= 8.0 ? 'text-green-600' : score >= 6.0 ? 'text-yellow-600' : 'text-red-600';
+            modalContent.innerHTML = `<button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-light" onclick="hideProductDetailAnalyst()">&times;</button><div class="grid md:grid-cols-2 gap-8"><div class="text-center md:text-left"><img src="${product.image}" class="rounded-lg shadow-md mx-auto mb-4 w-full max-w-sm"><h2 class="text-2xl font-bold text-gray-900">${product.productName}</h2><p class="text-gray-500 mb-4">${product.description}</p><div class="flex items-center justify-center md:justify-start gap-4 mb-4"><span class="font-mono text-5xl font-bold ${scoreColor}">${score.toFixed(1)}</span><div><p class="font-semibold">Overall Mood Score</p><p class="text-sm text-gray-500">Based on user sentiment</p></div></div><a href="${product.affiliateLink}" target="_blank" class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 w-full md:w-auto inline-block text-center">View Prices</a></div><div><div class="mb-6"><canvas id="sentimentChartAnalyst"></canvas></div><div class="bg-gray-50 rounded-lg p-4" id="ai-summary-container"><h4 class="font-bold text-gray-800 mb-2">AI-Generated Summary</h4><div id="ai-summary-content"><button onclick="generateAiSummary('${productId}')" class="w-full bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded-full font-semibold hover:bg-blue-50 flex items-center justify-center gap-2 text-sm"><span class="text-yellow-400">✨</span> Generate Summary</button></div></div><div class="grid grid-cols-2 gap-6 text-sm mt-4"><div class="space-y-2"><h4 class="font-bold text-gray-800 mb-2">Key Pros</h4><ul class="space-y-1 list-inside">${product.topPros.map(p => `<li class="flex items-start"><span class="text-green-500 mr-2">✓</span><span>${p}</span></li>`).join('')}</ul></div><div class="space-y-2"><h4 class="font-bold text-gray-800 mb-2">Common Cons</h4><ul class="space-y-1 list-inside">${product.topCons.map(c => `<li class="flex items-start"><span class="text-red-500 mr-2">✗</span><span>${c}</span></li>`).join('')}</ul></div></div></div></div>`;
             modal.classList.remove('hidden');
             setTimeout(() => { modal.classList.remove('opacity-0'); modalContent.classList.remove('scale-95'); }, 10);
-            renderDetailChartStory(productId);
+            renderDetailChartAnalyst(productId);
+        }
+        
+        function showHelpModal() { const modal = document.getElementById('help-modal'); const content = document.getElementById('help-modal-content'); modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); }, 10); }
+        function hideHelpModal() { const modal = document.getElementById('help-modal'); const content = document.getElementById('help-modal-content'); modal.classList.add('opacity-0'); content.classList.add('scale-95'); setTimeout(() => modal.classList.add('hidden'), 300); }
+
+        async function generateAiSummary(productId) {
+            const product = mockData[productId];
+            const summaryContainer = document.getElementById('ai-summary-content');
+            summaryContainer.innerHTML = `<div class="flex items-center justify-center gap-2 text-gray-500"><div class="w-5 h-5 border-2 border-gray-300 rounded-full spinner"></div><span>Generating...</span></div>`;
+
+            const prompt = `Generate a concise, balanced summary for a potential buyer about the ${product.productName}. Base it on these real user sentiments. Pros: ${product.topPros.join(', ')}. Cons: ${product.topCons.join(', ')}. Explain it like you're a helpful friend, not a robot.`;
+            
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                const result = await response.json();
+                const summaryText = result.candidates[0].content.parts[0].text;
+                summaryContainer.innerHTML = `<p class="text-sm text-gray-700">${summaryText}</p>`;
+            } catch (error) {
+                console.error("Gemini API error:", error);
+                summaryContainer.innerHTML = `<p class="text-sm text-red-500">Could not generate summary. Please try again.</p>`;
+            }
         }
 
-        function renderDetailChartStory(selectedProductId) { const ctx = document.getElementById('sentimentChartStory').getContext('2d'); if (detailChartStory) detailChartStory.destroy(); const datasets = Object.keys(mockDataStory).map(id => { const p = mockDataStory[id]; const isSelected = id === selectedProductId; return { label: p.productName, data: p.sentimentTrend.scores, borderColor: isSelected ? '#db2777' : 'rgba(156, 163, 175, 0.5)', borderWidth: isSelected ? 3 : 1.5, tension: 0.3, fill: isSelected, backgroundColor: 'rgba(219, 39, 119, 0.1)', pointRadius: isSelected ? 4 : 2 }; }); detailChartStory = new Chart(ctx, { type: 'line', data: { labels: mockDataStory[selectedProductId].sentimentTrend.labels, datasets: datasets }, options: { plugins: { legend: { position: 'bottom', labels: {boxWidth: 12, padding: 20} }, title: { display: true, text: 'Category Sentiment Comparison' } }, scales: { y: { beginAtZero: false, min: 7, max: 9 } } } }); }
+        document.getElementById('help-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const userInput = document.getElementById('help-input').value;
+            const responseContainer = document.getElementById('help-response');
+            responseContainer.innerHTML = `<div class="flex items-center justify-center gap-2 text-gray-500"><div class="w-5 h-5 border-2 border-gray-300 rounded-full spinner"></div><span>Thinking...</span></div>`;
 
-        document.addEventListener('DOMContentLoaded', () => { const grid = document.getElementById('product-grid-story'); if(grid) { grid.innerHTML = ''; for(const id in mockDataStory) { grid.appendChild(createProductCardStory(id, mockDataStory[id])); } } showPage('home', 'story'); });
+            const productDataForPrompt = Object.values(mockData).map(p => `${p.productName} (Pros: ${p.topPros.join(', ')}. Cons: ${p.topCons.join(', ')}.)`).join('\n');
+            const prompt = `You are a helpful product expert. A user is looking for a product. Their need is: "${userInput}". Based on the following product data, which single product do you recommend and why? Explain your choice clearly and concisely.\n\nAvailable products:\n${productDataForPrompt}`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                const result = await response.json();
+                const recommendationText = result.candidates[0].content.parts[0].text.replace(/\n/g, '<br>');
+                responseContainer.innerHTML = `<div class="bg-gray-50 rounded-lg p-4 text-sm text-gray-800">${recommendationText}</div>`;
+            } catch (error) {
+                console.error("Gemini API error:", error);
+                responseContainer.innerHTML = `<p class="text-sm text-red-500">Could not get recommendation. Please try again.</p>`;
+            }
+        });
+
+        function renderDetailChartAnalyst(selectedProductId) { const ctx = document.getElementById('sentimentChartAnalyst').getContext('2d'); if (detailChartAnalyst) detailChartAnalyst.destroy(); const datasets = Object.keys(mockData).map(id => { const p = mockData[id]; const isSelected = id === selectedProductId; return { label: p.productName, data: p.sentimentTrend.scores, borderColor: isSelected ? 'rgb(59, 130, 246)' : 'rgba(156, 163, 175, 0.5)', borderWidth: isSelected ? 3 : 1.5, tension: 0.3, fill: isSelected, backgroundColor: 'rgba(59, 130, 246, 0.1)', pointRadius: isSelected ? 4 : 2 }; }); detailChartAnalyst = new Chart(ctx, { type: 'line', data: { labels: mockData[selectedProductId].sentimentTrend.labels, datasets: datasets }, options: { plugins: { legend: { position: 'bottom', labels: {boxWidth: 12, padding: 20} }, title: { display: true, text: 'Category Sentiment Comparison' } }, scales: { y: { beginAtZero: false, min: 7, max: 9 } } } }); }
+        
+        document.addEventListener('DOMContentLoaded', () => { const grid = document.getElementById('product-grid-analyst'); if(grid) { grid.innerHTML = ''; for(const id in mockData) { grid.appendChild(createProductCardAnalyst(id, mockData[id])); } } showPage('home', 'analyst'); });
     </script>
 </body>
 </html>
