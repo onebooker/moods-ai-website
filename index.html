@@ -37,21 +37,35 @@
 
     <main class="container mx-auto px-4 py-12">
         <div id="page-home-hybrid" class="page-section">
-            <section class="mb-16">
-                 <div class="bg-gray-800 rounded-lg shadow-2xl p-8 text-center text-white relative overflow-hidden">
-                    <video class="absolute top-0 left-0 w-full h-full object-cover opacity-20" autoplay loop muted playsinline>
-                        <source src="https://moods-ai-media-assets.s3.eu-north-1.amazonaws.com/Video_Script_Generation_Complete.mp4" type="video/mp4">
-                    </video>
-                    <div class="relative z-10">
-                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">Understand the True <span class="text-cyan-300">Mood</span>.</h1>
-                        <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-gray-300">We analyze millions of real user discussions to bring you unbiased sentiment insights.</p>
-                        <div class="flex justify-center">
-                            <input type="text" id="search-bar" placeholder="Search for products or categories..." class="py-3 px-6 rounded-full text-gray-800 w-full max-w-md shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 px-6 text-center rounded-lg shadow-lg">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">Understand the True <span class="text-yellow-300">Mood</span> of Every Product.</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto opacity-90">We analyze millions of real user discussions to bring you unbiased sentiment insights.</p>
+                <div class="flex justify-center">
+                    <input type="text" id="search-bar" placeholder="Search for products or categories..." class="py-3 px-6 rounded-full text-gray-800 w-full max-w-md shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                </div>
+            </section>
+             <section class="my-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Featured Review</h2>
+                <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col lg:flex-row items-center gap-8">
+                    <div class="w-full lg:w-1/2">
+                        <div class="relative rounded-lg overflow-hidden shadow-lg group cursor-pointer" onclick="showProductDetailHybrid('proj_001')">
+                            <img src="https://placehold.co/560x315/e0e7ff/3b82f6?text=xGIMI+Pro+Review" alt="xGIMI Horizon Pro Video Review Thumbnail" class="w-full h-auto">
+                            <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-40">
+                                <svg class="w-20 h-20 text-white opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
                         </div>
+                    </div>
+                    <div class="w-full lg:w-1/2 text-center lg:text-left">
+                        <p class="text-sm font-semibold text-blue-600">IN-DEPTH ANALYSIS</p>
+                        <h3 class="text-3xl font-extrabold text-gray-900 mt-2 mb-4">xGIMI Horizon Pro: Is the Hype Real?</h3>
+                        <p class="text-gray-600 mb-6">With a Mood Score of 8.7, users rave about its stunning 4K clarity, but have some concerns about black levels. We dive deep into the data and the video review.</p>
+                        <button onclick="showProductDetailHybrid('proj_001')" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-700 transition-colors duration-200 shadow-xl inline-flex items-center gap-2">
+                           View Full Analysis
+                        </button>
                     </div>
                 </div>
             </section>
-            <section class="my-16"><h2 id="product-grid-title" class="text-3xl font-bold text-gray-900 mb-8 text-center">Trending Products</h2><div id="product-grid-hybrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div></section>
+            <section class="my-16"><h2 id="product-grid-title" class="text-3xl font-bold text-gray-900 mb-8 text-center">All Products</h2><div id="product-grid-hybrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div></section>
         </div>
         <div id="page-categories-hybrid" class="page-section">
             <h1 class="text-4xl font-extrabold text-gray-900 mb-2 text-center">Explore Product Categories</h1>
@@ -70,7 +84,7 @@
         const API_GATEWAY_INVOKE_URL = 'https://4fh84e5z4h.execute-api.eu-north-1.amazonaws.com';
         let detailChartHybrid = null;
         const mockData = {
-            'proj_001': { productName: 'xGIMI Horizon Pro', category: 'Projectors', image: 'https://placehold.co/150x100/e0e7ff/3b82f6?text=xGIMI+Pro', description: 'A premium 4K smart projector known for its bright image and intelligent screen adaptation.', moodScore: 8.7, summary: 'Users rave about its stunning 4K clarity and automatic keystone correction.', topPros: ['Stunning 4K picture quality', 'Excellent auto-focus', 'Intuitive smart features'], topCons: ['Black levels in bright rooms', 'Fan noise can be noticeable', 'High price point'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [8.2, 8.4, 8.5, 8.8, 8.6, 8.7] } },
+            'proj_001': { productName: 'xGIMI Horizon Pro', category: 'Projectors', image: 'https://placehold.co/150x100/e0e7ff/3b82f6?text=xGIMI+Pro', description: 'A premium 4K smart projector known for its bright image and intelligent screen adaptation.', moodScore: 8.7, summary: 'Users rave about its stunning 4K clarity and automatic keystone correction.', topPros: ['Stunning 4K picture quality', 'Excellent auto-focus', 'Intuitive smart features'], topCons: ['Black levels in bright rooms', 'Fan noise can be noticeable', 'High price point'], affiliateLink: '#', videoReviewUrl: 'https://moods-ai-media-assets.s3.eu-north-1.amazonaws.com/veo30generatepreview_Visual_A_closeup_shot_of_the_XGIMI_Horizo_0.mp4', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [8.2, 8.4, 8.5, 8.8, 8.6, 8.7] } },
             'proj_002': { productName: 'Anker Nebula Capsule 3', category: 'Projectors', image: 'https://placehold.co/150x100/e0e7ff/3b82f6?text=Nebula+3', description: 'An ultra-portable mini projector with built-in Android TV, perfect for on-the-go entertainment.', moodScore: 7.9, summary: 'Highly praised for its ultra-portability and built-in Android TV.', topPros: ['Ultra-portable and compact', 'Built-in Android TV', 'Good sound for its size'], topCons: ['Battery life could be longer', 'Brightness is limited', 'Not 4K resolution'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [7.5, 7.6, 7.8, 8.0, 7.8, 7.9] } },
             'proj_003': { productName: 'BenQ GS50', category: 'Projectors', image: 'https://placehold.co/150x100/e0e7ff/3b82f6?text=BenQ+GS50', description: 'A durable, splash-resistant portable projector designed for outdoor use with vibrant colors.', moodScore: 8.5, summary: 'Users love its robust build and splash resistance for outdoor use.', topPros: ['Robust and splash-resistant', 'Vibrant colors', 'Strong built-in speaker'], topCons: ['Lower native resolution', 'A bit bulky for some', 'Limited smart features'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [8.0, 8.1, 8.3, 8.4, 8.5, 8.5] } },
             'phone_001': { productName: 'Pixel 9 Pro', category: 'Smartphones', image: 'https://placehold.co/150x100/d1fae5/10b981?text=Pixel+9', description: 'Google\'s latest flagship, focusing on AI-powered camera features and a clean Android experience.', moodScore: 9.1, summary: 'Praised for its exceptional camera and smart software features. Some users note average battery life.', topPros: ['Best-in-class camera', 'Clean software experience', 'Unique AI features'], topCons: ['Battery life is just okay', 'Can run warm under load'], affiliateLink: '#', sentimentTrend: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], scores: [8.8, 8.9, 9.0, 9.2, 9.1, 9.1] } },
@@ -90,34 +104,48 @@
             
             Object.keys(mockData).forEach(id => {
                 const product = mockData[id];
-                if (product.productName.toLowerCase().includes(lowerCaseFilter) || product.category.toLowerCase().includes(lowerCaseFilter)) {
+                if (filter === '' || product.productName.toLowerCase().includes(lowerCaseFilter) || product.category.toLowerCase().includes(lowerCaseFilter)) {
                     productGrid.appendChild(createProductCardHybrid(id, product));
                 }
             });
         }
 
-        function createProductCardHybrid(id, product) { const card = document.createElement('div'); card.className = 'bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200 cursor-pointer'; card.onclick = () => showProductDetailHybrid(id); const score = parseFloat(product.moodScore); let scoreColor = score >= 8.0 ? 'text-green-600' : score >= 6.0 ? 'text-yellow-600' : 'text-red-600'; let scoreLabelClass = score >= 8.0 ? 'text-green-700 bg-green-100' : score >= 6.0 ? 'text-yellow-700 bg-yellow-100' : 'text-red-700 bg-red-100'; let labelText = score >= 8.0 ? 'Very Positive' : score >= 6.0 ? 'Positive' : 'Mixed'; card.innerHTML = `<img src="${product.image}" alt="${product.productName}" class="w-40 h-auto mb-4 rounded-lg"><h3 class="text-xl font-semibold text-gray-900 mb-2">${product.productName}</h3><p class="text-sm text-gray-600 mb-3">${product.category}</p><div class="flex items-center mb-4"><span class="font-mono text-5xl font-bold ${scoreColor} mr-2">${score.toFixed(1)}</span><span class="text-gray-500 text-sm">/ 10</span><span class="ml-3 text-sm font-medium ${scoreLabelClass} px-3 py-1 rounded-full">${labelText}</span></div><p class="text-gray-700 text-sm mb-4 line-clamp-3">${product.summary}</p><button class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 mt-auto">View Sentiment</button>`; return card; }
-        
-        function renderCategories() {
-            const categoryGrid = document.getElementById('category-grid');
-            const categories = [...new Set(Object.values(mockData).map(p => p.category))];
-            categoryGrid.innerHTML = '';
-            categories.forEach(category => {
-                const card = document.createElement('div');
-                card.className = 'bg-white rounded-xl shadow-lg p-6 flex flex-col hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer';
-                card.onclick = () => {
-                    showPage('home', 'hybrid');
-                    document.getElementById('product-grid-title').textContent = `Showing: ${category}`;
-                    renderProducts(category);
-                };
-                card.innerHTML = `<h3 class="text-xl font-bold text-gray-900 mb-2">${category}</h3><p class="text-gray-600 text-sm mb-4 flex-grow">Explore sentiment for ${category.toLowerCase()}.</p><button class="bg-blue-100 text-blue-700 mt-auto px-5 py-2 rounded-full font-semibold hover:bg-blue-200 w-full">View ${category}</button>`;
-                categoryGrid.appendChild(card);
-            });
-        }
+        function createProductCardHybrid(id, product) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200 cursor-pointer';
+            card.onclick = () => showProductDetailHybrid(id);
+            const score = parseFloat(product.moodScore);
+            let scoreColor = score >= 8.0 ? 'text-green-600' : score >= 6.0 ? 'text-yellow-600' : 'text-red-600';
+            let scoreLabelClass = score >= 8.0 ? 'text-green-700 bg-green-100' : score >= 6.0 ? 'text-yellow-700 bg-yellow-100' : 'text-red-700 bg-red-100';
+            let labelText = score >= 8.0 ? 'Very Positive' : score >= 6.0 ? 'Positive' : 'Mixed';
+            
+            let videoIcon = '';
+            if (product.videoReviewUrl) {
+                videoIcon = `<svg class="w-5 h-5 text-red-500 ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.904 3.43 0 4.948 0 12s.904 8.57 4.385 8.816c3.599.245 11.626.246 15.23 0C23.096 20.57 24 19.052 24 12s-.904-8.57-4.385-8.816zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>`;
+            }
 
+            card.innerHTML = `<img src="${product.image}" alt="${product.productName}" class="w-40 h-auto mb-4 rounded-lg"><div class="flex items-center justify-center"><h3 class="text-xl font-semibold text-gray-900 mb-2">${product.productName}</h3>${videoIcon}</div><p class="text-sm text-gray-600 mb-3">${product.category}</p><div class="flex items-center mb-4"><span class="font-mono text-5xl font-bold ${scoreColor} mr-2">${score.toFixed(1)}</span><span class="text-gray-500 text-sm">/ 10</span><span class="ml-3 text-sm font-medium ${scoreLabelClass} px-3 py-1 rounded-full">${labelText}</span></div><p class="text-gray-700 text-sm mb-4 line-clamp-3">${product.summary}</p><button class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 mt-auto">View Sentiment</button>`;
+            return card;
+        }
+        
+        function renderCategories() { const categoryGrid = document.getElementById('category-grid'); const categories = [...new Set(Object.values(mockData).map(p => p.category))]; categoryGrid.innerHTML = ''; categories.forEach(category => { const card = document.createElement('div'); card.className = 'bg-white rounded-xl shadow-lg p-6 flex flex-col hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer'; card.onclick = () => { showPage('home', 'hybrid'); document.getElementById('product-grid-title').textContent = `Showing: ${category}`; renderProducts(category); }; card.innerHTML = `<h3 class="text-xl font-bold text-gray-900 mb-2">${category}</h3><p class="text-gray-600 text-sm mb-4 flex-grow">Explore sentiment for ${category.toLowerCase()}.</p><button class="bg-blue-100 text-blue-700 mt-auto px-5 py-2 rounded-full font-semibold hover:bg-blue-200 w-full">View ${category}</button>`; categoryGrid.appendChild(card); }); }
+        
         function hideProductDetailHybrid() { const modal = document.getElementById('modal-hybrid'); const modalContent = document.getElementById('modal-content-hybrid'); modal.classList.add('opacity-0'); modalContent.classList.add('scale-95'); setTimeout(() => modal.classList.add('hidden'), 300); if (detailChartHybrid) detailChartHybrid.destroy(); }
         
-        function showProductDetailHybrid(productId) { const product = mockData[productId]; if (!product) return; const modal = document.getElementById('modal-hybrid'); const modalContent = document.getElementById('modal-content-hybrid'); const score = parseFloat(product.moodScore); let scoreColor = score >= 8.0 ? 'text-green-600' : score >= 6.0 ? 'text-yellow-600' : 'text-red-600'; modalContent.innerHTML = `<button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-light" onclick="hideProductDetailHybrid()">&times;</button><div class="grid md:grid-cols-2 gap-8"><div class="text-center md:text-left"><img src="${product.image}" class="rounded-lg shadow-md mx-auto mb-4 w-full max-w-sm"><h2 class="text-2xl font-bold text-gray-900">${product.productName}</h2><p class="text-gray-500 mb-4">${product.description}</p><div class="flex items-center justify-center md:justify-start gap-4 mb-4"><span class="font-mono text-5xl font-bold ${scoreColor}">${score.toFixed(1)}</span><div><p class="font-semibold">Overall Mood Score</p><p class="text-sm text-gray-500">Based on user sentiment</p></div></div><a href="${product.affiliateLink}" target="_blank" class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 w-full md:w-auto inline-block text-center">View Prices</a></div><div><div class="mb-6"><canvas id="sentimentChartHybrid"></canvas></div><div class="bg-gray-50 rounded-lg p-4" id="ai-summary-container-hybrid"><h4 class="font-bold text-gray-800 mb-2">AI-Generated Summary</h4><div id="ai-summary-content-hybrid"><button onclick="generateAiSummary('${productId}', 'hybrid')" class="w-full bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded-full font-semibold hover:bg-blue-50 flex items-center justify-center gap-2 text-sm"><span class="text-yellow-400">✨</span> Generate Summary</button></div></div><div class="grid grid-cols-2 gap-6 text-sm mt-4"><div class="space-y-2"><h4 class="font-bold text-gray-800 mb-2">Key Pros</h4><ul class="space-y-1 list-inside">${product.topPros.map(p => `<li class="flex items-start"><span class="text-green-500 mr-2">✓</span><span>${p}</span></li>`).join('')}</ul></div><div class="space-y-2"><h4 class="font-bold text-gray-800 mb-2">Common Cons</h4><ul class="space-y-1 list-inside">${product.topCons.map(c => `<li class="flex items-start"><span class="text-red-500 mr-2">✗</span><span>${c}</span></li>`).join('')}</ul></div></div></div></div>`; modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); modalContent.classList.remove('scale-95'); }, 10); renderDetailChartHybrid(productId); }
+        function showProductDetailHybrid(productId) {
+            const product = mockData[productId];
+            if (!product) return;
+            const modal = document.getElementById('modal-hybrid');
+            const modalContent = document.getElementById('modal-content-hybrid');
+            const score = parseFloat(product.moodScore);
+            let scoreColor = score >= 8.0 ? 'text-green-600' : score >= 6.0 ? 'text-yellow-600' : 'text-red-600';
+            
+            let videoButton = '';
+            if (product.videoReviewUrl) {
+                videoButton = `<a href="${product.videoReviewUrl}" target="_blank" class="bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 w-full md:w-auto inline-flex items-center justify-center gap-2 mt-4"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.904 3.43 0 4.948 0 12s.904 8.57 4.385 8.816c3.599.245 11.626.246 15.23 0C23.096 20.57 24 19.052 24 12s-.904-8.57-4.385-8.816zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>Watch Full Video Review</a>`;
+            }
+
+            modalContent.innerHTML = `<button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-light" onclick="hideProductDetailHybrid()">&times;</button><div class="grid md:grid-cols-2 gap-8"><div class="text-center md:text-left"><img src="${product.image}" class="rounded-lg shadow-md mx-auto mb-4 w-full max-w-sm"><h2 class="text-2xl font-bold text-gray-900">${product.productName}</h2><p class="text-gray-500 mb-4">${product.description}</p><div class="flex items-center justify-center md:justify-start gap-4 mb-4"><span class="font-mono text-5xl font-bold ${scoreColor}">${score.toFixed(1)}</span><div><p class="font-semibold">Overall Mood Score</p><p class="text-sm text-gray-500">Based on user sentiment</p></div></div><a href="${product.affiliateLink}" target="_blank" class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 w-full md:w-auto inline-block text-center">View Prices</a>${videoButton}</div><div><div class="mb-6"><canvas id="sentimentChartHybrid"></canvas></div><div class="bg-gray-50 rounded-lg p-4" id="ai-summary-container-hybrid"><h4 class="font-bold text-gray-800 mb-2">AI-Generated Summary</h4><div id="ai-summary-content-hybrid"><button onclick="generateAiSummary('${productId}', 'hybrid')" class="w-full bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded-full font-semibold hover:bg-blue-50 flex items-center justify-center gap-2 text-sm"><span class="text-yellow-400">✨</span> Generate Summary</button></div></div><div class="grid grid-cols-2 gap-6 text-sm mt-4"><div class="space-y-2"><h4 class="font-bold text-gray-800 mb-2">Key Pros</h4><ul class="space-y-1 list-inside">${product.topPros.map(p => `<li class="flex items-start"><span class="text-green-500 mr-2">✓</span><span>${p}</span></li>`).join('')}</ul></div><div class="space-y-2"><h4 class="font-bold text-gray-800 mb-2">Common Cons</h4><ul class="space-y-1 list-inside">${product.topCons.map(c => `<li class="flex items-start"><span class="text-red-500 mr-2">✗</span><span>${c}</span></li>`).join('')}</ul></div></div></div></div>`; modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); modalContent.classList.remove('scale-95'); }, 10); renderDetailChartHybrid(productId); }
         
         function showHelpModal() { const modal = document.getElementById('help-modal'); const content = document.getElementById('help-modal-content'); modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); }, 10); }
         function hideHelpModal() { const modal = document.getElementById('help-modal'); const content = document.getElementById('help-modal-content'); modal.classList.add('opacity-0'); content.classList.add('scale-95'); setTimeout(() => modal.classList.add('hidden'), 300); }
@@ -162,7 +190,10 @@
             renderProducts();
             renderCategories();
             showPage('home', 'hybrid');
-            document.getElementById('search-bar').addEventListener('input', (e) => renderProducts(e.target.value));
+            document.getElementById('search-bar').addEventListener('input', (e) => {
+                document.getElementById('product-grid-title').textContent = e.target.value ? `Showing Results for "${e.target.value}"` : 'All Products';
+                renderProducts(e.target.value);
+            });
         });
     </script>
 </body>
