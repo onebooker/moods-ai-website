@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO & Social Sharing Tags -->
+    <title>Moods.ai - Your Private AI Reflection Service</title>
+    <meta name="description" content="Moods.ai is a private, AI-powered journaling service that helps you process thoughts, uncover patterns, and build a wellness habit through the simplicity of email.">
+    <meta property="og:title" content="Moods.ai - Go Beyond Journaling">
+    <meta property="og:description" content="A private, AI-powered reflection service that helps you process thoughts and uncover insights through the simplicity of email.">
+    <meta property="og:image" content="https://placehold.co/1200x630/3b82f6/ffffff?text=Moods.ai">
+    <meta property="og:url" content="https://moods.ai">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #14b8a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] .arrow-down { transform: rotate(180deg); }
+        .companion-card, .insight-card, .testimonial-card { transition: transform 0.2s, box-shadow 0.2s; }
+        .companion-card:hover, .insight-card:hover, .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .pricing-tier { transition: transform 0.2s, box-shadow 0.2s; }
+        .pricing-tier:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+        .modal { transition: opacity 0.25s ease; }
+        .modal-content { transition: transform 0.25s ease; }
+        
+        /* Chart Animation */
+        #moodChart path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 2.5s ease-in-out forwards;
+        }
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-900">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold gradient-text">Moods.ai</h1>
+            <div>
+                <a href="#pricing" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors">View Plans</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="text-center py-20 px-6 bg-white">
+            <h2 class="text-5xl md:text-6xl font-bold leading-tight mb-4">Go Beyond Journaling.</h2>
+            <p class="text-lg md:text-xl text-gray-800 max-w-3xl mx-auto mb-8">Uncover insights effortlessly. Moods.ai is an active reflection service that helps you process thoughts and build a wellness habit—all through the simplicity of email.</p>
+            <a href="#pricing" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-transform transform hover:scale-105">Choose Your Plan</a>
+        </section>
+
+        <!-- Interactive Demo Section -->
+        <section class="py-20 px-6">
+            <div class="container mx-auto text-center max-w-3xl">
+                <h3 class="text-4xl font-bold mb-4">See It In Action</h3>
+                <p class="text-lg text-gray-800 mb-8">Curious how it works? See a real example of an entry and the kind of insightful reflection you'll receive from our different AI companions.</p>
+                <button id="openDemoModal" class="bg-white border border-gray-300 hover:bg-gray-100 text-gray-800 font-bold py-3 px-8 rounded-full text-lg transition-colors">View Interactive Demo</button>
+            </div>
+        </section>
+
+        <!-- Unlock Deeper Insights (Premium Features) -->
+        <section class="py-20 px-6 bg-white">
+            <div class="container mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold mb-2">From Daily Entries to Deeper Insights</h3>
+                    <p class="text-lg text-gray-800">Our Premium tier turns your reflections into a powerful tool for self-discovery.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto text-center">
+                    <div class="insight-card bg-white p-8 rounded-xl shadow-md">
+                        <h4 class="text-xl font-semibold mb-4">Track Your Mood Over Time</h4>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <svg id="moodChart" class="w-full" viewBox="0 0 100 50">
+                                <title>Animated mood trend chart</title>
+                                <path d="M 0 40 C 10 10, 20 10, 30 30 S 40 50, 50 40 S 60 20, 70 25 S 80 30, 90 20 L 100 15" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <p class="text-gray-800 mt-4">Opt-in to archiving and visualize your emotional journey with simple, private charts.</p>
+                    </div>
+                    <div class="insight-card bg-white p-8 rounded-xl shadow-md">
+                        <h4 class="text-xl font-semibold mb-4">AI-Powered Pattern Recognition</h4>
+                        <div class="bg-gray-100 p-4 rounded-lg text-left">
+                            <p class="text-sm font-semibold text-teal-600">Weekly Insight:</p>
+                            <p class="text-gray-800">"We've noticed you mention 'feeling overwhelmed' 3 times this week, often on days with late meetings."</p>
+                        </div>
+                        <p class="text-gray-800 mt-4">Our semi-agentic AI connects the dots between your entries to reveal habits and triggers.</p>
+                    </div>
+                    <div class="insight-card bg-white p-8 rounded-xl shadow-md">
+                        <h4 class="text-xl font-semibold mb-4">Build a Consistent Habit</h4>
+                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-center space-x-4">
+                            <div class="text-center">
+                                <div id="streak-count" class="text-3xl font-bold text-amber-500">0</div>
+                                <div class="text-sm text-gray-800">Day Streak</div>
+                            </div>
+                            <div class="text-center">
+                                <div id="entry-count" class="text-3xl font-bold text-amber-500">0</div>
+                                <div class="text-sm text-gray-800">Entries</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-800 mt-4">Gamified streaks and milestones make it easy and rewarding to stick with your practice.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Choose Your Companion Section -->
+        <section class="py-20 px-6">
+            <div class="container mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold mb-2">Find the Reflection Style For You</h3>
+                    <p class="text-lg text-gray-800">Your journal isn't one-size-fits-all. Your reflection shouldn't be either.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="companion-card bg-white p-8 rounded-xl shadow-md border-t-4 border-blue-400">
+                        <h4 class="text-xl font-semibold mb-2">Kai, The Listener</h4>
+                        <p class="text-gray-800">Offers empathy, validation, and gentle support to acknowledge your feelings.</p>
+                    </div>
+                    <div class="companion-card bg-white p-8 rounded-xl shadow-md border-t-4 border-purple-400">
+                        <h4 class="text-xl font-semibold mb-2">Socrates, The Philosopher</h4>
+                        <p class="text-gray-800">Asks deep, insightful questions that challenge your assumptions and reveal hidden truths.</p>
+                    </div>
+                    <div class="companion-card bg-white p-8 rounded-xl shadow-md border-t-4 border-amber-500">
+                        <h4 class="text-xl font-semibold mb-2">Marcus, The Stoic</h4>
+                        <p class="text-gray-800">Helps you focus on what you can control, reframing challenges to build resilience.</p>
+                    </div>
+                    <div class="companion-card bg-white p-8 rounded-xl shadow-md border-t-4 border-teal-400">
+                        <h4 class="text-xl font-semibold mb-2">Ada, The Analyst</h4>
+                        <p class="text-gray-800">Identifies recurring patterns, habits, and cognitive biases in your thinking over time.</p>
+                    </div>
+                </div>
+                 <p class="text-center text-gray-800 mt-8">Premium users can blend companion styles for a truly personalized reflection.</p>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-20 px-6 bg-white">
+            <div class="container mx-auto max-w-4xl">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold">Praised for its Simplicity and Insight</h3>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 text-left">
+                    <div class="testimonial-card bg-white p-6 rounded-lg border border-gray-200">
+                        <p class="text-gray-800 mb-4">"I never stuck with journaling before. The email format is genius. Ada's reflections helped me spot my anxiety triggers around work deadlines—truly life-changing."</p>
+                        <p class="font-semibold">- Alex P.</p>
+                    </div>
+                    <div class="testimonial-card bg-white p-6 rounded-lg border border-gray-200">
+                        <p class="text-gray-800 mb-4">"As someone who values privacy, Moods.ai was a perfect fit. Knowing my thoughts are deleted gives me the freedom to be completely honest without creating a digital paper trail."</p>
+                        <p class="font-semibold">- Jessica L.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 px-6 bg-gray-50">
+            <div class="container mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold">Find the Plan That's Right For You</h3>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Free Tier -->
+                    <div class="pricing-tier bg-white p-8 rounded-xl border border-gray-200">
+                        <h4 class="text-2xl font-bold mb-2">Free</h4>
+                        <p class="text-gray-800 mb-6">A perfect start to your journey.</p>
+                        <p class="text-4xl font-bold mb-6">$0</p>
+                        <ul class="space-y-3 text-left mb-8">
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>5 Reflections / Month</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Access to Kai, The Listener</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Complete Privacy & Deletion</li>
+                        </ul>
+                        <button class="signup-btn w-full bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-lg text-lg text-center inline-block">Start for Free</button>
+                    </div>
+
+                    <!-- Basic Tier -->
+                    <div class="pricing-tier bg-white p-8 rounded-xl border-2 border-blue-500 shadow-xl relative">
+                        <p class="absolute top-0 -mt-4 bg-blue-500 text-white text-sm font-bold py-1 px-3 rounded-full">Most Popular</p>
+                        <h4 class="text-2xl font-bold mb-2">Basic</h4>
+                        <p class="text-gray-800 mb-6">Build a consistent habit.</p>
+                        <p class="text-4xl font-bold mb-1">$7<span class="text-lg font-normal text-gray-500">/mo</span></p>
+                        <p class="text-sm text-gray-500 mb-6">7-day free trial included</p>
+                        <ul class="space-y-3 text-left mb-8">
+                            <li class="flex items-center font-bold"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Unlimited Reflections</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Access to All AI Companions</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Streaks & Milestones</li>
+                        </ul>
+                        <button class="signup-btn w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg text-center inline-block">Start Free Trial</button>
+                    </div>
+                    
+                    <!-- Premium Tier -->
+                    <div class="pricing-tier bg-white p-8 rounded-xl border border-gray-200">
+                        <h4 class="text-2xl font-bold mb-2">Premium</h4>
+                        <p class="text-gray-800 mb-6">Unlock deeper self-discovery.</p>
+                        <p class="text-4xl font-bold mb-1">$12<span class="text-lg font-normal text-gray-500">/mo</span></p>
+                        <p class="text-sm text-gray-500 mb-6">7-day free trial included</p>
+                        <ul class="space-y-3 text-left mb-8">
+                             <li class="flex items-center font-semibold"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Everything in Basic, plus:</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Optional Secure Archiving</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Mood Trend Charts & Insights</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>AI-Powered Pattern Recognition</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Blend Companion Styles</li>
+                             <li class="flex items-center text-teal-600"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Upsell: Curated AI Guides ($5)</li>
+                        </ul>
+                        <button class="signup-btn w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-lg text-lg text-center inline-block">Start Free Trial</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community/Referral Section -->
+        <section class="py-20 px-6 bg-white">
+            <div class="container mx-auto text-center max-w-2xl">
+                <h3 class="text-3xl font-bold mb-4">Share the Clarity, Get Rewarded</h3>
+                <p class="text-lg text-gray-800 mb-6">Love Moods.ai? Generate your unique referral link. When a friend signs up for a paid plan, you both get a month of Basic on us.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                    <input id="referralLink" type="text" class="bg-gray-100 border border-gray-300 text-gray-700 text-sm rounded-lg p-2.5 w-full sm:w-64" value="https://moods.ai?ref=" readonly>
+                    <button id="copyLinkBtn" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg w-full sm:w-auto">Copy Link</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- FAQ Section -->
+        <section class="py-20 px-6 bg-gray-50">
+            <div class="container mx-auto max-w-3xl">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold">Your Questions, Answered</h3>
+                </div>
+                <div class="space-y-4">
+                    <details class="bg-white p-6 rounded-lg shadow-sm group">
+                        <summary role="button" aria-expanded="false" class="flex justify-between items-center font-semibold cursor-pointer">
+                            Why not just use ChatGPT or another general AI?
+                            <svg class="w-5 h-5 text-gray-500 transition-transform transform arrow-down" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </summary>
+                        <p class="text-gray-800 mt-4">Moods.ai is a curated experience, not just an AI. We provide value in three key ways: 1) **Zero Friction:** It's a single step via email, fitting into your life without new apps or logins. 2) **Guaranteed Quality:** Our AI companions use expertly crafted prompts to deliver consistently insightful reflections. We've done the hard work for you. 3) **True Privacy:** A dedicated, ephemeral channel feels safer and more private than a general chat history.</p>
+                    </details>
+                    <details class="bg-white p-6 rounded-lg shadow-sm group">
+                        <summary role="button" aria-expanded="false" class="flex justify-between items-center font-semibold cursor-pointer">
+                            If entries are deleted, how do Premium insights work?
+                            <svg class="w-5 h-5 text-gray-500 transition-transform transform arrow-down" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </summary>
+                        <p class="text-gray-800 mt-4">Privacy is paramount. Insights and trend-tracking are strictly opt-in features for Premium users. When you enable archiving, your entries are stored securely with end-to-end encryption. You can purge your archive at any time. For all other users, the "delete after reflection" policy remains absolute.</p>
+                    </details>
+                     <details class="bg-white p-6 rounded-lg shadow-sm group">
+                        <summary role="button" aria-expanded="false" class="flex justify-between items-center font-semibold cursor-pointer">
+                            How do you ensure the AI responses are safe and unbiased?
+                            <svg class="w-5 h-5 text-gray-500 transition-transform transform arrow-down" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </summary>
+                        <p class="text-gray-800 mt-4">This is our highest priority. Our AI companions are not general-purpose chatbots. They are built on fine-tuned models and operate using carefully engineered prompts that are continuously audited for safety, bias, and helpfulness. We explicitly prohibit the AI from giving medical advice and focus solely on supportive, insightful reflection.</p>
+                    </details>
+                    <details class="bg-white p-6 rounded-lg shadow-sm group">
+                        <summary role="button" aria-expanded="false" class="flex justify-between items-center font-semibold cursor-pointer">
+                            Is this a replacement for therapy?
+                            <svg class="w-5 h-5 text-gray-500 transition-transform transform arrow-down" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </summary>
+                        <p class="text-gray-800 mt-4">Absolutely not. Moods.ai is a tool for self-reflection, not a medical service. It is not designed to diagnose or treat any mental health conditions. If you are struggling, please seek help from a qualified professional.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <div class="flex items-center text-sm text-gray-400" title="Our AI models are regularly audited for safety and bias.">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span>Ethical AI</span>
+                </div>
+                 <div class="flex items-center text-sm text-gray-400" title="We use energy-efficient models to minimize our environmental impact.">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <span>Eco-Mode Processing</span>
+                </div>
+            </div>
+            <p>&copy; 2025 Moods.ai. All Rights Reserved.</p>
+            <div class="mt-4">
+                <a href="#" class="text-gray-400 hover:text-white mx-2">Terms of Service</a>
+                <a href="#" class="text-gray-400 hover:text-white mx-2">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 pointer-events-none z-50">
+        <div class="modal-content bg-white w-full max-w-4xl rounded-lg shadow-xl p-8 transform -translate-y-10">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Interactive Demo</h3>
+                <button id="closeDemoModal" aria-label="Close demo modal" class="text-gray-500 hover:text-gray-800 text-3xl">&times;</button>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Your Entry:</h4>
+                    <p class="text-gray-800 text-sm">"Feeling really overwhelmed today. I have this big project deadline at work, and on top of that, I feel like I'm not being a present enough parent. It's like I'm failing on both fronts and just treading water. I'm not sure how to get ahead of it all."</p>
+                </div>
+                <div id="reflection-container">
+                    <!-- Dynamic content will be injected here -->
+                </div>
+            </div>
+             <div class="mt-6 border-t pt-4">
+                <p class="text-sm text-gray-800 mb-2 font-semibold">See how different companions would respond:</p>
+                <div id="demo-tabs" class="flex space-x-2">
+                    <button class="demo-tab bg-blue-500 text-white py-1 px-3 rounded-md text-sm">Kai</button>
+                    <button class="demo-tab bg-gray-200 text-gray-800 py-1 px-3 rounded-md text-sm">Socrates</button>
+                    <button class="demo-tab bg-gray-200 text-gray-800 py-1 px-3 rounded-md text-sm">Ada</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 pointer-events-none z-50">
+        <div class="modal-content bg-white w-full max-w-md rounded-lg shadow-xl p-8 transform -translate-y-10 text-center relative">
+             <button id="closeSignupModal" aria-label="Close signup modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl">&times;</button>
+            <h3 class="text-2xl font-bold mb-4">Start Your Journey</h3>
+            <p class="text-gray-800 mb-6">Enter your email to begin your 7-day free trial. No credit card required.</p>
+            <form id="signupForm" class="flex flex-col space-y-4">
+                <input id="emailInput" type="email" placeholder="you@example.com" class="border border-gray-300 p-3 rounded-lg w-full" required>
+                <p id="emailError" class="text-red-500 text-sm text-left hidden">Please enter a valid email address.</p>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg">Create My Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- DATA ---
+            const demoReflections = {
+                Kai: {
+                    style: 'bg-blue-50 border-blue-200',
+                    html: `<h4 class="font-semibold mb-2">Kai's Reflection (The Listener):</h4><div class="text-gray-800 text-sm space-y-3"><p>It sounds like you're feeling the immense pressure of trying to excel in different, demanding parts of your life, and it's completely understandable to feel overwhelmed by that weight.</p><p>I'm noticing a theme of holding yourself to a very high standard, where anything less than perfect feels like failure. This "all-or-nothing" thinking can often make challenging situations feel impossible.</p><p class="font-semibold">What is one small thing you did today, either at work or as a parent, that you can acknowledge as a step in the right direction, no matter how minor?</p></div>`
+                },
+                Socrates: {
+                    style: 'bg-purple-50 border-purple-200',
+                    html: `<h4 class="font-semibold mb-2">Socrates' Reflection (The Philosopher):</h4><div class="text-gray-800 text-sm space-y-3"><p>It's clear you're grappling with a conflict between your professional duties and your role as a parent. The feeling of 'failing' suggests there is an ideal standard you're measuring yourself against.</p><p>You use the phrase "present enough parent." This implies there is a certain level of presence that would be 'enough'.</p><p class="font-semibold">What does being a "present enough parent" truly look like to you, if you were to define it outside of today's pressures?</p></div>`
+                },
+                Ada: {
+                    style: 'bg-teal-50 border-teal-200',
+                    html: `<h4 class="font-semibold mb-2">Ada's Reflection (The Analyst):</h4><div class="text-gray-800 text-sm space-y-3"><p>The data points to two core stressors: [Project Deadline] and [Parental Presence]. The resulting emotion is 'overwhelmed', which is a logical consequence of resource contention—your time and energy.</p><p>The phrase 'treading water' indicates a state of maintenance without progress. This often stems from trying to optimize two competing priorities simultaneously, leading to suboptimal outcomes in both.</p><p class="font-semibold">If you could only allocate your energy to one of these two fronts for the next 24 hours to achieve a single, meaningful outcome, which would you choose and why?</p></div>`
+                }
+            };
+
+            // --- MODAL LOGIC ---
+            function setupModal(modalId, openBtnSelector, closeBtnId) {
+                const modal = document.getElementById(modalId);
+                const openBtns = document.querySelectorAll(openBtnSelector);
+                const closeBtn = document.getElementById(closeBtnId);
+                const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+                let firstFocusableElement, lastFocusableElement;
+
+                const openModal = () => {
+                    modal.classList.remove('opacity-0', 'pointer-events-none');
+                    modal.querySelector('.modal-content').classList.remove('-translate-y-10');
+                    const focusableContent = modal.querySelectorAll(focusableElements);
+                    firstFocusableElement = focusableContent[0];
+                    lastFocusableElement = focusableContent[focusableContent.length - 1];
+                    firstFocusableElement.focus();
+                };
+
+                const closeModal = () => {
+                    modal.querySelector('.modal-content').classList.add('-translate-y-10');
+                    modal.classList.add('opacity-0');
+                    setTimeout(() => modal.classList.add('pointer-events-none'), 250);
+                };
+
+                openBtns.forEach(btn => btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal();
+                }));
+                
+                closeBtn.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+                
+                modal.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') closeModal();
+                    if (e.key === 'Tab') {
+                        if (e.shiftKey) {
+                            if (document.activeElement === firstFocusableElement) {
+                                lastFocusableElement.focus();
+                                e.preventDefault();
+                            }
+                        } else {
+                            if (document.activeElement === lastFocusableElement) {
+                                firstFocusableElement.focus();
+                                e.preventDefault();
+                            }
+                        }
+                    }
+                });
+            }
+
+            setupModal('demoModal', '#openDemoModal', 'closeDemoModal');
+            setupModal('signupModal', '.signup-btn', 'closeSignupModal');
+
+            // --- INTERACTIVE DEMO LOGIC ---
+            const reflectionContainer = document.getElementById('reflection-container');
+            const demoTabs = document.querySelectorAll('.demo-tab');
+            
+            function updateReflection(agent) {
+                const data = demoReflections[agent];
+                reflectionContainer.className = `p-4 rounded-lg border ${data.style}`;
+                reflectionContainer.innerHTML = data.html;
+
+                demoTabs.forEach(tab => {
+                    if (tab.textContent === agent) {
+                        tab.className = 'demo-tab bg-blue-500 text-white py-1 px-3 rounded-md text-sm';
+                    } else {
+                        tab.className = 'demo-tab bg-gray-200 text-gray-800 py-1 px-3 rounded-md text-sm';
+                    }
+                });
+            }
+
+            demoTabs.forEach(tab => {
+                tab.addEventListener('click', () => updateReflection(tab.textContent));
+            });
+            updateReflection('Kai'); // Set initial state
+
+            // --- SIGNUP FORM VALIDATION ---
+            const signupForm = document.getElementById('signupForm');
+            const emailInput = document.getElementById('emailInput');
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (emailRegex.test(emailInput.value)) {
+                    emailError.classList.add('hidden');
+                    alert('Thank you for signing up! Please check your email.');
+                    // In a real app, you would close the modal and show a success message.
+                } else {
+                    emailError.classList.remove('hidden');
+                }
+            });
+
+            // --- REFERRAL LINK LOGIC ---
+            const copyLinkBtn = document.getElementById('copyLinkBtn');
+            const referralLinkInput = document.getElementById('referralLink');
+            copyLinkBtn.addEventListener('click', () => {
+                if (!referralLinkInput.value.includes('?ref=')) {
+                    const randomString = Math.random().toString(36).substring(2, 8);
+                    referralLinkInput.value = `https://moods.ai?ref=${randomString}`;
+                }
+                navigator.clipboard.writeText(referralLinkInput.value).then(() => {
+                    copyLinkBtn.textContent = 'Copied!';
+                    setTimeout(() => { copyLinkBtn.textContent = 'Copy Link'; }, 2000);
+                });
+            });
+
+            // --- ANIMATION & LOCALSTORAGE LOGIC ---
+            function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) window.requestAnimationFrame(step);
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            const streakCountEl = document.getElementById('streak-count');
+            const entryCountEl = document.getElementById('entry-count');
+            
+            // Persist mock data with localStorage
+            let streak = localStorage.getItem('moodsAiStreak') || 0;
+            let entries = localStorage.getItem('moodsAiEntries') || 0;
+            
+            // For demo purposes, let's set some values if they are 0
+            if (streak == 0) streak = 14;
+            if (entries == 0) entries = 50;
+
+            // Animate on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateValue(streakCountEl, 0, streak, 1500);
+                        animateValue(entryCountEl, 0, entries, 1500);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(document.querySelector('.insight-card'));
+        });
+    </script>
+</body>
+</html>
