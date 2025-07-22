@@ -11,6 +11,7 @@
     <meta property="og:image" content="https://placehold.co/1200x630/3b82f6/ffffff?text=Moods.ai">
     <meta property="og:url" content="https://moods.ai">
     <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="favicon.ico" sizes="any"> <!-- Favicon for perf -->
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,6 +55,43 @@
             }
         }
     </style>
+    <!-- Google Analytics Placeholder -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-XXXXX-X');
+    </script>
+    <!-- FAQ Schema for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Why not just use ChatGPT or another general AI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Moods.ai is a curated experience, not just an AI. We provide value in three key ways: 1) Zero Friction: It's a single step via email. 2) Guaranteed Quality: Our AI companions use expert prompts for insightful reflections. 3) True Privacy: A dedicated, ephemeral channel feels safer than a general chat history."
+        }
+      },{
+        "@type": "Question",
+        "name": "If entries are deleted, how do Premium insights work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Privacy is paramount. Insights are a strictly opt-in feature for Premium users. When you enable archiving, your entries are stored securely with end-to-end encryption. You can purge your archive at any time. For all other users, the 'delete after reflection' policy remains absolute."
+        }
+      },{
+        "@type": "Question",
+        "name": "Is this a replacement for therapy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely not. Moods.ai is a tool for self-reflection, not a medical service. It is not designed to diagnose or treat any mental health conditions. If you are struggling, please seek help from a qualified professional."
+        }
+      }]
+    }
+    </script>
 </head>
 <body class="text-gray-900">
 
@@ -62,7 +100,7 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold gradient-text">Moods.ai</h1>
             <div>
-                <a href="#pricing" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors">View Plans</a>
+                <a href="#pricing" class="cta-button bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors">View Plans</a>
             </div>
         </div>
     </header>
@@ -73,7 +111,7 @@
         <section class="text-center py-20 px-6 bg-white">
             <h2 class="text-5xl md:text-6xl font-bold leading-tight mb-4">Go Beyond Journaling.</h2>
             <p class="text-lg md:text-xl text-gray-800 max-w-3xl mx-auto mb-8">Uncover insights effortlessly. Moods.ai is an active reflection service that helps you process thoughts and build a wellness habit—all through the simplicity of email.</p>
-            <a href="#pricing" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-transform transform hover:scale-105">Choose Your Plan</a>
+            <a href="#pricing" class="cta-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-transform transform hover:scale-105">Choose Your Plan</a>
         </section>
 
         <!-- Interactive Demo Section -->
@@ -96,7 +134,7 @@
                     <div class="insight-card bg-white p-8 rounded-xl shadow-md">
                         <h4 class="text-xl font-semibold mb-4">Track Your Mood Over Time</h4>
                         <div class="bg-gray-100 p-4 rounded-lg">
-                            <svg id="moodChart" class="w-full" viewBox="0 0 100 50">
+                            <svg id="moodChart" class="w-full" viewBox="0 0 100 50" loading="lazy">
                                 <title>Animated mood trend chart</title>
                                 <path d="M 0 40 C 10 10, 20 10, 30 30 S 40 50, 50 40 S 60 20, 70 25 S 80 30, 90 20 L 100 15" fill="none" stroke="#3b82f6" stroke-width="2"/>
                             </svg>
@@ -164,14 +202,29 @@
                 <div class="text-center mb-12">
                     <h3 class="text-4xl font-bold">Praised for its Simplicity and Insight</h3>
                 </div>
-                <div class="grid md:grid-cols-2 gap-8 text-left">
-                    <div class="testimonial-card bg-white p-6 rounded-lg border border-gray-200">
-                        <p class="text-gray-800 mb-4">"I never stuck with journaling before. The email format is genius. Ada's reflections helped me spot my anxiety triggers around work deadlines—truly life-changing."</p>
-                        <p class="font-semibold">- Alex P.</p>
-                    </div>
-                    <div class="testimonial-card bg-white p-6 rounded-lg border border-gray-200">
-                        <p class="text-gray-800 mb-4">"As someone who values privacy, Moods.ai was a perfect fit. Knowing my thoughts are deleted gives me the freedom to be completely honest without creating a digital paper trail."</p>
-                        <p class="font-semibold">- Jessica L.</p>
+                <div id="testimonialCarousel" class="relative overflow-hidden w-full">
+                    <div id="testimonial-slider" class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-card flex-shrink-0 w-full md:w-1/2 p-4">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 h-full">
+                                <p class="text-gray-800 mb-4">"I never stuck with journaling before. The email format is genius. Ada's reflections helped me spot my anxiety triggers around work deadlines—truly life-changing."</p>
+                                <p class="font-semibold">- Alex P.</p>
+                            </div>
+                        </div>
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-card flex-shrink-0 w-full md:w-1/2 p-4">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 h-full">
+                                <p class="text-gray-800 mb-4">"As someone who values privacy, Moods.ai was a perfect fit. Knowing my thoughts are deleted gives me the freedom to be completely honest without creating a digital paper trail."</p>
+                                <p class="font-semibold">- Jessica L.</p>
+                            </div>
+                        </div>
+                        <!-- Testimonial 3 (Duplicate for smooth loop) -->
+                         <div class="testimonial-card flex-shrink-0 w-full md:w-1/2 p-4">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 h-full">
+                                <p class="text-gray-800 mb-4">"The streaks feature is surprisingly motivating. Seeing my 14-day streak keeps me coming back. It's the first wellness habit I've actually stuck with."</p>
+                                <p class="font-semibold">- David R.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -240,7 +293,8 @@
                 <p class="text-lg text-gray-800 mb-6">Love Moods.ai? Generate your unique referral link. When a friend signs up for a paid plan, you both get a month of Basic on us.</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2">
                     <input id="referralLink" type="text" class="bg-gray-100 border border-gray-300 text-gray-700 text-sm rounded-lg p-2.5 w-full sm:w-64" value="https://moods.ai?ref=" readonly>
-                    <button id="copyLinkBtn" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg w-full sm:w-auto">Copy Link</button>
+                    <button id="copyLinkBtn" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg">Copy Link</button>
+                    <button id="shareTwitterBtn" class="bg-blue-400 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg">Share on Twitter</button>
                 </div>
             </div>
         </section>
@@ -291,11 +345,11 @@
         <div class="container mx-auto px-6 py-8 text-center">
             <div class="flex justify-center space-x-6 mb-4">
                 <div class="flex items-center text-sm text-gray-400" title="Our AI models are regularly audited for safety and bias.">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     <span>Ethical AI</span>
                 </div>
                  <div class="flex items-center text-sm text-gray-400" title="We use energy-efficient models to minimize our environmental impact.">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     <span>Eco-Mode Processing</span>
                 </div>
             </div>
@@ -317,14 +371,15 @@
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="bg-gray-50 p-4 rounded-lg">
                     <h4 class="font-semibold mb-2">Your Entry:</h4>
-                    <p class="text-gray-800 text-sm">"Feeling really overwhelmed today. I have this big project deadline at work, and on top of that, I feel like I'm not being a present enough parent. It's like I'm failing on both fronts and just treading water. I'm not sure how to get ahead of it all."</p>
+                    <textarea id="demoInput" class="w-full p-2 border rounded-md text-sm h-32" placeholder="Type your own entry here... (e.g., 'Feeling stressed about work.')">Feeling really overwhelmed today. I have this big project deadline at work, and on top of that, I feel like I'm not being a present enough parent. It's like I'm failing on both fronts and just treading water. I'm not sure how to get ahead of it all.</textarea>
+                    <button id="generateReflection" class="mt-2 w-full bg-blue-500 text-white py-2 px-4 rounded-md text-sm font-semibold">Generate Reflection</button>
                 </div>
                 <div id="reflection-container">
                     <!-- Dynamic content will be injected here -->
                 </div>
             </div>
              <div class="mt-6 border-t pt-4">
-                <p class="text-sm text-gray-800 mb-2 font-semibold">See how different companions would respond:</p>
+                <p class="text-sm text-gray-800 mb-2 font-semibold">Or, see how different companions would respond to the default entry:</p>
                 <div id="demo-tabs" class="flex space-x-2">
                     <button class="demo-tab bg-blue-500 text-white py-1 px-3 rounded-md text-sm">Kai</button>
                     <button class="demo-tab bg-gray-200 text-gray-800 py-1 px-3 rounded-md text-sm">Socrates</button>
@@ -369,6 +424,7 @@
             // --- MODAL LOGIC ---
             function setupModal(modalId, openBtnSelector, closeBtnId) {
                 const modal = document.getElementById(modalId);
+                if (!modal) return;
                 const openBtns = document.querySelectorAll(openBtnSelector);
                 const closeBtn = document.getElementById(closeBtnId);
                 const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -394,7 +450,7 @@
                     openModal();
                 }));
                 
-                closeBtn.addEventListener('click', closeModal);
+                if (closeBtn) closeBtn.addEventListener('click', closeModal);
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) closeModal();
                 });
@@ -423,6 +479,8 @@
             // --- INTERACTIVE DEMO LOGIC ---
             const reflectionContainer = document.getElementById('reflection-container');
             const demoTabs = document.querySelectorAll('.demo-tab');
+            const generateReflectionBtn = document.getElementById('generateReflection');
+            const demoInput = document.getElementById('demoInput');
             
             function updateReflection(agent) {
                 const data = demoReflections[agent];
@@ -437,6 +495,20 @@
                     }
                 });
             }
+            
+            if(generateReflectionBtn) {
+                generateReflectionBtn.addEventListener('click', () => {
+                    const input = demoInput.value.trim().toLowerCase();
+                    let response = "Thank you for sharing. It's brave to put your feelings into words. Remember to be kind to yourself during challenging times. What's one small action you could take to feel even 1% better right now?";
+                    if (input.includes('overwhelmed') || input.includes('stress')) {
+                        response = "It sounds like you're dealing with a lot. When things feel overwhelming, sometimes the most powerful step is to focus on just one small, manageable thing. What's one task you could complete that would bring a sense of relief?";
+                    } else if (input.includes('happy') || input.includes('excited')) {
+                        response = "That sounds wonderful! It's great to hear about the positive things happening. What was the best part of that experience for you?";
+                    }
+                    reflectionContainer.className = 'p-4 rounded-lg border bg-green-50 border-green-200';
+                    reflectionContainer.innerHTML = `<h4 class="font-semibold mb-2">Your Custom Reflection:</h4><p class="text-gray-800 text-sm">${response}</p>`;
+                });
+            }
 
             demoTabs.forEach(tab => {
                 tab.addEventListener('click', () => updateReflection(tab.textContent));
@@ -449,30 +521,49 @@
             const emailError = document.getElementById('emailError');
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            signupForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (emailRegex.test(emailInput.value)) {
-                    emailError.classList.add('hidden');
-                    alert('Thank you for signing up! Please check your email.');
-                    // In a real app, you would close the modal and show a success message.
-                } else {
-                    emailError.classList.remove('hidden');
-                }
-            });
+            if(signupForm) {
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    if (emailRegex.test(emailInput.value)) {
+                        emailError.classList.add('hidden');
+                        alert('Thank you for signing up! Please check your email.');
+                        // In a real app, you would close the modal and show a success message.
+                    } else {
+                        emailError.classList.remove('hidden');
+                    }
+                });
+            }
 
             // --- REFERRAL LINK LOGIC ---
             const copyLinkBtn = document.getElementById('copyLinkBtn');
+            const shareTwitterBtn = document.getElementById('shareTwitterBtn');
             const referralLinkInput = document.getElementById('referralLink');
-            copyLinkBtn.addEventListener('click', () => {
-                if (!referralLinkInput.value.includes('?ref=')) {
+            
+            function generateReferralLink() {
+                 if (!referralLinkInput.value.includes('?ref=')) {
                     const randomString = Math.random().toString(36).substring(2, 8);
                     referralLinkInput.value = `https://moods.ai?ref=${randomString}`;
                 }
-                navigator.clipboard.writeText(referralLinkInput.value).then(() => {
-                    copyLinkBtn.textContent = 'Copied!';
-                    setTimeout(() => { copyLinkBtn.textContent = 'Copy Link'; }, 2000);
+            }
+            
+            if(copyLinkBtn) {
+                copyLinkBtn.addEventListener('click', () => {
+                    generateReferralLink();
+                    navigator.clipboard.writeText(referralLinkInput.value).then(() => {
+                        copyLinkBtn.textContent = 'Copied!';
+                        setTimeout(() => { copyLinkBtn.textContent = 'Copy Link'; }, 2000);
+                    });
                 });
-            });
+            }
+
+            if(shareTwitterBtn) {
+                shareTwitterBtn.addEventListener('click', () => {
+                    generateReferralLink();
+                    const text = encodeURIComponent("Discover a new way to reflect on your thoughts with Moods.ai! It's a private, AI-powered journaling companion.");
+                    const url = encodeURIComponent(referralLinkInput.value);
+                    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+                });
+            }
 
             // --- ANIMATION & LOCALSTORAGE LOGIC ---
             function animateValue(obj, start, end, duration) {
@@ -490,12 +581,14 @@
             const entryCountEl = document.getElementById('entry-count');
             
             // Persist mock data with localStorage
-            let streak = localStorage.getItem('moodsAiStreak') || 0;
-            let entries = localStorage.getItem('moodsAiEntries') || 0;
+            let streak = parseInt(localStorage.getItem('moodsAiStreak')) || 0;
+            let entries = parseInt(localStorage.getItem('moodsAiEntries')) || 0;
             
-            // For demo purposes, let's set some values if they are 0
-            if (streak == 0) streak = 14;
-            if (entries == 0) entries = 50;
+            // For demo purposes, let's increment on visit
+            streak += 1;
+            entries += 2;
+            localStorage.setItem('moodsAiStreak', streak);
+            localStorage.setItem('moodsAiEntries', entries);
 
             // Animate on scroll
             const observer = new IntersectionObserver((entries) => {
@@ -507,8 +600,18 @@
                     }
                 });
             }, { threshold: 0.5 });
+            
+            const insightCard = document.querySelector('.insight-card');
+            if(insightCard) {
+                observer.observe(insightCard);
+            }
 
-            observer.observe(document.querySelector('.insight-card'));
+            // Track CTA Clicks
+            document.querySelectorAll('.cta-button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    gtag('event', 'click', { 'event_category': 'CTA', 'event_label': 'Choose Plan' });
+                });
+            });
         });
     </script>
 </body>
