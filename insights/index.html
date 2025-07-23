@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Insights - Moods.ai</title>
+    <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Inter', sans-serif; background-color: #f8fafc; } .gradient-text { background: linear-gradient(to right, #3b82f6, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } </style>
+</head>
+<body class="text-gray-900">
+    
+    <header class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="../dashboard/index.html"><img src="../images/logo.jpg" alt="Moods.ai Logo" class="h-8 w-auto"></a>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="../dashboard/index.html" class="text-gray-600 hover:text-gray-900 font-medium" id="nav-dashboard">Dashboard</a> <a href="../mood-tracker/index.html" class="text-gray-600 hover:text-gray-900 font-medium" id="nav-mood-tracker">Mood Tracker</a> <a href="../insights/index.html" class="text-blue-600 font-semibold hover:text-gray-900 font-medium" id="nav-insights">Insights</a> <a href="../flow-sessions/index.html" class="text-gray-600 hover:text-gray-900 font-medium" id="nav-flow">Flow Sessions</a> <a href="../companions/index.html" class="text-gray-600 hover:text-gray-900 font-medium" id="nav-companions">Companions</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <input type="text" placeholder="Search entries..." class="hidden md:block bg-gray-100 border border-gray-300 text-sm rounded-lg p-2 w-48 focus:outline-none focus:border-blue-500">
+                <div class="relative">
+                    <button id="user-menu-button" class="flex items-center space-x-2">
+                        <img src="https://placehold.co/32x32/3b82f6/ffffff?text=U" alt="User Avatar" class="h-8 w-8 rounded-full">
+                        <span class="hidden md:inline text-gray-800 font-medium">User</span>
+                    </button>
+                    <div id="user-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden">
+                        <a href="../user/profile.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
+                        <a href="../user/settings.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                        <button id="logoutBtn" class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userMenuButton = document.getElementById('user-menu-button');
+            const userMenu = document.getElementById('user-menu');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if(userMenuButton) {
+                userMenuButton.addEventListener('click', () => userMenu.classList.toggle('hidden'));
+                document.addEventListener('click', (e) => {
+                    if (userMenu && !userMenuButton.contains(e.target) && !userMenu.contains(e.target)) {
+                        userMenu.classList.add('hidden');
+                    }
+                });
+            }
+            if(logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('moodsUser');
+                    window.location.href = '../index.html';
+                });
+            }
+        });
+    </script>
+    
+    <main class="container mx-auto px-6 py-12 flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8">
+        
+<aside class="md:w-64 bg-white rounded-xl shadow-sm p-6 hidden md:block">
+    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+    <ul class="space-y-2">
+        <li><a href="../mood-tracker/index.html" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900">Mood Tracker</a></li>
+        <li><a href="../insights/index.html" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900">Patterns & Triggers</a></li>
+        <li><a href="../archive/index.html" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900">Archived Entries</a></li>
+    </ul>
+    <div class="mt-8 border-t pt-4">
+        <p class="text-sm text-gray-500">Your data is encrypted and private. Opt-out of archiving anytime in settings.</p>
+    </div>
+</aside>
+
+        <div class="flex-1">
+            <h1 class="text-3xl font-bold gradient-text mb-8">AI Insights</h1>
+            <div class="space-y-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h2 class="text-xl font-semibold mb-2 text-teal-600">Weekly Summary</h2>
+                    <p class="text-gray-700">Your average mood was <strong>6.3/10</strong> this week. The primary emotion detected was <strong>Anxiety</strong>, often linked to the keyword 'deadline'. However, entries where you mentioned 'family' or 'kids' showed a significant mood boost.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h2 class="text-xl font-semibold mb-2 text-purple-600">Habit Recommendations</h2>
+                    <p class="text-gray-700">You tend to write reflections in the evening after stressful days. Consider trying a <strong>morning reflection with Kai</strong> to set a positive tone for the day.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h2 class="text-xl font-semibold mb-2 text-blue-600">Flow Session Impact</h2>
+                    <p class="text-gray-700">You completed <strong>2 Flow Architect sessions</strong> this month, which correlated with a <strong>15% increase in mood</strong> on those days. Try a session with Marcus to tackle work-related stress.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

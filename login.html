@@ -3,47 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moods.ai - Login</title>
-    <meta name="description" content="Login to your Moods.ai account to access your private AI reflection service.">
-    <link rel="icon" href="images/logo.png" type="image/png">
+    <title>Login - Moods.ai</title>
+    <link rel="icon" href="images/logo.jpg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .gradient-text { background: linear-gradient(to right, #3b82f6, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gradient-bg { background-image: linear-gradient(to right, #3b82f6, #14b8a6); }
-        .fade-in { opacity: 0; transition: opacity 0.5s ease-out; }
-        .fade-in.visible { opacity: 1; }
-    </style>
+    <style> body {font-family:'Inter',sans-serif;background-color:#f8fafc;} .gradient-bg{background-image:linear-gradient(to right, #3b82f6, #14b8a6);} </style>
 </head>
-<body class="text-gray-900 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-xl shadow-md max-w-md w-full">
-        <h1 class="text-3xl font-bold gradient-text text-center mb-6">Login to Moods.ai</h1>
-        <form id="loginForm" class="space-y-4">
-            <input type="email" placeholder="Email" class="border border-gray-300 p-3 rounded-lg w-full" required>
-            <input type="password" placeholder="Password" class="border border-gray-300 p-3 rounded-lg w-full" required>
-            <p id="loginError" class="text-red-500 text-sm hidden">Invalid credentials.</p>
-            <button type="submit" class="gradient-bg text-white font-bold py-3 rounded-lg w-full">Login</button>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-sm w-full">
+        <a href="index.html" class="flex justify-center mb-6"><img src="images/logo.jpg" alt="Moods.ai Logo" class="h-12 w-auto"></a>
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Welcome Back</h2>
+        <form id="loginForm">
+            <div class="space-y-4">
+                <input type="email" placeholder="Email (user@example.com)" class="border border-gray-300 p-3 rounded-lg w-full" required>
+                <input type="password" placeholder="Password (demo)" class="border border-gray-300 p-3 rounded-lg w-full" required>
+            </div>
+            <p id="loginError" class="text-red-500 text-sm mt-2 hidden">Invalid credentials. Use user@example.com / demo</p>
+            <button type="submit" class="w-full gradient-bg text-white font-bold py-3 rounded-lg mt-6">Login</button>
         </form>
-        <p class="text-center mt-4 text-sm text-gray-600">Don't have an account? <a href="/signup" class="text-blue-600 hover:underline">Sign up</a></p>
-        <p class="text-center mt-2 text-sm text-gray-600"><a href="/" class="text-blue-600 hover:underline">Back to Home</a></p>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('loginForm');
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = form.querySelector('input[type="email"]').value;
-                const password = form.querySelector('input[type="password"]').value;
-                if (email === 'user@example.com' && password === 'demo') {
-                    localStorage.setItem('auth', 'loggedIn');
-                    window.location.href = '/dashboard';
-                } else {
-                    document.getElementById('loginError').classList.remove('hidden');
-                }
-            });
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            const password = e.target.querySelector('input[type="password"]').value;
+            if (email === 'user@example.com' && password === 'demo') {
+                localStorage.setItem('moodsUser', 'loggedIn');
+                window.location.href = 'dashboard/index.html';
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+            }
         });
     </script>
 </body>
