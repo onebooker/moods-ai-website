@@ -1,516 +1,372 @@
 <!DOCTYPE html>
-<html lang="en" style="scroll-behavior: smooth;">
+<html lang="en" style="scroll-behavior:smooth;">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moods.ai | Actionable Narrative Intelligence</title>
-    <style>
-        :root {
-            --primary-color: #0a2342;
-            --secondary-color: #2ca58d;
-            --background-color: #f4f4f9;
-            --card-background: #ffffff;
-            --text-color: #333333;
-            --header-text-color: #ffffff;
-            --border-color: #e0e0e0;
-            --shadow-color: rgba(0, 0, 0, 0.08);
-            --long-color: #28a745;
-            --short-color: #dc3545;
-            --neutral-color: #6c757d;
-            --actionable-color: #28a745;
-            --incubating-color: #fd7e14;
-            --success-color: #28a745;
-            --loss-color: #dc3545;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-        /* Navigation Bar */
-        nav {
-            background: var(--primary-color);
-            color: var(--header-text-color);
-            padding: 0 1.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 60px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--header-text-color);
-            text-decoration: none;
-        }
-        nav .nav-links {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 1.5rem;
-        }
-        nav .nav-links li a {
-            color: var(--header-text-color);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 10px 0;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.3s;
-        }
-        nav .nav-links li a:hover {
-            border-color: var(--secondary-color);
-        }
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 4px;
-            z-index: 1001; /* Ensure it's above nav links */
-        }
-        .hamburger .bar {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            transition: all 0.3s ease;
-        }
-        header {
-            background: #0a2342e0;
-            color: var(--header-text-color);
-            padding: 3rem 1.5rem;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.2rem;
-            font-weight: 700;
-        }
-        header p {
-            font-size: 1.1rem;
-            font-weight: 300;
-            max-width: 700px;
-            margin: 0 auto;
-            color: rgba(255,255,255,0.9);
-        }
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            font-weight: 600;
-            scroll-margin-top: 80px;
-        }
-        .card {
-            background: var(--card-background);
-            border: 1px solid var(--border-color);
-            border-left: 5px solid var(--border-color);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 8px var(--shadow-color);
-            transition: border-left-color 0.3s;
-        }
-        .card:hover { border-left-color: var(--secondary-color); }
-        
-        /* Responsive Tables */
-        .table-responsive { overflow-x: auto; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
-        }
-        th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-        tbody tr { transition: background-color 0.2s; }
-        tbody tr:hover { background-color: #f1f1f1; }
-        
-        .tag, .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            font-weight: 700;
-            color: #fff;
-            margin: 2px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .badge.actionable { background-color: var(--actionable-color); }
-        .badge.incubating { background-color: var(--incubating-color); }
-        .badge.success { background-color: var(--success-color); }
-        .badge.loss { background-color: var(--loss-color); }
-        
-        .info-box {
-            margin-top: 15px;
-            padding: 15px;
-            background: #e9ecef;
-            border-left: 4px solid var(--secondary-color);
-            border-radius: 4px;
-        }
-        .info-box ul { padding-left: 20px; margin: 0.5rem 0; }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            font-size: 0.9em;
-            color: var(--neutral-color);
-            background: var(--card-background);
-            border-top: 1px solid var(--border-color);
-        }
-        a { color: var(--secondary-color); text-decoration: none; font-weight: 500; }
-        a:hover { text-decoration: underline; }
-        
-        #back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--secondary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: opacity 0.3s, transform 0.3s;
-        }
-        #back-to-top:hover { opacity: 0.8; }
-        
-        .cta-button {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .cta-button:hover { background-color: #248c75; }
-        
-        .disclaimer-box {
-            background-color: #fffbe6;
-            border: 1px solid #ffe58f;
-            color: #d46b08;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        /* Mobile-First Enhancements */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 0;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background-color: var(--primary-color);
-                padding-top: 80px;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out;
-            }
-            .nav-links.active {
-                transform: translateX(0);
-            }
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
-            .nav-links li a {
-                display: block;
-                padding: 1.5rem 0;
-                width: 100%;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-            .hamburger {
-                display: flex;
-            }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-            /* Responsive Tables to Cards */
-            .table-responsive table, 
-            .table-responsive thead, 
-            .table-responsive tbody, 
-            .table-responsive th, 
-            .table-responsive td, 
-            .table-responsive tr {
-                display: block;
-            }
-            .table-responsive thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            .table-responsive tr {
-                border: 1px solid var(--border-color);
-                margin-bottom: 1rem;
-                border-radius: 5px;
-            }
-            .table-responsive td {
-                border: none;
-                border-bottom: 1px solid #eee;
-                position: relative;
-                padding-left: 50%;
-                text-align: right;
-            }
-            .table-responsive td:before {
-                position: absolute;
-                top: 50%;
-                left: 15px;
-                transform: translateY(-50%);
-                width: 45%;
-                padding-right: 10px;
-                white-space: nowrap;
-                text-align: left;
-                font-weight: bold;
-                content: attr(data-label);
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Moods.ai | Actionable Narrative Intelligence</title>
+  <meta name="description" content="We spot under-priced narratives, validate them across web/social, and turn them into risk-defined trades." />
+  <style>
+    :root{
+      --primary-color:#0a2342;
+      --secondary-color:#2ca58d;
+      --background-color:#f4f4f9;
+      --card-background:#ffffff;
+      --text-color:#333333;
+      --header-text-color:#ffffff;
+      --border-color:#e0e0e0;
+      --shadow-color:rgba(0,0,0,0.08);
+      --actionable-color:#28a745;
+      --incubating-color:#fd7e14;
+      --success-color:#28a745;
+      --loss-color:#dc3545;
+    }
+    *{box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;margin:0;color:var(--text-color);background:var(--background-color);line-height:1.6}
+    .container{max-width:1200px;margin:0 auto;padding:1rem}
+    /* NAV */
+    nav{position:sticky;top:0;z-index:1000;background:var(--primary-color);color:var(--header-text-color);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+    .logo{font-weight:800;font-size:1.25rem;color:#fff;text-decoration:none}
+    .nav-links{list-style:none;display:flex;gap:1.25rem;margin:0;padding:0}
+    .nav-links a{color:#fff;text-decoration:none;font-weight:500;padding:.4rem 0;border-bottom:2px solid transparent;transition:border-color .2s}
+    .nav-links a:hover{border-color:var(--secondary-color)}
+    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;z-index:1001}
+    .hamburger .bar{width:25px;height:3px;background:#fff;transition:.3s all}
+    /* HERO */
+    header{background:#0a2342e0;color:#fff;text-align:center;padding:3rem 1.25rem}
+    header h1{margin:0;font-weight:800;font-size:2.1rem}
+    header p{max-width:760px;margin:.5rem auto 0;color:rgba(255,255,255,.9)}
+    #last-updated{opacity:.85;margin:.5rem 0 0}
+    /* TYPOGRAPHY */
+    h2{color:var(--primary-color);border-bottom:2px solid var(--secondary-color);padding-bottom:.6rem;margin:2rem 0 1rem;font-size:1.6rem}
+    h3{margin:.25rem 0 0}
+    /* CARDS + TABLES */
+    .card{background:var(--card-background);border:1px solid var(--border-color);border-left:5px solid var(--border-color);border-radius:10px;padding:20px;margin:16px 0;box-shadow:0 8px 16px var(--shadow-color)}
+    .card:hover{border-left-color:var(--secondary-color)}
+    .cta-button{background:var(--secondary-color);color:#fff;border:none;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}
+    .cta-button:hover{opacity:.9}
+    .disclaimer-box{background:#fffbe6;border:1px solid #ffe58f;color:#8b5e00;border-radius:8px;padding:10px 14px;font-size:.92rem;margin:.75rem 0 1rem}
+    .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    table{width:100%;border-collapse:collapse;font-size:.95rem}
+    thead th{background:#f8f9fa;color:var(--primary-color);text-align:left;border-bottom:1px solid var(--border-color);padding:12px 12px;cursor:pointer}
+    tbody td{padding:12px 12px;border-bottom:1px solid var(--border-color);vertical-align:middle}
+    tbody tr:hover{background:#f6f7f9}
+    .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:800;color:#fff}
+    .badge.actionable{background:var(--actionable-color)}
+    .badge.incubating{background:var(--incubating-color)}
+    .tag{display:inline-block;background:#e9eef9;color:#0a2342;padding:3px 8px;border-radius:999px;font-size:.75rem;margin:2px 6px 2px 0}
+    .info-box{margin-top:12px;padding:12px;background:#eef2f5;border-left:4px solid var(--secondary-color);border-radius:6px}
+    .kv{display:flex;gap:8px;align-items:flex-start;margin:.25rem 0}
+    .kv strong{min-width:120px}
+    .feedback-prompt{font-size:.9rem;color:#6c757d;margin-top:.5rem}
+    /* BACK TO TOP */
+    #back-to-top{position:fixed;bottom:20px;right:20px;background:var(--secondary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+    /* FOOTER */
+    footer{text-align:center;padding:20px;color:#6c757d}
+    /* MOBILE */
+    @media (max-width:768px){
+      .hamburger{display:flex}
+      .nav-links{position:fixed;inset:0 0 0 0;flex-direction:column;align-items:center;gap:0;background:var(--primary-color);padding-top:80px;transform:translateX(-100%);transition:transform .25s ease}
+      .nav-links.active{transform:translateX(0)}
+      .nav-links li{width:100%}
+      .nav-links a{display:block;width:100%;text-align:center;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.12)}
+      .hamburger.active .bar:nth-child(2){opacity:0}
+      .hamburger.active .bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+      .hamburger.active .bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+      /* Responsive table → cards */
+      .table-responsive table,.table-responsive thead,.table-responsive tbody,.table-responsive th,.table-responsive td,.table-responsive tr{display:block}
+      .table-responsive thead tr{position:absolute;top:-9999px;left:-9999px}
+      .table-responsive tr{border:1px solid var(--border-color);border-radius:8px;margin:0 0 12px 0;background:#fff}
+      .table-responsive td{border:none;border-bottom:1px solid #eee;position:relative;padding-left:50%;text-align:right}
+      .table-responsive td:before{position:absolute;left:12px;top:50%;transform:translateY(-50%);content:attr(data-label);font-weight:700;text-align:left}
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <a href="#" class="logo">Moods.ai</a>
-        <div class="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#trade-blotter">Trade Blotter</a></li>
-            <li><a href="#track-record">Track Record</a></li>
-            <li><a href="#theses">Theses</a></li>
-            <li><a href="#incubating-ideas">Incubating</a></li>
-            <li><a href="#evidence-log">Evidence</a></li>
-        </ul>
-    </nav>
-    <header id="top">
-        <h1>Actionable Narrative Intelligence</h1>
-        <p>We spot under-priced narratives, validate them, and construct risk-defined trades.</p>
-    </header>
+  <nav>
+    <a href="#" class="logo">Moods.ai</a>
+    <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#trade-blotter">Trade Blotter</a></li>
+      <li><a href="#track-record">Track Record</a></li>
+      <li><a href="#theses">Theses</a></li>
+      <li><a href="#incubating-ideas">Incubating</a></li>
+      <li><a href="#evidence-log">Evidence</a></li>
+    </ul>
+  </nav>
 
-    <main class="container">
-        <div class="card" style="text-align:center;">
-            <h3>How It Works</h3>
-            <p>Our system scans social and web data, validates emerging stories with financial data, and builds trades only when a clear edge is found.</p>
-            <button class="cta-button">Start Your Free Trial</button>
-        </div>
+  <header id="top">
+    <h1>Actionable Narrative Intelligence</h1>
+    <p>We spot under-priced narratives, validate them across web/social, and turn them into risk-defined trades.</p>
+    <p id="last-updated" aria-live="polite"></p>
+  </header>
 
-        <h2 id="trade-blotter">Actionable Trade Blotter</h2>
-        <div class="disclaimer-box">
-            <strong>Disclaimer:</strong> This is not financial advice. All information is for educational purposes only.
-        </div>
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ticker</th>
-                        <th>Side / Structure</th>
-                        <th>Catalyst Date</th>
-                        <th>Valid Until</th>
-                        <th>R:R</th>
-                        <th>Conf.</th>
-                        <th>Links</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-label="Ticker"><strong>CHD</strong></td>
-                        <td data-label="Structure">Long Call Spread<br><small>(Jan'26 95c/115c)</small></td>
-                        <td data-label="Catalyst Date">2025-10-25</td>
-                        <td data-label="Valid Until">2025-11-15</td>
-                        <td data-label="R:R">4.0</td>
-                        <td data-label="Conf.">0.9</td>
-                        <td data-label="Links"><a href="#thesis-chd">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Ticker"><strong>OPEN</strong></td>
-                        <td data-label="Structure">Long Straddle<br><small>(Oct'25 2.5c/2.5p)</small></td>
-                        <td data-label="Catalyst Date">2025-08-26</td>
-                        <td data-label="Valid Until">2025-09-15</td>
-                        <td data-label="R:R">N/A</td>
-                        <td data-label="Conf.">0.9</td>
-                        <td data-label="Links"><a href="#thesis-open">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Ticker"><strong>9992.HK</strong></td>
-                        <td data-label="Structure">Long Stock</td>
-                        <td data-label="Catalyst Date">2025-08-31</td>
-                        <td data-label="Valid Until">2025-08-31</td>
-                        <td data-label="R:R">2.0</td>
-                        <td data-label="Conf.">0.9</td>
-                        <td data-label="Links"><a href="#thesis-popmart">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
-                    </tr>
-                     <tr>
-                        <td data-label="Ticker"><strong>2593.T</strong></td>
-                        <td data-label="Structure">Long Stock</td>
-                        <td data-label="Catalyst Date">2025-09-15</td>
-                        <td data-label="Valid Until">2025-08-31</td>
-                        <td data-label="R:R">2.0</td>
-                        <td data-label="Conf.">0.9</td>
-                        <td data-label="Links"><a href="#thesis-itoen">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <h2 id="track-record">Track Record (Closed Trades)</h2>
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ticker</th>
-                        <th>Strategy</th>
-                        <th>Entry Date</th>
-                        <th>Exit Date</th>
-                        <th>Realized P/L</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-label="Ticker">XYZ</td>
-                        <td data-label="Strategy">Long Stock</td>
-                        <td data-label="Entry Date">2025-06-01</td>
-                        <td data-label="Exit Date">2025-07-15</td>
-                        <td data-label="P/L" style="color:var(--success-color)">+15.2%</td>
-                        <td data-label="Status"><span class="badge success">Win</span></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Ticker">ABC</td>
-                        <td data-label="Strategy">Short Put Spread</td>
-                        <td data-label="Entry Date">2025-05-20</td>
-                        <td data-label="Exit Date">2025-06-19</td>
-                        <td data-label="P/L" style="color:var(--loss-color)">-100.0%</td>
-                        <td data-label="Status"><span class="badge loss">Loss</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <main class="container">
+    <div class="card" style="text-align:center">
+      <h3>How It Works</h3>
+      <p>We scan social and web data to find emerging stories, cross-verify with credible sources, and only publish trades when a clear, quantifiable edge exists.</p>
+      <button class="cta-button" onclick="alert('Beta access coming soon')">Start Your Free Trial</button>
+    </div>
 
-        <section id="theses">
-            <h2 id="thesis-chd">Thesis: Church & Dwight (CHD)</h2>
-            <div class="card">
-                <h3>Underappreciated Growth Asset</h3>
-                <p><span class="badge actionable">Actionable</span> <span class="tag emerging">Emerging</span></p>
-                <div class="info-box">
-                    <ul>
-                        <li><strong>Signal Origin:</strong> Viral TikTok content & high search volume for "Mighty Patch".</li>
-                        <li><strong>Cross-Verification:</strong> Confirmed with market research reports, press reviews, and official company filings.</li>
-                        <li><strong>Materiality:</strong> Hero brand cited as primary growth driver in Q2'25 earnings, estimated 8% revenue contribution.</li>
-                        <li><strong>Priced-in Test:</strong> Stock YTD -13%, underperforming sector. Low IV Rank (18th percentile) suggests complacency.</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- BLOTTTER -->
+    <h2 id="trade-blotter">Actionable Trade Blotter</h2>
+    <div class="disclaimer-box"><strong>Disclaimer:</strong> Educational content, not investment advice.</div>
+    <div class="card table-responsive">
+      <table aria-describedby="trade-blotter">
+        <thead>
+          <tr>
+            <th data-sort="string">Ticker</th>
+            <th data-sort="string">Side / Structure</th>
+            <th data-sort="date">Catalyst Date</th>
+            <th data-sort="date">Valid Until</th>
+            <th data-sort="number">R:R</th>
+            <th data-sort="number">Conf.</th>
+            <th>Links</th>
+          </tr>
+        </thead>
+        <tbody id="blotter-body"><!-- hydrated --></tbody>
+      </table>
+    </div>
 
-            <h2 id="thesis-open">Thesis: Opendoor (OPEN)</h2>
-            <div class="card">
-                <h3>Sentiment vs. Fundamental Dislocation</h3>
-                <p><span class="badge actionable">Actionable</span> <span class="tag mainstream">Mainstream</span></p>
-                 <div class="info-box">
-                    <ul>
-                        <li><strong>Signal Origin:</strong> High engagement on Reddit's r/wallstreetbets.</li>
-                        <li><strong>Cross-Verification:</strong> Confirmed with financial news outlets and market data (high volume, price surge).</li>
-                        <li><strong>Analyst Consensus:</strong> Bearish. Citigroup downgraded to "Strong Sell" (Aug 6) and Zelman & Associates to "Underperform" (Aug 7).</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <h2 id="incubating-ideas">Incubating Ideas</h2>
-        <div class="card">
-            <h3>Short META Campaign</h3>
-            <p><span class="badge incubating">Incubating</span></p>
-            <div class="info-box">
-                <strong>Reason:</strong> A TikTok-driven campaign to short Meta stock is gaining attention, but lacks credible source confirmation.<br>
-                <strong>What to Watch:</strong> Spread to mainstream news; changes in META short interest. <br>
-                <strong>Review Date:</strong> 2025-08-18
-            </div>
-        </div>
+    <!-- TRACK RECORD (static example block; you can wire later) -->
+    <h2 id="track-record">Track Record (Closed Trades)</h2>
+    <div class="card table-responsive">
+      <table aria-describedby="track-record">
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Strategy</th>
+            <th>Entry Date</th>
+            <th>Exit Date</th>
+            <th>Realized P/L</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Ticker">XYZ</td>
+            <td data-label="Strategy">Long Stock</td>
+            <td data-label="Entry Date">2025-06-01</td>
+            <td data-label="Exit Date">2025-07-15</td>
+            <td data-label="Realized P/L" style="color:var(--success-color)">+15.2%</td>
+            <td data-label="Status"><span class="badge actionable">Win</span></td>
+          </tr>
+          <tr>
+            <td data-label="Ticker">ABC</td>
+            <td data-label="Strategy">Short Put Spread</td>
+            <td data-label="Entry Date">2025-05-20</td>
+            <td data-label="Exit Date">2025-06-19</td>
+            <td data-label="Realized P/L" style="color:var(--loss-color)">-100.0%</td>
+            <td data-label="Status"><span class="badge incubating">Loss</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <h2 id="evidence-log">Evidence Log</h2>
-        <div class="table-responsive">
-            <table>
-                <thead><tr><th>Story ID</th><th>Entity</th><th>Event Type</th><th>Source</th></tr></thead>
-                <tbody>
-                    <tr><td data-label="Story ID">popmart_labubu</td><td data-label="Entity">Pop Mart</td><td data-label="Event">viral</td><td data-label="Source"><a href="#" target="_blank">indiatimes.com</a></td></tr>
-                    <tr><td data-label="Story ID">matcha_shortage</td><td data-label="Entity">Ito En</td><td data-label="Event">policy</td><td data-label="Source"><a href="#" target="_blank">abcnews.go.com</a></td></tr>
-                    <tr><td data-label="Story ID">SKIN_POSITIVITY_2025</td><td data-label="Entity">CHD</td><td data-label="Event">social_signal</td><td data-label="Source"><a href="#" target="_blank">cosmeticsbusiness.com</a></td></tr>
-                    <tr><td data-label="Story ID">MEME_VS_FUNDAMENTALS_2025</td><td data-label="Entity">OPEN</td><td data-label="Event">social_signal</td><td data-label="Source"><a href="#" target="_blank">reddit.com</a></td></tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
-    <button id="back-to-top" title="Go to top">↑</button>
+    <!-- THESES -->
+    <section id="theses">
+      <h2>Theses</h2>
+      <div id="theses-container"><!-- hydrated --></div>
+    </section>
 
-    <footer>
-        <p>Generated by GPT-4 v4.0 on 2025-08-11T19:30:00 Europe/Zurich. This is not financial advice.</p>
-        <p>Access Report: Web OK, Forums OK. Skipped: X, TikTok, Instagram.</p>
-    </footer>
-    <script>
-        // Hamburger Menu
-        const hamburger = document.querySelector(".hamburger");
-        const navLinks = document.querySelector(".nav-links");
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navLinks.classList.toggle("active");
-        });
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove("active");
-                navLinks.classList.remove("active");
+    <!-- INCUBATING (optional static placeholder) -->
+    <h2 id="incubating-ideas">Incubating Ideas</h2>
+    <div class="card">
+      <h3>New ideas will appear here as “Incubating” until confirmation/priced-in gates are met.</h3>
+      <p class="info-box" style="margin:0">This section will be hydrated from your feed when you choose to include it. For now it stays informational.</p>
+    </div>
+
+    <!-- EVIDENCE -->
+    <h2 id="evidence-log">Evidence Log</h2>
+    <div class="card table-responsive">
+      <table aria-describedby="evidence-log">
+        <thead>
+          <tr>
+            <th>Story ID</th>
+            <th>Entity</th>
+            <th>Event Type</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="evidence-body"><!-- hydrated --></tbody>
+      </table>
+    </div>
+  </main>
+
+  <button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+
+  <footer>
+    <p>© Moods.ai — BETA. This is not financial advice.</p>
+  </footer>
+
+  <script>
+    // ---------- helpers ----------
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    const esc = (v) => String(v == null ? '' : v);
+
+    function applyDataLabels(tbodyEl){
+      if(!tbodyEl) return;
+      const table = tbodyEl.closest('table');
+      if(!table) return;
+      const headers = $$('#'+table.id+' thead th'); // would be empty unless id set
+      const ths = headers.length ? headers : Array.from(table.querySelectorAll('thead th'));
+      const labels = ths.map(th => th.textContent.trim());
+      $$('#'+tbodyEl.id+' tr').forEach(tr=>{
+        $$('td', tr).forEach((td,i)=> td.setAttribute('data-label', labels[i] || ''));
+      });
+    }
+
+    function sortTableByColumn(table, column, asc=true){
+      const dir = asc ? 1 : -1;
+      const tBody = table.tBodies[0];
+      const rows = Array.from(tBody.querySelectorAll('tr'));
+      const header = table.querySelector(`thead th:nth-child(${column+1})`);
+      const type = header?.dataset?.sort || 'string';
+
+      const parseCell = (td) => {
+        let v = td.textContent.trim();
+        if(type==='number'){ const n = parseFloat(v); return isNaN(n) ? -Infinity : n; }
+        if(type==='date'){ const t = Date.parse(v); return isNaN(t) ? -Infinity : t; }
+        return v.toLowerCase();
+      };
+
+      const sorted = rows.sort((a,b)=>{
+        const A = parseCell(a.children[column] || {});
+        const B = parseCell(b.children[column] || {});
+        return (A > B ? 1 : -1) * dir;
+      });
+
+      tBody.innerHTML = '';
+      tBody.append(...sorted);
+      table.querySelectorAll('th').forEach(th=>th.classList.remove('th-sort-asc','th-sort-desc'));
+      header?.classList.toggle('th-sort-asc', asc);
+      header?.classList.toggle('th-sort-desc', !asc);
+    }
+
+    // ---------- nav + back-to-top ----------
+    (function navAndTop(){
+      const hamburger = $('#hamburger');
+      const navLinks = $('#navLinks');
+      const toggle = () => {
+        hamburger.classList.toggle('active');
+        const expanded = hamburger.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', String(expanded));
+        navLinks.classList.toggle('active');
+      };
+      hamburger.addEventListener('click', toggle);
+      hamburger.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' ') {e.preventDefault(); toggle();}});
+      $$('#navLinks a').forEach(a=> a.addEventListener('click', ()=> {
+        hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded','false'); navLinks.classList.remove('active');
+      }));
+      const b2t = $('#back-to-top');
+      window.addEventListener('scroll', ()=> b2t.style.display = (document.documentElement.scrollTop > 120) ? 'flex' : 'none');
+      b2t.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+    })();
+
+    // ---------- hydrate from /data/feed.json ----------
+    (async function hydrate(){
+      try{
+        const res = await fetch('/data/feed.json?ts=' + Date.now(), {cache:'no-store'});
+        if(!res.ok) throw new Error('feed.json not found');
+        const data = await res.json();
+
+        // last updated
+        if(data.lastUpdated){
+          const d = new Date(data.lastUpdated);
+          $('#last-updated').textContent = 'Last updated: ' + d.toLocaleString();
+        }
+
+        // map theses by id
+        const theses = Array.isArray(data.theses) ? data.theses : [];
+        const thesisMap = Object.fromEntries(theses.map(t => [t.id, t]));
+
+        // BLOTTTER
+        const bb = $('#blotter-body');
+        if(bb){
+          const rows = (data.blotter || []).map(r => `
+            <tr>
+              <td><strong>${esc(r.ticker)}</strong></td>
+              <td>${esc(r.structure)}</td>
+              <td>${esc(r.catalystDate)}</td>
+              <td>${esc(r.validUntil)}</td>
+              <td>${r?.rr==null ? 'N/A' : esc(r.rr)}</td>
+              <td>${esc(Number(r.conf).toFixed(1))}</td>
+              <td><a href="#${esc(r.thesisId)}">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
+            </tr>
+          `).join('');
+          bb.innerHTML = rows || `<tr><td colspan="7">No actionable items today.</td></tr>`;
+          applyDataLabels(bb);
+
+          // enable simple sorting
+          const table = bb.closest('table');
+          table.querySelectorAll('thead th').forEach((th, idx)=>{
+            th.addEventListener('click', ()=>{
+              const asc = !th.classList.contains('th-sort-asc');
+              sortTableByColumn(table, idx, asc);
             });
-        });
+          });
+        }
 
-        // Back to top button
-        const backToTopButton = document.getElementById("back-to-top");
-        window.onscroll = () => {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                backToTopButton.style.display = "flex";
-            } else {
-                backToTopButton.style.display = "none";
-            }
-        };
-        backToTopButton.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-    </script>
+        // THESES (supports longer investmentCase text)
+        const tc = $('#theses-container');
+        if(tc){
+          const html = theses.map(t => {
+            const tags = (t.tags||[]).map(tag => `<span class="tag">${esc(tag)}</span>`).join('');
+            const pf = (t.passedFilter||[]).map(p => `<li><strong>${esc(p.label)}:</strong> ${esc(p.text)}</li>`).join('');
+            const trd = t.tradeConstruction || {};
+            const prettyKeys = {
+              structure:'Structure', debit:'Cost (Debit)', maxLoss:'Max Loss', maxGain:'Max Gain',
+              breakeven:'Breakeven', ivRank:'IV Rank', ivVs30d:'IV vs 30d', entry:'Entry', stop:'Stop',
+              target1:'Target 1', target2:'Target 2'
+            };
+            const tradeKV = Object.entries(trd)
+              .filter(([_,v]) => v!==null && v!=='' && v!==undefined)
+              .map(([k,v]) => `<div class="kv"><strong>${esc(prettyKeys[k]||k)}:</strong> <span>${esc(v)}</span></div>`)
+              .join('');
+
+            return `
+              <div class="card" id="${esc(t.id)}">
+                <h3>${esc(t.title)}
+                  ${t.status ? `<span class="badge ${t.status==='Actionable'?'actionable':'incubating'}" style="margin-left:.5rem">${esc(t.status)}</span>` : ''}
+                  ${t.ticker ? `<span class="tag" style="background:#2ca58d;color:#fff">${esc(t.ticker)}</span>` : ''}
+                </h3>
+                ${tags ? `<div style="margin:.25rem 0">${tags}</div>` : ''}
+                ${t.investmentCase ? `<p style="margin:.75rem 0 1rem">${esc(t.investmentCase)}</p>` : ''}
+                ${pf ? `<div class="info-box"><ul style="margin:.25rem 0;padding-left:1.1rem">${pf}</ul></div>` : ''}
+                ${t.analystConsensus ? `<div class="info-box"><strong>Analyst Consensus:</strong> ${esc(t.analystConsensus)}</div>` : ''}
+                ${tradeKV ? `<div class="info-box">${tradeKV}</div>` : ''}
+                <div class="feedback-prompt">Was this thesis helpful? <button>👍</button> <button>👎</button></div>
+              </div>
+            `;
+          }).join('');
+          tc.innerHTML = html || `<div class="card"><em>No theses available yet.</em></div>`;
+        }
+
+        // EVIDENCE
+        const eb = $('#evidence-body');
+        if(eb){
+          const rows = (data.evidence||[]).map(e => `
+            <tr>
+              <td>${esc(e.storyId)}</td>
+              <td>${esc(e.entity)}</td>
+              <td>${esc(e.eventType)}</td>
+              <td>${e?.domain ? `<a href="${esc(e.url||'#')}" rel="noopener" target="_blank">${esc(e.domain)}</a>` : ''}</td>
+            </tr>
+          `).join('');
+          eb.innerHTML = rows || `<tr><td colspan="4">No evidence logs today.</td></tr>`;
+          applyDataLabels(eb);
+        }
+      }catch(err){
+        console.warn('Hydration failed:', err);
+        // graceful fallbacks
+        const bb = $('#blotter-body'); if(bb) bb.innerHTML = `<tr><td colspan="7">feed.json missing. Add /data/feed.json to hydrate.</td></tr>`;
+        const tc = $('#theses-container'); if(tc) tc.innerHTML = `<div class="card"><em>feed.json missing.</em></div>`;
+        const eb = $('#evidence-body'); if(eb) eb.innerHTML = `<tr><td colspan="4">feed.json missing.</td></tr>`;
+      }
+    })();
+  </script>
 </body>
 </html>
+
