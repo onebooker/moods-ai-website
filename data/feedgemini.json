@@ -1,0 +1,75 @@
+{
+  "report_date": "2025-08-11",
+  "emerging_narrative": {
+    "narrative_id": "US_DEMINIMIS_SUSPENSION_2025",
+    "description": "Global suspension of the U.S. $800 de minimis trade exemption, effective August 29, 2025, creating structural headwinds for cross-border e-commerce and tailwinds for trade compliance services.",
+    "source_verification": [8, 11, 17, 18]
+  },
+  "exposed_entities":,
+        "supporting_data": [20, 22]
+      },
+      "is_priced_in_analysis": {
+        "priced_in_score": 0.20,
+        "rationale": "Market rallied on management's downplaying of the risk following Q2 2025 earnings, suggesting investors are underappreciating the second-order effects on international merchant acquisition and churn, which are key to the stock's premium valuation.",
+        "supporting_data": [19, 21]
+      }
+    },
+    {
+      "company_name": "Etsy, Inc.",
+      "ticker": "ETSY",
+      "exposure_type": "Negative",
+      "exposure_materiality_score": 0.85,
+      "revenue_exposure_analysis": {
+        "description": "Highly exposed due to a large base of small, international artisan sellers who are ill-equipped to handle the new costs and administrative burdens of formal customs entry. The policy shock hits during a period of pre-existing weakness, with GMS and active buyer counts already in decline.",
+        "metrics":,
+        "supporting_data": [15, 25]
+      },
+      "is_priced_in_analysis": {
+        "priced_in_score": 0.70,
+        "rationale": "The stock sold off following the announcement of the global suspension, indicating the market has priced in a significant negative impact. However, the full extent of the impact on seller churn and future GMS may not be fully reflected until Q3 results are reported.",
+        "supporting_data": [28, 29]
+      }
+    },
+    {
+      "company_name": "Descartes Systems Group Inc.",
+      "ticker": "DSGX",
+      "exposure_type": "Positive",
+      "exposure_materiality_score": 0.90,
+      "revenue_exposure_analysis": {
+        "description": "Positioned as a direct, structural beneficiary. The policy change creates a mandatory requirement for formal customs filings for over 1.36 billion annual shipments that were previously exempt, representing a massive, step-function expansion of the TAM for Descartes' core Customs & Regulatory Compliance solutions.",
+        "metrics": [
+          {
+            "name": "Annual shipments moving from exempt to formal entry",
+            "value": 1360000000,
+            "unit": "shipments"
+          }
+        ],
+        "supporting_data": [14, 31]
+      },
+      "is_priced_in_analysis": {
+        "priced_in_score": 0.40,
+        "rationale": "The stock has performed well, but the full, quantifiable impact of the TAM expansion is unlikely to be priced in until management provides updated guidance, which is a key catalyst for the upcoming Q2 earnings call on September 3, 2025.",
+        "supporting_data": [34, 41]
+      }
+    }
+  ],
+  "trade_ideas":,
+      "risk_parameters": {
+        "stop_loss": "Initiate review if price ratio (DSGX/ETSY) deviates more than 2 standard deviations from 3-month historical average.",
+        "max_risk": null
+      },
+      "catalysts":
+    },
+    {
+      "trade_id": "ASYM_SHOP_PUT_SPREAD_01",
+      "trade_type": "Options - Bearish Spread",
+      "thesis": "The market has underestimated the second-order risks to Shopify's international growth narrative and premium valuation from the de minimis suspension. A put debit spread offers a defined-risk way to position for a potential correction as these risks materialize.",
+      "legs":,
+      "risk_parameters": {
+        "stop_loss": null,
+        "max_risk": "Net debit paid to establish the position."
+      },
+      "catalysts":
+    }
+  ]
+}
