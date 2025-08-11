@@ -1,0 +1,226 @@
+{
+  "lastUpdated": "2025-08-11T18:43:12.387455+02:00",
+  "blotter": [
+    {
+      "ticker": "CHD",
+      "structure": "Long Call Spread (Jan'26 95c/115c)",
+      "catalystDate": "2025-10-25",
+      "validUntil": "2025-11-15",
+      "rr": 4.0,
+      "conf": 0.9,
+      "thesisId": "thesis-chd"
+    },
+    {
+      "ticker": "OPEN",
+      "structure": "Long Straddle (Oct'25 2.5c/2.5p)",
+      "catalystDate": "2025-08-26",
+      "validUntil": "2025-09-15",
+      "rr": null,
+      "conf": 0.9,
+      "thesisId": "thesis-open"
+    },
+    {
+      "ticker": "9992.HK",
+      "structure": "Long Stock",
+      "catalystDate": "2025-08-31",
+      "validUntil": "2025-08-31",
+      "rr": 2.0,
+      "conf": 0.9,
+      "thesisId": "thesis-popmart"
+    },
+    {
+      "ticker": "2593.T",
+      "structure": "Long Stock",
+      "catalystDate": "2025-09-15",
+      "validUntil": "2025-08-31",
+      "rr": 2.0,
+      "conf": 0.9,
+      "thesisId": "thesis-itoen"
+    }
+  ],
+  "theses": [
+    {
+      "id": "thesis-chd",
+      "ticker": "CHD",
+      "title": "Underappreciated Growth Asset",
+      "status": "Actionable",
+      "tags": [
+        "emerging",
+        "direct"
+      ],
+      "passedFilter": [
+        {
+          "label": "Signal Origin",
+          "text": "Viral TikTok content & high search volume for 'Mighty Patch'."
+        },
+        {
+          "label": "Cross-Verification",
+          "text": "Market research reports, tier\u20111 press reviews, and official filings."
+        },
+        {
+          "label": "Materiality",
+          "text": "Hero brand cited as a primary growth driver in Q2\u201925; ~8% revenue contribution (est.)."
+        },
+        {
+          "label": "Priced-in Test",
+          "text": "YTD underperformance vs. XLP; low IV rank suggests complacency."
+        }
+      ],
+      "analystConsensus": "Generally Hold; price targets may lag Hero\u2019s growth trajectory.",
+      "tradeConstruction": {
+        "structure": "Jan 2026 95/115 Call Spread",
+        "debit": 2.5,
+        "maxLoss": 2.5,
+        "maxGain": 17.5,
+        "breakeven": 97.5,
+        "ivRank": "18%"
+      }
+    },
+    {
+      "id": "thesis-open",
+      "ticker": "OPEN",
+      "title": "Sentiment vs. Fundamental Dislocation",
+      "status": "Actionable",
+      "tags": [
+        "mainstream",
+        "direct"
+      ],
+      "passedFilter": [
+        {
+          "label": "Signal Origin",
+          "text": "High engagement on r/wallstreetbets; meme\u2011stock dynamics."
+        },
+        {
+          "label": "Cross-Verification",
+          "text": "Financial press and market data confirm extreme volume & move."
+        },
+        {
+          "label": "Materiality",
+          "text": "Narrative directly targets the equity and business model."
+        },
+        {
+          "label": "Priced-in Test",
+          "text": "IV ~elevated; big move likely, direction uncertain \u2192 long vol favored."
+        }
+      ],
+      "analystConsensus": "Bearish skew post\u2011guidance; several downgrades in early Aug 2025.",
+      "tradeConstruction": {
+        "structure": "Oct 2025 $2.50 Straddle",
+        "debit": 0.85,
+        "maxLoss": 0.85,
+        "breakeven": "1.65 & 3.35",
+        "ivVs30d": "+15%"
+      }
+    },
+    {
+      "id": "thesis-popmart",
+      "ticker": "9992.HK",
+      "title": "Labubu Craze Boosting Pop Mart Earnings",
+      "status": "Actionable",
+      "tags": [
+        "mainstream",
+        "direct"
+      ],
+      "passedFilter": [
+        {
+          "label": "Signal Origin",
+          "text": "Viral content and celebrity endorsements for 'Labubu' collectible dolls."
+        },
+        {
+          "label": "Cross-Verification",
+          "text": "Mainstream coverage in Asia & global consumer press."
+        },
+        {
+          "label": "Materiality",
+          "text": "Strong H1 momentum attributed to Labubu; significant sales contribution."
+        },
+        {
+          "label": "Priced-in Test",
+          "text": "Momentum ahead of earnings may not fully reflect sustained demand."
+        }
+      ],
+      "analystConsensus": "Mixed; momentum recognized but sustainability debated.",
+      "tradeConstruction": {
+        "structure": "Long Stock",
+        "entry": 271.2,
+        "stop": 249.0,
+        "target1": 316.0,
+        "target2": 340.0
+      }
+    },
+    {
+      "id": "thesis-itoen",
+      "ticker": "2593.T",
+      "title": "Matcha Mania Strains Supply (Ito En Beneficiary)",
+      "status": "Actionable",
+      "tags": [
+        "emerging",
+        "direct"
+      ],
+      "passedFilter": [
+        {
+          "label": "Signal Origin",
+          "text": "TikTok\u2011fueled health trend accelerating global matcha demand."
+        },
+        {
+          "label": "Cross-Verification",
+          "text": "Multiple outlets report shortages and price hikes."
+        },
+        {
+          "label": "Materiality",
+          "text": "Matcha is a key growth segment; tariffs + price increases bolster margins."
+        },
+        {
+          "label": "Priced-in Test",
+          "text": "Low priced\u2011in score indicates under\u2011recognized margin expansion."
+        }
+      ],
+      "analystConsensus": "Constructive; margin expansion underappreciated.",
+      "tradeConstruction": {
+        "structure": "Long Stock",
+        "entry": 3398.0,
+        "stop": 3250.0,
+        "target1": 3700.0,
+        "target2": 4000.0
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "storyId": "popmart_labubu",
+      "entity": "Pop Mart",
+      "eventType": "viral",
+      "rationale": "Labubu collectibles drove significant H1 growth per multiple consumer reports.",
+      "sourceType": "Website",
+      "domain": "indiatimes.com",
+      "url": "https://timesofindia.indiatimes.com/"
+    },
+    {
+      "storyId": "matcha_shortage",
+      "entity": "Ito En",
+      "eventType": "policy",
+      "rationale": "High demand + tariffs \u2192 shortages and price hikes; likely benefits Ito En margins.",
+      "sourceType": "Website",
+      "domain": "abcnews.go.com",
+      "url": "https://abcnews.go.com/"
+    },
+    {
+      "storyId": "SKIN_POSITIVITY_2025",
+      "entity": "CHD",
+      "eventType": "social_signal",
+      "rationale": "Skin\u2011positivity and pimple patch virality lifting Hero brand growth.",
+      "sourceType": "Website",
+      "domain": "cosmeticsbusiness.com",
+      "url": "https://www.cosmeticsbusiness.com/"
+    },
+    {
+      "storyId": "MEME_VS_FUNDAMENTALS_2025",
+      "entity": "OPEN",
+      "eventType": "social_signal",
+      "rationale": "Retail participation and meme dynamics increase realized volatility.",
+      "sourceType": "Forum",
+      "domain": "reddit.com",
+      "url": "https://www.reddit.com/r/wallstreetbets"
+    }
+  ]
+}

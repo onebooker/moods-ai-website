@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moods.ai | Actionable Narrative Intelligence (BETA)</title>
+  <style>
+    :root { --primary-color:#0a2342; --secondary-color:#2ca58d; --background-color:#f4f4f9; --card-background:#ffffff; --text-color:#333; --header-text-color:#fff; --border-color:#e0e0e0; --shadow-color:rgba(0,0,0,.08); --actionable-color:#28a745; --incubating-color:#fd7e14; }
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;margin:0;padding:0;background:var(--background-color);color:var(--text-color);line-height:1.6}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    nav{background:var(--primary-color);color:#fff;padding:0 2rem;position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;height:60px;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+    nav .logo{font-size:1.5rem;font-weight:700;color:#fff;text-decoration:none}
+    nav .nav-links{list-style:none;display:flex;gap:1.5rem;margin:0;padding:0}
+    nav .nav-links a{color:#fff;text-decoration:none;font-weight:500;padding:10px 0;border-bottom:2px solid transparent;transition:border-color .3s}
+    nav .nav-links a:hover{border-color:var(--secondary-color)}
+    .hamburger{display:none;cursor:pointer;flex-direction:column;gap:4px}
+    .hamburger .bar{width:25px;height:3px;background:#fff}
+    header{background:#0a2342e0;color:#fff;padding:3.5rem 1.5rem 2.5rem;text-align:center}
+    header h1{margin:0 0 10px 0;font-size:2.2rem;font-weight:800}
+    .beta{display:inline-block;background:#ffe58f;color:#8b5e00;padding:6px 12px;border-radius:999px;font-weight:700;margin-top:.5rem}
+    h2{color:var(--primary-color);border-bottom:2px solid var(--secondary-color);padding-bottom:10px;margin-top:40px;margin-bottom:20px;font-size:1.6rem;font-weight:700;scroll-margin-top:80px}
+    .card{background:var(--card-background);border:1px solid var(--border-color);border-left:5px solid var(--border-color);border-radius:8px;padding:24px;margin-bottom:24px;box-shadow:0 4px 8px var(--shadow-color)}
+    .cta-button{background:var(--secondary-color);color:#fff;padding:12px 20px;border:none;border-radius:6px;font-weight:700;cursor:pointer}
+    .cta-button:hover{opacity:.9}
+    table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+    th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--border-color);vertical-align:middle}
+    th{background:#f8f9fa;color:var(--primary-color);cursor:pointer}
+    th:hover{background:#e9ecef}
+    .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:.75rem;font-weight:800;color:#fff}
+    .badge.actionable{background:var(--actionable-color)}
+    .badge.incubating{background:var(--incubating-color)}
+    .pill{display:inline-block;background:#e9ecef;color:#333;padding:2px 8px;border-radius:999px;font-size:.75rem;margin-right:6px}
+    .kv{display:flex;gap:8px;align-items:flex-start;margin:.25rem 0}
+    .kv strong{min-width:140px}
+    .disclaimer-box{background:#fffbe6;border:1px solid #ffe58f;color:#8b5e00;padding:10px 15px;border-radius:8px;font-size:.9rem;margin-bottom:18px}
+    .feedback-prompt{font-size:.9rem;color:#6c757d;margin-top:.5rem}
+    footer{text-align:center;padding:20px;color:#6c757d}
+    #back-to-top{position:fixed;bottom:20px;right:20px;background:var(--secondary-color);color:#fff;border:none;border-radius:50%;width:50px;height:50px;display:none;align-items:center;justify-content:center;cursor:pointer}
+    @media (max-width: 768px){.nav-links{display:none;position:absolute;left:0;top:60px;width:100%;background:var(--primary-color);flex-direction:column}.nav-links.active{display:flex}.hamburger{display:flex}header h1{font-size:1.8rem}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="logo">Moods.ai</a>
+    <div class="hamburger" id="hamburger"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#trade-blotter">Trade Blotter</a></li>
+      <li><a href="#track-record">Track Record</a></li>
+      <li><a href="#theses">Theses</a></li>
+      <li><a href="#incubating-ideas">Incubating</a></li>
+      <li><a href="#evidence-log">Evidence</a></li>
+      <li><a href="#waitlist">Join Beta</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Actionable Narrative Intelligence</h1>
+    <div class="beta" id="beta-badge">BETA</div>
+    <p>We spot under‑priced narratives, validate them across web/social, and turn them into risk‑defined trades.</p>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h3>How It Works</h3>
+      <p>We scan social and web data to find emerging stories, cross‑verify with credible sources, and only publish trades when a clear, quantifiable edge exists.</p>
+      <button class="cta-button" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Start Your Free Trial</button>
+    </div>
+
+    <h2 id="trade-blotter">Actionable Trade Blotter</h2>
+    <div class="disclaimer-box"><strong>Disclaimer:</strong> This is not financial advice. Educational purposes only.</div>
+    <div class="card table-responsive">
+      <table id="blotter-table">
+        <thead>
+          <tr>
+            <th data-sort="string">Ticker</th>
+            <th data-sort="string">Side / Structure</th>
+            <th data-sort="date">Catalyst Date</th>
+            <th data-sort="date">Valid Until</th>
+            <th data-sort="number">R:R</th>
+            <th data-sort="number">Conf.</th>
+            <th>Links</th>
+          </tr>
+        </thead>
+        <tbody><!-- Hydrated --></tbody>
+      </table>
+    </div>
+
+    <h2 id="track-record">Track Record (Closed Trades)</h2>
+    <div class="card table-responsive">
+      <table>
+        <thead><tr><th>Ticker</th><th>Strategy</th><th>Entry Date</th><th>Exit Date</th><th>Realized P/L</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>XYZ</td><td>Long Stock</td><td>2025-06-01</td><td>2025-07-15</td><td style="color:#28a745">+15.2%</td><td><span class="badge actionable">Win</span></td></tr>
+          <tr><td>ABC</td><td>Short Put Spread</td><td>2025-05-20</td><td>2025-06-19</td><td style="color:#fd7e14">-100.0%</td><td><span class="badge incuabting">Loss</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section id="theses">
+      <h2>Detailed Theses</h2>
+      <div id="theses-container"><!-- Hydrated --></div>
+    </section>
+
+    <h2 id="incubating-ideas">Incubating Ideas</h2>
+    <div class="card"><h3>Short META Campaign <span class="badge incuabting">Incubating</span></h3></div>
+
+    <h2 id="evidence-log">Evidence Log</h2>
+    <div class="card table-responsive">
+      <table id="evidence-table">
+        <thead><tr><th>Story ID</th><th>Entity</th><th>Event Type</th><th>Rationale</th><th>Source Type</th><th>Source (Domain)</th></tr></thead>
+        <tbody><!-- Hydrated --></tbody>
+      </table>
+    </div>
+
+    <!-- Netlify Forms: Waitlist -->
+    <h2 id="waitlist">Join the Waitlist</h2>
+    <form name="waitlist" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field" class="card" style="max-width:520px;margin:20px auto">
+      <input type="hidden" name="form-name" value="waitlist" />
+      <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+      <h3>Get early access</h3>
+      <p><input type="email" name="email" required placeholder="you@domain.com" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:6px"></p>
+      <label style="font-size:.85rem;display:block;margin:8px 0;"><input type="checkbox" name="consent" required> I agree to receive beta & launch emails.</label>
+      <div data-netlify-recaptcha="true" style="margin:10px 0;"></div>
+      <button class="cta-button" type="submit">Join the waitlist</button>
+      <p class="feedback-prompt">We’ll only email about the product. Unsubscribe anytime. <a href="/privacy.html">Privacy</a></p>
+    </form>
+  </main>
+
+  <button id="back-to-top" title="Go to top">↑</button>
+
+  <footer><p>© Moods.ai — BETA. This is not financial advice.</p></footer>
+
+  <script>
+    // Mobile nav
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger?.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+    // Back to top
+    const b2t = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => b2t.style.display = (document.documentElement.scrollTop > 100) ? 'flex' : 'none');
+    b2t.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Sorting
+    document.querySelectorAll('#blotter-table th').forEach(h => {
+      h.addEventListener('click', () => {
+        const table = h.closest('table');
+        const idx = Array.from(h.parentElement.children).indexOf(h);
+        const asc = !h.classList.contains('th-sort-asc');
+        sortTableByColumn(table, idx, asc);
+      });
+    });
+    function sortTableByColumn(table, column, asc = true) {
+      const dir = asc ? 1 : -1;
+      const tBody = table.tBodies[0];
+      const rows = Array.from(tBody.querySelectorAll('tr'));
+      const header = table.querySelector(`th:nth-child(${column + 1})`);
+      const type = header.dataset.sort;
+      const sorted = rows.sort((a, b) => {
+        let A = a.children[column].textContent.trim();
+        let B = b.children[column].textContent.trim();
+        if (type === 'number') { A = parseFloat(A) || 0; B = parseFloat(B) || 0; }
+        if (type === 'date') { A = new Date(A).getTime() || 0; B = new Date(B).getTime() || 0; }
+        return (A > B ? 1 : -1) * dir;
+      });
+      tBody.innerHTML = '';
+      tBody.append(...sorted);
+      table.querySelectorAll('th').forEach(th => th.classList.remove('th-sort-asc', 'th-sort-desc'));
+      header.classList.toggle('th-sort-asc', asc);
+      header.classList.toggle('th-sort-desc', !asc);
+    }
+
+    // Hydration
+    (async function hydrate() {
+      try {
+        const res = await fetch('/data/feed.json?ts=' + Date.now(), { cache:'no-store' });
+        if (!res.ok) throw new Error('feed not found');
+        const data = await res.json();
+
+        // Updated badge
+        const badge = document.getElementById('beta-badge');
+        if (badge && data.lastUpdated) {
+          const d = new Date(data.lastUpdated);
+          badge.textContent = 'BETA · Last updated ' + d.toLocaleString();
+        }
+
+        // Blotter
+        const tbody = document.querySelector('#blotter-table tbody');
+        if (tbody && Array.isArray(data.blotter)) {
+          tbody.innerHTML = data.blotter.map(r => `
+            <tr>
+              <td><strong>${r.ticker}</strong></td>
+              <td>${r.structure}</td>
+              <td>${r.catalystDate}</td>
+              <td>${r.validUntil}</td>
+              <td>${(r.rr ?? 'N/A')}</td>
+              <td>${Number(r.conf).toFixed(1)}</td>
+              <td><a href="#${r.thesisId}">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
+            </tr>
+          `).join('');
+        }
+
+        // Theses
+        const tc = document.getElementById('theses-container');
+        if (tc && Array.isArray(data.theses)) {
+          tc.innerHTML = data.theses.map(t => {
+            const tags = (t.tags||[]).map(x => `<span class="pill">${x}</span>`).join(' ');
+            const passed = (t.passedFilter||[]).map(p => `<div class="kv"><strong>${p.label}:</strong> <span>${p.text}</span></div>`).join('');
+            let tradeTable = '';
+            if (t.tradeConstruction) {
+              const kv = Object.entries(t.tradeConstruction).map(([k,v]) => `<div class="kv"><strong>${k}:</strong> <span>${v}</span></div>`).join('');
+              tradeTable = `<div class="card" style="background:#f8f9fa">${kv}</div>`;
+            }
+            return `
+              <div class="card" id="${t.id}">
+                <h3>${t.title} <span class="badge actionable">${t.status}</span> <span class="pill">${t.ticker}</span></h3>
+                <div>${tags}</div>
+                <h4>How this idea passed the filter</h4>
+                ${passed || '<div class="kv"><em>No details provided.</em></div>'}
+                <h4>Analyst Consensus</h4>
+                <p>${t.analystConsensus || '—'}</p>
+                <h4>Trade Construction</h4>
+                ${tradeTable}
+                <div class="feedback-prompt">Was this thesis helpful? <button>👍</button> <button>👎</button></div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // Evidence
+        const et = document.querySelector('#evidence-table tbody');
+        if (et && Array.isArray(data.evidence)) {
+          et.innerHTML = data.evidence.map(e => `
+            <tr>
+              <td>${e.storyId}</td>
+              <td>${e.entity}</td>
+              <td>${e.eventType}</td>
+              <td>${e.rationale || ''}</td>
+              <td>${e.sourceType || ''}</td>
+              <td>${e.domain ? `<a href="${e.url||'#'}" target="_blank" rel="noopener">${e.domain}</a>` : ''}</td>
+            </tr>
+          `).join('');
+        }
+      } catch (e) {
+        console.warn('hydrate failed', e);
+      }
+    })();
+  </script>
+</body>
+</html>
