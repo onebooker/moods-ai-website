@@ -19,7 +19,6 @@
             --neutral-color: #6c757d;
             --actionable-color: #28a745;
             --incubating-color: #fd7e14;
-            --invalidated-color: #dc3545;
             --success-color: #28a745;
             --loss-color: #dc3545;
         }
@@ -34,13 +33,13 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 1rem;
         }
         /* Navigation Bar */
         nav {
             background: var(--primary-color);
             color: var(--header-text-color);
-            padding: 0 2rem;
+            padding: 0 1.5rem;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -79,6 +78,7 @@
             cursor: pointer;
             flex-direction: column;
             gap: 4px;
+            z-index: 1001; /* Ensure it's above nav links */
         }
         .hamburger .bar {
             width: 25px;
@@ -89,16 +89,16 @@
         header {
             background: #0a2342e0;
             color: var(--header-text-color);
-            padding: 4rem 1.5rem 3rem;
+            padding: 3rem 1.5rem;
             text-align: center;
         }
         header h1 {
             margin: 0 0 10px 0;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
         }
         header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 300;
             max-width: 700px;
             margin: 0 auto;
@@ -124,9 +124,10 @@
             box-shadow: 0 4px 8px var(--shadow-color);
             transition: border-left-color 0.3s;
         }
-        .card:hover {
-            border-left-color: var(--secondary-color);
-        }
+        .card:hover { border-left-color: var(--secondary-color); }
+        
+        /* Responsive Tables */
+        .table-responsive { overflow-x: auto; }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -134,7 +135,7 @@
             font-size: 0.9rem;
         }
         th, td {
-            padding: 12px 10px;
+            padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
             vertical-align: middle;
@@ -145,11 +146,9 @@
             color: var(--primary-color);
             cursor: pointer;
         }
-        th:hover {
-            background-color: #e9ecef;
-        }
         tbody tr { transition: background-color 0.2s; }
         tbody tr:hover { background-color: #f1f1f1; }
+        
         .tag, .badge {
             display: inline-block;
             padding: 4px 12px;
@@ -165,6 +164,7 @@
         .badge.incubating { background-color: var(--incubating-color); }
         .badge.success { background-color: var(--success-color); }
         .badge.loss { background-color: var(--loss-color); }
+        
         .info-box {
             margin-top: 15px;
             padding: 15px;
@@ -173,28 +173,7 @@
             border-radius: 4px;
         }
         .info-box ul { padding-left: 20px; margin: 0.5rem 0; }
-        .source-diversity {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .source-diversity .source-tag {
-            background: #e9ecef;
-            color: var(--text-color);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.85rem;
-        }
-        .source-diversity .source-tag.present {
-            background: var(--secondary-color);
-            color: white;
-        }
-        .source-diversity .source-tag.skipped {
-            background: #e9ecef;
-            color: var(--neutral-color);
-            text-decoration: line-through;
-        }
+        
         footer {
             text-align: center;
             margin-top: 40px;
@@ -206,7 +185,7 @@
         }
         a { color: var(--secondary-color); text-decoration: none; font-weight: 500; }
         a:hover { text-decoration: underline; }
-        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        
         #back-to-top {
             position: fixed;
             bottom: 20px;
@@ -226,10 +205,7 @@
             transition: opacity 0.3s, transform 0.3s;
         }
         #back-to-top:hover { opacity: 0.8; }
-        .cta-card {
-            text-align: center;
-            padding: 2rem;
-        }
+        
         .cta-button {
             background-color: var(--secondary-color);
             color: white;
@@ -241,9 +217,8 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .cta-button:hover {
-            background-color: #248c75;
-        }
+        .cta-button:hover { background-color: #248c75; }
+        
         .disclaimer-box {
             background-color: #fffbe6;
             border: 1px solid #ffe58f;
@@ -253,48 +228,82 @@
             font-size: 0.9rem;
             margin-bottom: 20px;
         }
-        .feedback-prompt {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: var(--neutral-color);
-        }
-        .feedback-prompt button {
-            background: none;
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: background-color 0.2s;
-        }
-        .feedback-prompt button:hover {
-            background-color: #e9ecef;
-        }
 
+        /* Mobile-First Enhancements */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                display: flex;
                 flex-direction: column;
-                position: absolute;
-                top: 60px;
+                align-items: center;
+                gap: 0;
+                position: fixed;
+                top: 0;
                 left: 0;
                 width: 100%;
+                height: 100vh;
                 background-color: var(--primary-color);
-                padding: 1rem 0;
+                padding-top: 80px;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
             }
             .nav-links.active {
-                display: flex;
+                transform: translateX(0);
             }
             .nav-links li {
+                width: 100%;
                 text-align: center;
-                padding: 10px 0;
+            }
+            .nav-links li a {
+                display: block;
+                padding: 1.5rem 0;
+                width: 100%;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
             }
             .hamburger {
                 display: flex;
             }
-            header h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+            /* Responsive Tables to Cards */
+            .table-responsive table, 
+            .table-responsive thead, 
+            .table-responsive tbody, 
+            .table-responsive th, 
+            .table-responsive td, 
+            .table-responsive tr {
+                display: block;
+            }
+            .table-responsive thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            .table-responsive tr {
+                border: 1px solid var(--border-color);
+                margin-bottom: 1rem;
+                border-radius: 5px;
+            }
+            .table-responsive td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+            .table-responsive td:before {
+                position: absolute;
+                top: 50%;
+                left: 15px;
+                transform: translateY(-50%);
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                content: attr(data-label);
+            }
         }
     </style>
 </head>
@@ -316,13 +325,13 @@
     </nav>
     <header id="top">
         <h1>Actionable Narrative Intelligence</h1>
-        <p>We spot under-priced narratives, validate them across web/social, and turn them into risk-defined trades.</p>
+        <p>We spot under-priced narratives, validate them, and construct risk-defined trades.</p>
     </header>
 
     <main class="container">
-        <div class="card cta-card">
+        <div class="card" style="text-align:center;">
             <h3>How It Works</h3>
-            <p>Our system continuously scans social and web data to find emerging stories, validates them against financial data, and constructs trades only when a clear, quantifiable edge is found.</p>
+            <p>Our system scans social and web data, validates emerging stories with financial data, and builds trades only when a clear edge is found.</p>
             <button class="cta-button">Start Your Free Trial</button>
         </div>
 
@@ -330,62 +339,62 @@
         <div class="disclaimer-box">
             <strong>Disclaimer:</strong> This is not financial advice. All information is for educational purposes only.
         </div>
-        <div class="card table-responsive">
-            <table id="blotter-table">
+        <div class="table-responsive">
+            <table>
                 <thead>
                     <tr>
-                        <th data-sort="string">Ticker</th>
-                        <th data-sort="string">Side / Structure</th>
-                        <th data-sort="date">Catalyst Date</th>
-                        <th data-sort="date">Valid Until</th>
-                        <th data-sort="number">R:R</th>
-                        <th data-sort="number">Conf.</th>
+                        <th>Ticker</th>
+                        <th>Side / Structure</th>
+                        <th>Catalyst Date</th>
+                        <th>Valid Until</th>
+                        <th>R:R</th>
+                        <th>Conf.</th>
                         <th>Links</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>CHD</strong></td>
-                        <td>Long Call Spread<br><small>(Jan'26 95c/115c)</small></td>
-                        <td>2025-10-25</td>
-                        <td>2025-11-15</td>
-                        <td>4.0</td>
-                        <td>0.9</td>
-                        <td><a href="#thesis-chd">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
+                        <td data-label="Ticker"><strong>CHD</strong></td>
+                        <td data-label="Structure">Long Call Spread<br><small>(Jan'26 95c/115c)</small></td>
+                        <td data-label="Catalyst Date">2025-10-25</td>
+                        <td data-label="Valid Until">2025-11-15</td>
+                        <td data-label="R:R">4.0</td>
+                        <td data-label="Conf.">0.9</td>
+                        <td data-label="Links"><a href="#thesis-chd">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
                     </tr>
                     <tr>
-                        <td><strong>OPEN</strong></td>
-                        <td>Long Straddle<br><small>(Oct'25 2.5c/2.5p)</small></td>
-                        <td>2025-08-26</td>
-                        <td>2025-09-15</td>
-                        <td>N/A</td>
-                        <td>0.9</td>
-                        <td><a href="#thesis-open">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
+                        <td data-label="Ticker"><strong>OPEN</strong></td>
+                        <td data-label="Structure">Long Straddle<br><small>(Oct'25 2.5c/2.5p)</small></td>
+                        <td data-label="Catalyst Date">2025-08-26</td>
+                        <td data-label="Valid Until">2025-09-15</td>
+                        <td data-label="R:R">N/A</td>
+                        <td data-label="Conf.">0.9</td>
+                        <td data-label="Links"><a href="#thesis-open">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
                     </tr>
                     <tr>
-                        <td><strong>9992.HK</strong></td>
-                        <td>Long Stock</td>
-                        <td>2025-08-31</td>
-                        <td>2025-08-31</td>
-                        <td>2.0</td>
-                        <td>0.9</td>
-                        <td><a href="#thesis-popmart">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
+                        <td data-label="Ticker"><strong>9992.HK</strong></td>
+                        <td data-label="Structure">Long Stock</td>
+                        <td data-label="Catalyst Date">2025-08-31</td>
+                        <td data-label="Valid Until">2025-08-31</td>
+                        <td data-label="R:R">2.0</td>
+                        <td data-label="Conf.">0.9</td>
+                        <td data-label="Links"><a href="#thesis-popmart">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
                     </tr>
                      <tr>
-                        <td><strong>2593.T</strong></td>
-                        <td>Long Stock</td>
-                        <td>2025-09-15</td>
-                        <td>2025-08-31</td>
-                        <td>2.0</td>
-                        <td>0.9</td>
-                        <td><a href="#thesis-itoen">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
+                        <td data-label="Ticker"><strong>2593.T</strong></td>
+                        <td data-label="Structure">Long Stock</td>
+                        <td data-label="Catalyst Date">2025-09-15</td>
+                        <td data-label="Valid Until">2025-08-31</td>
+                        <td data-label="R:R">2.0</td>
+                        <td data-label="Conf.">0.9</td>
+                        <td data-label="Links"><a href="#thesis-itoen">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         
         <h2 id="track-record">Track Record (Closed Trades)</h2>
-        <div class="card table-responsive">
+        <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
@@ -399,96 +408,51 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>XYZ</td>
-                        <td>Long Stock</td>
-                        <td>2025-06-01</td>
-                        <td>2025-07-15</td>
-                        <td style="color:var(--success-color)">+15.2%</td>
-                        <td><span class="badge success">Win</span></td>
+                        <td data-label="Ticker">XYZ</td>
+                        <td data-label="Strategy">Long Stock</td>
+                        <td data-label="Entry Date">2025-06-01</td>
+                        <td data-label="Exit Date">2025-07-15</td>
+                        <td data-label="P/L" style="color:var(--success-color)">+15.2%</td>
+                        <td data-label="Status"><span class="badge success">Win</span></td>
                     </tr>
                     <tr>
-                        <td>ABC</td>
-                        <td>Short Put Spread</td>
-                        <td>2025-05-20</td>
-                        <td>2025-06-19</td>
-                        <td style="color:var(--loss-color)">-100.0%</td>
-                        <td><span class="badge loss">Loss</span></td>
+                        <td data-label="Ticker">ABC</td>
+                        <td data-label="Strategy">Short Put Spread</td>
+                        <td data-label="Entry Date">2025-05-20</td>
+                        <td data-label="Exit Date">2025-06-19</td>
+                        <td data-label="P/L" style="color:var(--loss-color)">-100.0%</td>
+                        <td data-label="Status"><span class="badge loss">Loss</span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <section id="theses">
-            <h2 id="thesis-chd">Detailed Thesis: Church & Dwight (CHD)</h2>
+            <h2 id="thesis-chd">Thesis: Church & Dwight (CHD)</h2>
             <div class="card">
                 <h3>Underappreciated Growth Asset</h3>
-                <p><span class="badge actionable">Actionable</span> <span class="tag emerging">Emerging</span> <span class="tag direct">Direct</span></p>
-                
-                <h4>How this idea passed the filter</h4>
+                <p><span class="badge actionable">Actionable</span> <span class="tag emerging">Emerging</span></p>
                 <div class="info-box">
                     <ul>
                         <li><strong>Signal Origin:</strong> Viral TikTok content & high search volume for "Mighty Patch".</li>
-                        <li><strong>Cross-Verification:</strong> Confirmed with market research reports (2), press reviews (3), and official company filings (1).</li>
+                        <li><strong>Cross-Verification:</strong> Confirmed with market research reports, press reviews, and official company filings.</li>
                         <li><strong>Materiality:</strong> Hero brand cited as primary growth driver in Q2'25 earnings, estimated 8% revenue contribution.</li>
-                        <li><strong>Priced-in Test:</strong> Stock YTD -13%, underperforming sector (XLP). Low IV Rank (18th percentile) suggests complacency.</li>
+                        <li><strong>Priced-in Test:</strong> Stock YTD -13%, underperforming sector. Low IV Rank (18th percentile) suggests complacency.</li>
                     </ul>
                 </div>
-
-                <h4>Source Diversity & Analyst Consensus</h4>
-                <div class="source-diversity">
-                    <span class="source-tag present">✓ IR/Filings (1)</span>
-                    <span class="source-tag present">✓ Tier-1 Press (3)</span>
-                    <span class="source-tag present">✓ Social (TikTok) (5+)</span>
-                    <span class="source-tag present">✓ Forums (2)</span>
-                    <span class="source-tag skipped">X (Twitter)</span>
-                </div>
-                <div class="info-box"><strong>Analyst Consensus:</strong> Generally "Hold," with price targets not fully reflecting Hero's growth potential.</div>
-
-                <h4>Trade Construction: Long-Dated Call Spread</h4>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr><th>Structure</th><th>Cost (Debit)</th><th>Max Loss</th><th>Max Gain</th><th>Breakeven</th><th>IV Rank</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><strong>Jan 2026 95/115 Call Spread</strong></td><td>$2.50</td><td>$2.50</td><td>$17.50</td><td>$97.50</td><td>18%</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="feedback-prompt">Was this thesis helpful? <button>👍</button><button>👎</button></div>
             </div>
 
-            <h2 id="thesis-open">Detailed Thesis: Opendoor (OPEN)</h2>
+            <h2 id="thesis-open">Thesis: Opendoor (OPEN)</h2>
             <div class="card">
                 <h3>Sentiment vs. Fundamental Dislocation</h3>
-                <p><span class="badge actionable">Actionable</span> <span class="tag mainstream">Mainstream</span> <span class="tag direct">Direct</span></p>
-
-                <h4>How this idea passed the filter</h4>
-                <div class="info-box">
+                <p><span class="badge actionable">Actionable</span> <span class="tag mainstream">Mainstream</span></p>
+                 <div class="info-box">
                     <ul>
-                        <li><strong>Signal Origin:</strong> High engagement on Reddit's r/wallstreetbets, classifying OPEN as a "meme stock".</li>
-                        <li><strong>Cross-Verification:</strong> Confirmed with financial news outlets (3) and market data (high volume, price surge).</li>
-                        <li><strong>Materiality:</strong> Narrative directly concerns the company's stock and core business (100% exposure).</li>
-                        <li><strong>Priced-in Test:</strong> Extremely high IV (140%) indicates market expects a large move, but not the direction. Edge exists in profiting from volatility itself.</li>
+                        <li><strong>Signal Origin:</strong> High engagement on Reddit's r/wallstreetbets.</li>
+                        <li><strong>Cross-Verification:</strong> Confirmed with financial news outlets and market data (high volume, price surge).</li>
+                        <li><strong>Analyst Consensus:</strong> Bearish. Citigroup downgraded to "Strong Sell" (Aug 6) and Zelman & Associates to "Underperform" (Aug 7).</li>
                     </ul>
                 </div>
-                <h4>Source Diversity & Analyst Consensus</h4>
-                <div class="source-diversity">
-                    <span class="source-tag present">✓ IR/Filings (1)</span>
-                    <span class="source-tag present">✓ Tier-1 Press (4)</span>
-                    <span class="source-tag present">✓ Forums (Reddit) (10+)</span>
-                    <span class="source-tag skipped">X (Twitter)</span>
-                </div>
-                <div class="info-box"><strong>Analyst Consensus:</strong> Bearish. Citigroup downgraded to "Strong Sell" (Aug 6) and Zelman & Associates to "Underperform" (Aug 7) following weak Q3 guidance.</div>
-
-                <h4>Trade Construction: Long Straddle</h4>
-                 <div class="table-responsive">
-                    <table>
-                        <thead><tr><th>Structure</th><th>Total Debit</th><th>Max Loss</th><th>Breakevens</th><th>IV vs 30d Avg</th></tr></thead>
-                        <tbody><tr><td><strong>Oct 2025 $2.50 Straddle</strong></td><td>$0.85</td><td>$0.85</td><td>$1.65 & $3.35</td><td>+15%</td></tr></tbody>
-                    </table>
-                </div>
-                <div class="feedback-prompt">Was this thesis helpful? <button>👍</button><button>👎</button></div>
             </div>
         </section>
         
@@ -497,21 +461,21 @@
             <h3>Short META Campaign</h3>
             <p><span class="badge incubating">Incubating</span></p>
             <div class="info-box">
-                <strong>Reason:</strong> A TikTok-driven campaign encouraging users to short Meta stock is gaining attention, but lacks credible source confirmation.<br>
+                <strong>Reason:</strong> A TikTok-driven campaign to short Meta stock is gaining attention, but lacks credible source confirmation.<br>
                 <strong>What to Watch:</strong> Spread to mainstream news; changes in META short interest. <br>
                 <strong>Review Date:</strong> 2025-08-18
             </div>
         </div>
 
         <h2 id="evidence-log">Evidence Log</h2>
-        <div class="card table-responsive">
+        <div class="table-responsive">
             <table>
-                <thead><tr><th>Story ID</th><th>Entity</th><th>Event Type</th><th>Source (Domain)</th></tr></thead>
+                <thead><tr><th>Story ID</th><th>Entity</th><th>Event Type</th><th>Source</th></tr></thead>
                 <tbody>
-                    <tr><td>popmart_labubu</td><td>Pop Mart</td><td>viral</td><td><a href="#" target="_blank">indiatimes.com</a></td></tr>
-                    <tr><td>matcha_shortage</td><td>Ito En</td><td>policy</td><td><a href="#" target="_blank">abcnews.go.com</a></td></tr>
-                    <tr><td>SKIN_POSITIVITY_2025</td><td>CHD</td><td>social_signal</td><td><a href="#" target="_blank">cosmeticsbusiness.com</a></td></tr>
-                    <tr><td>MEME_VS_FUNDAMENTALS_2025</td><td>OPEN</td><td>social_signal</td><td><a href="#" target="_blank">reddit.com</a></td></tr>
+                    <tr><td data-label="Story ID">popmart_labubu</td><td data-label="Entity">Pop Mart</td><td data-label="Event">viral</td><td data-label="Source"><a href="#" target="_blank">indiatimes.com</a></td></tr>
+                    <tr><td data-label="Story ID">matcha_shortage</td><td data-label="Entity">Ito En</td><td data-label="Event">policy</td><td data-label="Source"><a href="#" target="_blank">abcnews.go.com</a></td></tr>
+                    <tr><td data-label="Story ID">SKIN_POSITIVITY_2025</td><td data-label="Entity">CHD</td><td data-label="Event">social_signal</td><td data-label="Source"><a href="#" target="_blank">cosmeticsbusiness.com</a></td></tr>
+                    <tr><td data-label="Story ID">MEME_VS_FUNDAMENTALS_2025</td><td data-label="Entity">OPEN</td><td data-label="Event">social_signal</td><td data-label="Source"><a href="#" target="_blank">reddit.com</a></td></tr>
                 </tbody>
             </table>
         </div>
@@ -519,7 +483,7 @@
     <button id="back-to-top" title="Go to top">↑</button>
 
     <footer>
-        <p>Generated by GPT-4 v4.0 on 2025-08-11T18:04:00 Europe/Zurich. This is not financial advice.</p>
+        <p>Generated by GPT-4 v4.0 on 2025-08-11T19:30:00 Europe/Zurich. This is not financial advice.</p>
         <p>Access Report: Web OK, Forums OK. Skipped: X, TikTok, Instagram.</p>
     </footer>
     <script>
@@ -527,7 +491,14 @@
         const hamburger = document.querySelector(".hamburger");
         const navLinks = document.querySelector(".nav-links");
         hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
             navLinks.classList.toggle("active");
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove("active");
+                navLinks.classList.remove("active");
+            });
         });
 
         // Back to top button
@@ -540,50 +511,6 @@
             }
         };
         backToTopButton.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // Table Sorting
-        document.querySelectorAll('#blotter-table th').forEach(headerCell => {
-            headerCell.addEventListener('click', () => {
-                const tableElement = headerCell.parentElement.parentElement.parentElement;
-                const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
-                const currentIsAscending = headerCell.classList.contains('th-sort-asc');
-                sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
-            });
-        });
-
-        function sortTableByColumn(table, column, asc = true) {
-            const dirModifier = asc ? 1 : -1;
-            const tBody = table.tBodies[0];
-            const rows = Array.from(tBody.querySelectorAll('tr'));
-
-            const sortedRows = rows.sort((a, b) => {
-                let aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-                let bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-                
-                const header = table.querySelector(`th:nth-child(${column + 1})`);
-                const sortType = header.dataset.sort;
-
-                if (sortType === 'number') {
-                    aColText = parseFloat(aColText) || 0;
-                    bColText = parseFloat(bColText) || 0;
-                } else if (sortType === 'date') {
-                    aColText = new Date(aColText).getTime() || 0;
-                    bColText = new Date(bColText).getTime() || 0;
-                }
-
-                return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
-            });
-
-            while (tBody.firstChild) {
-                tBody.removeChild(tBody.firstChild);
-            }
-
-            tBody.append(...sortedRows);
-
-            table.querySelectorAll('th').forEach(th => th.classList.remove('th-sort-asc', 'th-sort-desc'));
-            table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-asc', asc);
-            table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-desc', !asc);
-        }
     </script>
 </body>
 </html>
