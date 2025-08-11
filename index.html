@@ -7,18 +7,11 @@
   <meta name="description" content="We spot under-priced narratives, validate them across web/social, and turn them into risk-defined trades." />
   <style>
     :root{
-      --primary-color:#0a2342;
-      --secondary-color:#2ca58d;
-      --background-color:#f4f4f9;
-      --card-background:#ffffff;
-      --text-color:#333333;
-      --header-text-color:#ffffff;
-      --border-color:#e0e0e0;
-      --shadow-color:rgba(0,0,0,0.08);
-      --actionable-color:#28a745;
-      --incubating-color:#fd7e14;
-      --success-color:#28a745;
-      --loss-color:#dc3545;
+      --primary-color:#0a2342; --secondary-color:#2ca58d; --background-color:#f4f4f9;
+      --card-background:#ffffff; --text-color:#333333; --header-text-color:#ffffff;
+      --border-color:#e0e0e0; --shadow-color:rgba(0,0,0,0.08);
+      --actionable-color:#28a745; --incubating-color:#fd7e14;
+      --success-color:#28a745; --loss-color:#dc3545;
     }
     *{box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;margin:0;color:var(--text-color);background:var(--background-color);line-height:1.6}
@@ -26,20 +19,23 @@
     /* NAV */
     nav{position:sticky;top:0;z-index:1000;background:var(--primary-color);color:var(--header-text-color);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;box-shadow:0 2px 5px rgba(0,0,0,.2)}
     .logo{font-weight:800;font-size:1.25rem;color:#fff;text-decoration:none}
-    .nav-links{list-style:none;display:flex;gap:1.25rem;margin:0;padding:0}
+    .nav-left{display:flex;align-items:center;gap:12px}
+    .nav-links{list-style:none;display:flex;gap:1rem;margin:0;padding:0}
     .nav-links a{color:#fff;text-decoration:none;font-weight:500;padding:.4rem 0;border-bottom:2px solid transparent;transition:border-color .2s}
     .nav-links a:hover{border-color:var(--secondary-color)}
     .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;z-index:1001}
     .hamburger .bar{width:25px;height:3px;background:#fff;transition:.3s all}
+    .feedpicker{display:flex;align-items:center;gap:.5rem;color:#fff}
+    .feedpicker select{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:.35rem .5rem}
+    .feedpicker option{color:#000}
     /* HERO */
     header{background:#0a2342e0;color:#fff;text-align:center;padding:3rem 1.25rem}
     header h1{margin:0;font-weight:800;font-size:2.1rem}
     header p{max-width:760px;margin:.5rem auto 0;color:rgba(255,255,255,.9)}
     #last-updated{opacity:.85;margin:.5rem 0 0}
-    /* TYPOGRAPHY */
+    /* TYPOGRAPHY/CARDS/TABLES */
     h2{color:var(--primary-color);border-bottom:2px solid var(--secondary-color);padding-bottom:.6rem;margin:2rem 0 1rem;font-size:1.6rem}
     h3{margin:.25rem 0 0}
-    /* CARDS + TABLES */
     .card{background:var(--card-background);border:1px solid var(--border-color);border-left:5px solid var(--border-color);border-radius:10px;padding:20px;margin:16px 0;box-shadow:0 8px 16px var(--shadow-color)}
     .card:hover{border-left-color:var(--secondary-color)}
     .cta-button{background:var(--secondary-color);color:#fff;border:none;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}
@@ -51,28 +47,25 @@
     tbody td{padding:12px 12px;border-bottom:1px solid var(--border-color);vertical-align:middle}
     tbody tr:hover{background:#f6f7f9}
     .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:800;color:#fff}
-    .badge.actionable{background:var(--actionable-color)}
-    .badge.incubating{background:var(--incubating-color)}
+    .badge.actionable{background:var(--actionable-color)} .badge.incubating{background:var(--incubating-color)}
     .tag{display:inline-block;background:#e9eef9;color:#0a2342;padding:3px 8px;border-radius:999px;font-size:.75rem;margin:2px 6px 2px 0}
     .info-box{margin-top:12px;padding:12px;background:#eef2f5;border-left:4px solid var(--secondary-color);border-radius:6px}
     .kv{display:flex;gap:8px;align-items:flex-start;margin:.25rem 0}
     .kv strong{min-width:120px}
     .feedback-prompt{font-size:.9rem;color:#6c757d;margin-top:.5rem}
-    /* BACK TO TOP */
     #back-to-top{position:fixed;bottom:20px;right:20px;background:var(--secondary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.2)}
-    /* FOOTER */
     footer{text-align:center;padding:20px;color:#6c757d}
     /* MOBILE */
     @media (max-width:768px){
       .hamburger{display:flex}
-      .nav-links{position:fixed;inset:0 0 0 0;flex-direction:column;align-items:center;gap:0;background:var(--primary-color);padding-top:80px;transform:translateX(-100%);transition:transform .25s ease}
+      .nav-links{position:fixed;inset:0;flex-direction:column;align-items:center;gap:0;background:var(--primary-color);padding-top:80px;transform:translateX(-100%);transition:transform .25s ease}
       .nav-links.active{transform:translateX(0)}
       .nav-links li{width:100%}
       .nav-links a{display:block;width:100%;text-align:center;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.12)}
       .hamburger.active .bar:nth-child(2){opacity:0}
       .hamburger.active .bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
       .hamburger.active .bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-      /* Responsive table → cards */
+      /* responsive table → cards */
       .table-responsive table,.table-responsive thead,.table-responsive tbody,.table-responsive th,.table-responsive td,.table-responsive tr{display:block}
       .table-responsive thead tr{position:absolute;top:-9999px;left:-9999px}
       .table-responsive tr{border:1px solid var(--border-color);border-radius:8px;margin:0 0 12px 0;background:#fff}
@@ -83,7 +76,20 @@
 </head>
 <body>
   <nav>
-    <a href="#" class="logo">Moods.ai</a>
+    <div class="nav-left">
+      <a href="#" class="logo">Moods.ai</a>
+      <div class="feedpicker" title="Choose data source">
+        <span style="font-weight:600;">Feed:</span>
+        <select id="feedSelector">
+          <option value="auto">Auto</option>
+          <option value="/data/feed.json">Default</option>
+          <option value="/data/feedchatgpt.json">ChatGPT</option>
+          <option value="/data/feedgrok.json">Grok</option>
+          <option value="/data/feedgemini.json">Gemini</option>
+          <option value="ensemble">Ensemble (merge)</option>
+        </select>
+      </div>
+    </div>
     <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
       <div class="bar"></div><div class="bar"></div><div class="bar"></div>
     </div>
@@ -113,7 +119,7 @@
     <h2 id="trade-blotter">Actionable Trade Blotter</h2>
     <div class="disclaimer-box"><strong>Disclaimer:</strong> Educational content, not investment advice.</div>
     <div class="card table-responsive">
-      <table aria-describedby="trade-blotter">
+      <table id="blotter-table" aria-describedby="trade-blotter">
         <thead>
           <tr>
             <th data-sort="string">Ticker</th>
@@ -129,37 +135,16 @@
       </table>
     </div>
 
-    <!-- TRACK RECORD (static example block; you can wire later) -->
+    <!-- TRACK RECORD (static placeholder) -->
     <h2 id="track-record">Track Record (Closed Trades)</h2>
     <div class="card table-responsive">
       <table aria-describedby="track-record">
         <thead>
-          <tr>
-            <th>Ticker</th>
-            <th>Strategy</th>
-            <th>Entry Date</th>
-            <th>Exit Date</th>
-            <th>Realized P/L</th>
-            <th>Status</th>
-          </tr>
+          <tr><th>Ticker</th><th>Strategy</th><th>Entry Date</th><th>Exit Date</th><th>Realized P/L</th><th>Status</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td data-label="Ticker">XYZ</td>
-            <td data-label="Strategy">Long Stock</td>
-            <td data-label="Entry Date">2025-06-01</td>
-            <td data-label="Exit Date">2025-07-15</td>
-            <td data-label="Realized P/L" style="color:var(--success-color)">+15.2%</td>
-            <td data-label="Status"><span class="badge actionable">Win</span></td>
-          </tr>
-          <tr>
-            <td data-label="Ticker">ABC</td>
-            <td data-label="Strategy">Short Put Spread</td>
-            <td data-label="Entry Date">2025-05-20</td>
-            <td data-label="Exit Date">2025-06-19</td>
-            <td data-label="Realized P/L" style="color:var(--loss-color)">-100.0%</td>
-            <td data-label="Status"><span class="badge incubating">Loss</span></td>
-          </tr>
+          <tr><td data-label="Ticker">XYZ</td><td data-label="Strategy">Long Stock</td><td data-label="Entry Date">2025-06-01</td><td data-label="Exit Date">2025-07-15</td><td style="color:var(--success-color)">+15.2%</td><td><span class="badge actionable">Win</span></td></tr>
+          <tr><td data-label="Ticker">ABC</td><td data-label="Strategy">Short Put Spread</td><td data-label="Entry Date">2025-05-20</td><td data-label="Exit Date">2025-06-19</td><td style="color:var(--loss-color)">-100.0%</td><td><span class="badge incubating">Loss</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -170,7 +155,7 @@
       <div id="theses-container"><!-- hydrated --></div>
     </section>
 
-    <!-- INCUBATING (optional static placeholder) -->
+    <!-- INCUBATING (informational placeholder) -->
     <h2 id="incubating-ideas">Incubating Ideas</h2>
     <div class="card">
       <h3>New ideas will appear here as “Incubating” until confirmation/priced-in gates are met.</h3>
@@ -180,14 +165,9 @@
     <!-- EVIDENCE -->
     <h2 id="evidence-log">Evidence Log</h2>
     <div class="card table-responsive">
-      <table aria-describedby="evidence-log">
+      <table id="evidence-table" aria-describedby="evidence-log">
         <thead>
-          <tr>
-            <th>Story ID</th>
-            <th>Entity</th>
-            <th>Event Type</th>
-            <th>Source</th>
-          </tr>
+          <tr><th>Story ID</th><th>Entity</th><th>Event Type</th><th>Source</th></tr>
         </thead>
         <tbody id="evidence-body"><!-- hydrated --></tbody>
       </table>
@@ -201,172 +181,375 @@
   </footer>
 
   <script>
-    // ---------- helpers ----------
-    const $ = (sel, root=document) => root.querySelector(sel);
-    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    // ===== helpers
+    const $  = (s, root=document) => root.querySelector(s);
+    const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
     const esc = (v) => String(v == null ? '' : v);
 
-    function applyDataLabels(tbodyEl){
-      if(!tbodyEl) return;
-      const table = tbodyEl.closest('table');
-      if(!table) return;
-      const headers = $$('#'+table.id+' thead th'); // would be empty unless id set
-      const ths = headers.length ? headers : Array.from(table.querySelectorAll('thead th'));
-      const labels = ths.map(th => th.textContent.trim());
-      $$('#'+tbodyEl.id+' tr').forEach(tr=>{
-        $$('td', tr).forEach((td,i)=> td.setAttribute('data-label', labels[i] || ''));
-      });
-    }
+    // ===== UI: mobile nav + back to top
+    (function navAndTop(){
+      const hamburger = $('#hamburger');
+      const navLinks = $('#navLinks');
+      const toggle = () => {
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', String(hamburger.classList.contains('active')));
+        navLinks.classList.toggle('active');
+      };
+      hamburger.addEventListener('click', toggle);
+      hamburger.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); }});
+      $$('#navLinks a').forEach(a=> a.addEventListener('click', ()=> { hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded','false'); navLinks.classList.remove('active'); }));
+      const b2t = $('#back-to-top');
+      window.addEventListener('scroll', ()=> b2t.style.display = (document.documentElement.scrollTop > 120) ? 'flex' : 'none');
+      b2t.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+    })();
 
+    // ===== table sorting
     function sortTableByColumn(table, column, asc=true){
       const dir = asc ? 1 : -1;
       const tBody = table.tBodies[0];
       const rows = Array.from(tBody.querySelectorAll('tr'));
       const header = table.querySelector(`thead th:nth-child(${column+1})`);
       const type = header?.dataset?.sort || 'string';
-
       const parseCell = (td) => {
         let v = td.textContent.trim();
         if(type==='number'){ const n = parseFloat(v); return isNaN(n) ? -Infinity : n; }
         if(type==='date'){ const t = Date.parse(v); return isNaN(t) ? -Infinity : t; }
         return v.toLowerCase();
       };
-
       const sorted = rows.sort((a,b)=>{
         const A = parseCell(a.children[column] || {});
         const B = parseCell(b.children[column] || {});
         return (A > B ? 1 : -1) * dir;
       });
-
-      tBody.innerHTML = '';
-      tBody.append(...sorted);
+      tBody.innerHTML = ''; tBody.append(...sorted);
       table.querySelectorAll('th').forEach(th=>th.classList.remove('th-sort-asc','th-sort-desc'));
-      header?.classList.toggle('th-sort-asc', asc);
-      header?.classList.toggle('th-sort-desc', !asc);
+      header?.classList.toggle('th-sort-asc', asc); header?.classList.toggle('th-sort-desc', !asc);
     }
 
-    // ---------- nav + back-to-top ----------
-    (function navAndTop(){
-      const hamburger = $('#hamburger');
-      const navLinks = $('#navLinks');
-      const toggle = () => {
-        hamburger.classList.toggle('active');
-        const expanded = hamburger.classList.contains('active');
-        hamburger.setAttribute('aria-expanded', String(expanded));
-        navLinks.classList.toggle('active');
-      };
-      hamburger.addEventListener('click', toggle);
-      hamburger.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' ') {e.preventDefault(); toggle();}});
-      $$('#navLinks a').forEach(a=> a.addEventListener('click', ()=> {
-        hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded','false'); navLinks.classList.remove('active');
-      }));
-      const b2t = $('#back-to-top');
-      window.addEventListener('scroll', ()=> b2t.style.display = (document.documentElement.scrollTop > 120) ? 'flex' : 'none');
-      b2t.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
-    })();
+    // ===== apply data-labels for mobile cards
+    function applyDataLabels(tbodyEl){
+      if(!tbodyEl) return;
+      const table = tbodyEl.closest('table'); if(!table) return;
+      const ths = Array.from(table.querySelectorAll('thead th'));
+      const labels = ths.map(th => th.textContent.trim());
+      Array.from(tbodyEl.querySelectorAll('tr')).forEach(tr=>{
+        Array.from(tr.querySelectorAll('td')).forEach((td,i)=> td.setAttribute('data-label', labels[i] || ''));
+      });
+    }
 
-    // ---------- hydrate from /data/feed.json ----------
-    (async function hydrate(){
+    // ===== feed loading + ensemble logic
+    const FEED_ORDER = [
+      '/data/feed.json',
+      '/data/feedchatgpt.json',
+      '/data/feedgrok.json',
+      '/data/feedgemini.json'
+    ];
+
+    async function tryFetch(url){
       try{
-        const res = await fetch('/data/feed.json?ts=' + Date.now(), {cache:'no-store'});
-        if(!res.ok) throw new Error('feed.json not found');
-        const data = await res.json();
+        const res = await fetch(url + (url.includes('?') ? '' : ('?ts=' + Date.now())), {cache:'no-store'});
+        if(!res.ok) throw new Error('not ok');
+        return await res.json();
+      }catch(e){ return null; }
+    }
 
-        // last updated
-        if(data.lastUpdated){
-          const d = new Date(data.lastUpdated);
-          $('#last-updated').textContent = 'Last updated: ' + d.toLocaleString();
-        }
-
-        // map theses by id
-        const theses = Array.isArray(data.theses) ? data.theses : [];
-        const thesisMap = Object.fromEntries(theses.map(t => [t.id, t]));
-
-        // BLOTTTER
-        const bb = $('#blotter-body');
-        if(bb){
-          const rows = (data.blotter || []).map(r => `
-            <tr>
-              <td><strong>${esc(r.ticker)}</strong></td>
-              <td>${esc(r.structure)}</td>
-              <td>${esc(r.catalystDate)}</td>
-              <td>${esc(r.validUntil)}</td>
-              <td>${r?.rr==null ? 'N/A' : esc(r.rr)}</td>
-              <td>${esc(Number(r.conf).toFixed(1))}</td>
-              <td><a href="#${esc(r.thesisId)}">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
-            </tr>
-          `).join('');
-          bb.innerHTML = rows || `<tr><td colspan="7">No actionable items today.</td></tr>`;
-          applyDataLabels(bb);
-
-          // enable simple sorting
-          const table = bb.closest('table');
-          table.querySelectorAll('thead th').forEach((th, idx)=>{
-            th.addEventListener('click', ()=>{
-              const asc = !th.classList.contains('th-sort-asc');
-              sortTableByColumn(table, idx, asc);
-            });
-          });
-        }
-
-        // THESES (supports longer investmentCase text)
-        const tc = $('#theses-container');
-        if(tc){
-          const html = theses.map(t => {
-            const tags = (t.tags||[]).map(tag => `<span class="tag">${esc(tag)}</span>`).join('');
-            const pf = (t.passedFilter||[]).map(p => `<li><strong>${esc(p.label)}:</strong> ${esc(p.text)}</li>`).join('');
-            const trd = t.tradeConstruction || {};
-            const prettyKeys = {
-              structure:'Structure', debit:'Cost (Debit)', maxLoss:'Max Loss', maxGain:'Max Gain',
-              breakeven:'Breakeven', ivRank:'IV Rank', ivVs30d:'IV vs 30d', entry:'Entry', stop:'Stop',
-              target1:'Target 1', target2:'Target 2'
-            };
-            const tradeKV = Object.entries(trd)
-              .filter(([_,v]) => v!==null && v!=='' && v!==undefined)
-              .map(([k,v]) => `<div class="kv"><strong>${esc(prettyKeys[k]||k)}:</strong> <span>${esc(v)}</span></div>`)
-              .join('');
-
-            return `
-              <div class="card" id="${esc(t.id)}">
-                <h3>${esc(t.title)}
-                  ${t.status ? `<span class="badge ${t.status==='Actionable'?'actionable':'incubating'}" style="margin-left:.5rem">${esc(t.status)}</span>` : ''}
-                  ${t.ticker ? `<span class="tag" style="background:#2ca58d;color:#fff">${esc(t.ticker)}</span>` : ''}
-                </h3>
-                ${tags ? `<div style="margin:.25rem 0">${tags}</div>` : ''}
-                ${t.investmentCase ? `<p style="margin:.75rem 0 1rem">${esc(t.investmentCase)}</p>` : ''}
-                ${pf ? `<div class="info-box"><ul style="margin:.25rem 0;padding-left:1.1rem">${pf}</ul></div>` : ''}
-                ${t.analystConsensus ? `<div class="info-box"><strong>Analyst Consensus:</strong> ${esc(t.analystConsensus)}</div>` : ''}
-                ${tradeKV ? `<div class="info-box">${tradeKV}</div>` : ''}
-                <div class="feedback-prompt">Was this thesis helpful? <button>👍</button> <button>👎</button></div>
-              </div>
-            `;
-          }).join('');
-          tc.innerHTML = html || `<div class="card"><em>No theses available yet.</em></div>`;
-        }
-
-        // EVIDENCE
-        const eb = $('#evidence-body');
-        if(eb){
-          const rows = (data.evidence||[]).map(e => `
-            <tr>
-              <td>${esc(e.storyId)}</td>
-              <td>${esc(e.entity)}</td>
-              <td>${esc(e.eventType)}</td>
-              <td>${e?.domain ? `<a href="${esc(e.url||'#')}" rel="noopener" target="_blank">${esc(e.domain)}</a>` : ''}</td>
-            </tr>
-          `).join('');
-          eb.innerHTML = rows || `<tr><td colspan="4">No evidence logs today.</td></tr>`;
-          applyDataLabels(eb);
-        }
-      }catch(err){
-        console.warn('Hydration failed:', err);
-        // graceful fallbacks
-        const bb = $('#blotter-body'); if(bb) bb.innerHTML = `<tr><td colspan="7">feed.json missing. Add /data/feed.json to hydrate.</td></tr>`;
-        const tc = $('#theses-container'); if(tc) tc.innerHTML = `<div class="card"><em>feed.json missing.</em></div>`;
-        const eb = $('#evidence-body'); if(eb) eb.innerHTML = `<tr><td colspan="4">feed.json missing.</td></tr>`;
+    async function loadAuto(){
+      for(const url of FEED_ORDER){
+        const data = await tryFetch(url);
+        if(data) return { data, label: url };
       }
+      return { data:null, label:null };
+    }
+
+    function normKeyFromThesis(t){
+      const basis = (t.ticker || '') + '|' + (t.title || t.id || '').toLowerCase().replace(/\s+/g,' ').trim();
+      return basis || (t.id || Math.random().toString(36).slice(2));
+    }
+
+    function pickMostCompleteTrade(trades){
+      // choose the tradeConstruction object with the most non-null fields
+      let best = null, bestScore = -1;
+      for(const tr of trades){
+        if(!tr) continue;
+        const score = Object.values(tr).reduce((acc,v)=> acc + ((v!==null && v!=='' && v!==undefined) ? 1 : 0), 0);
+        if(score > bestScore){ best = tr; bestScore = score; }
+      }
+      return best || {};
+    }
+
+    function mostCommonString(arr){
+      const map = new Map();
+      arr.filter(Boolean).forEach(s => map.set(s, (map.get(s)||0)+1));
+      let best = null, count = -1;
+      for(const [k,v] of map.entries()){ if(v>count){ best=k; count=v; } }
+      return best || arr.find(Boolean) || '';
+    }
+
+    function nearestFutureDate(dates){
+      const now = Date.now();
+      const valid = dates.map(d => Date.parse(d)).filter(t => !isNaN(t));
+      if(!valid.length) return '';
+      const future = valid.filter(t => t >= now);
+      const best = (future.length ? Math.min(...future) : Math.min(...valid));
+      const dt = new Date(best); return dt.toISOString().slice(0,10);
+    }
+
+    function earliestDate(dates){
+      const ts = dates.map(d => Date.parse(d)).filter(t => !isNaN(t));
+      if(!ts.length) return '';
+      const dt = new Date(Math.min(...ts)); return dt.toISOString().slice(0,10);
+    }
+
+    function avg(nums){
+      const arr = nums.filter(n => typeof n === 'number' && !isNaN(n));
+      if(!arr.length) return null;
+      const s = arr.reduce((a,b)=>a+b,0); return s/arr.length;
+    }
+
+    function mergeEvidence(allEvidences){
+      const seen = new Set(); const out = [];
+      for(const ev of allEvidences){
+        const key = (ev.url || ev.domain || ev.storyId) || Math.random();
+        if(seen.has(key)) continue;
+        seen.add(key); out.push(ev);
+      }
+      return out;
+    }
+
+    function ensemble(feeds){
+      // feeds: [{label, data}]
+      const allTheses = [];
+      const allBlotter = [];
+      const allEvi = [];
+      feeds.forEach(f => {
+        const d = f.data || {};
+        (d.theses||[]).forEach(t => allTheses.push({...t, __src:f.label}));
+        (d.blotter||[]).forEach(b => allBlotter.push({...b, __src:f.label}));
+        (d.evidence||[]).forEach(e => allEvi.push({...e, __src:f.label}));
+      });
+
+      // group theses by normalized key
+      const thesisGroups = new Map();
+      for(const t of allTheses){
+        const key = normKeyFromThesis(t);
+        if(!thesisGroups.has(key)) thesisGroups.set(key, []);
+        thesisGroups.get(key).push(t);
+      }
+
+      const mergedTheses = [];
+      const thesisKeyToId = new Map();
+
+      thesisGroups.forEach((group, key) => {
+        // choose title/ticker/status/tags/investmentCase
+        const ticker = mostCommonString(group.map(g=>g.ticker));
+        const title  = mostCommonString(group.map(g=>g.title));
+        const status = group.some(g=>g.status==='Actionable') ? 'Actionable' : mostCommonString(group.map(g=>g.status));
+        const tags   = Array.from(new Set(group.flatMap(g=>g.tags||[])));
+        // pick longest investmentCase (for richer content)
+        const investCases = group.map(g=>g.investmentCase||'').sort((a,b)=> b.length - a.length);
+        const investmentCase = investCases[0] || '';
+        // passedFilter union by label (keep first text for a label)
+        const pfMap = new Map();
+        group.forEach(g=> (g.passedFilter||[]).forEach(p => { if(!pfMap.has(p.label)) pfMap.set(p.label, p.text); }));
+        const passedFilter = Array.from(pfMap.entries()).map(([label,text])=>({label, text}));
+        // analyst consensus (first non-null)
+        const analystConsensus = (group.find(g=>g.analystConsensus) || {}).analystConsensus || null;
+        // best tradeConstruction
+        const tradeConstruction = pickMostCompleteTrade(group.map(g=>g.tradeConstruction));
+
+        const id = `ens-${ticker}-${title}`.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+        thesisKeyToId.set(key, id);
+
+        mergedTheses.push({
+          id, ticker, title, status, tags, investmentCase, passedFilter, analystConsensus, tradeConstruction
+        });
+      });
+
+      // merge blotter: group by thesis key based on mapping from original thesis
+      const blotterGroups = new Map();
+      for(const b of allBlotter){
+        // find its thesis
+        const originalThesis = allTheses.find(t => t.id === b.thesisId);
+        const key = originalThesis ? normKeyFromThesis(originalThesis) : (b.ticker + '|' + (b.structure||''));
+        if(!blotterGroups.has(key)) blotterGroups.set(key, []);
+        blotterGroups.get(key).push(b);
+      }
+
+      const mergedBlotter = [];
+      blotterGroups.forEach((group, key) => {
+        const structures = group.map(g=>g.structure);
+        const catalystDates = group.map(g=>g.catalystDate).filter(Boolean);
+        const validUntils   = group.map(g=>g.validUntil).filter(Boolean);
+        const confAvg = avg(group.map(g=>Number(g.conf)));
+        const rrAvg   = avg(group.map(g => (typeof g.rr==='number' ? g.rr : NaN)));
+
+        mergedBlotter.push({
+          ticker: mostCommonString(group.map(g=>g.ticker)),
+          structure: mostCommonString(structures),
+          catalystDate: nearestFutureDate(catalystDates),
+          validUntil: earliestDate(validUntils),
+          rr: rrAvg,                         // could be null if none provided
+          conf: confAvg || 0,
+          thesisId: thesisKeyToId.get(key) || `ens-${Math.random().toString(36).slice(2)}`
+        });
+      });
+
+      // merge evidence
+      const mergedEvidence = mergeEvidence(allEvi);
+
+      return {
+        lastUpdated: new Date().toISOString(),
+        blotter: mergedBlotter,
+        theses: mergedTheses,
+        evidence: mergedEvidence
+      };
+    }
+
+    // ===== hydration (single feed)
+    function hydrateFromData(data, sourceLabel=''){
+      // last updated
+      if(data.lastUpdated){
+        const d = new Date(data.lastUpdated);
+        $('#last-updated').textContent = (sourceLabel ? `[${sourceLabel}] ` : '') + 'Last updated: ' + d.toLocaleString();
+      } else {
+        $('#last-updated').textContent = (sourceLabel ? `[${sourceLabel}] ` : '') + 'Last updated: n/a';
+      }
+
+      const theses = Array.isArray(data.theses) ? data.theses : [];
+      const thesisMap = Object.fromEntries(theses.map(t => [t.id, t]));
+
+      // blotter
+      const bb = $('#blotter-body');
+      if(bb){
+        const rows = (data.blotter || []).map(r => `
+          <tr>
+            <td><strong>${esc(r.ticker)}</strong></td>
+            <td>${esc(r.structure)}</td>
+            <td>${esc(r.catalystDate)}</td>
+            <td>${esc(r.validUntil)}</td>
+            <td>${r?.rr==null ? 'N/A' : esc(Number(r.rr.toFixed ? r.rr.toFixed(2) : r.rr))}</td>
+            <td>${esc(Number(r.conf).toFixed(1))}</td>
+            <td><a href="#${esc(r.thesisId)}">Thesis</a> / <a href="#evidence-log">Evidence</a></td>
+          </tr>
+        `).join('');
+        bb.innerHTML = rows || `<tr><td colspan="7">No actionable items.</td></tr>`;
+        applyDataLabels(bb);
+
+        const table = $('#blotter-table');
+        table.querySelectorAll('thead th').forEach((th, idx)=>{
+          th.addEventListener('click', ()=>{
+            const asc = !th.classList.contains('th-sort-asc');
+            sortTableByColumn(table, idx, asc);
+          });
+        });
+      }
+
+      // theses
+      const tc = $('#theses-container');
+      if(tc){
+        const html = theses.map(t => {
+          const tags = (t.tags||[]).map(tag => `<span class="tag">${esc(tag)}</span>`).join('');
+          const pf = (t.passedFilter||[]).map(p => `<li><strong>${esc(p.label)}:</strong> ${esc(p.text)}</li>`).join('');
+          const trd = t.tradeConstruction || {};
+          const prettyKeys = {structure:'Structure', debit:'Cost (Debit)', maxLoss:'Max Loss', maxGain:'Max Gain', breakeven:'Breakeven', ivRank:'IV Rank', ivVs30d:'IV vs 30d', entry:'Entry', stop:'Stop', target1:'Target 1', target2:'Target 2'};
+          const tradeKV = Object.entries(trd)
+            .filter(([_,v]) => v!==null && v!=='' && v!==undefined)
+            .map(([k,v]) => `<div class="kv"><strong>${esc(prettyKeys[k]||k)}:</strong> <span>${esc(v)}</span></div>`)
+            .join('');
+          return `
+            <div class="card" id="${esc(t.id)}">
+              <h3>${esc(t.title)}
+                ${t.status ? `<span class="badge ${t.status==='Actionable'?'actionable':'incubating'}" style="margin-left:.5rem">${esc(t.status)}</span>` : ''}
+                ${t.ticker ? `<span class="tag" style="background:#2ca58d;color:#fff">${esc(t.ticker)}</span>` : ''}
+              </h3>
+              ${tags ? `<div style="margin:.25rem 0">${tags}</div>` : ''}
+              ${t.investmentCase ? `<p style="margin:.75rem 0 1rem">${esc(t.investmentCase)}</p>` : ''}
+              ${pf ? `<div class="info-box"><ul style="margin:.25rem 0;padding-left:1.1rem">${pf}</ul></div>` : ''}
+              ${t.analystConsensus ? `<div class="info-box"><strong>Analyst Consensus:</strong> ${esc(t.analystConsensus)}</div>` : ''}
+              ${tradeKV ? `<div class="info-box">${tradeKV}</div>` : ''}
+              <div class="feedback-prompt">Was this thesis helpful? <button>👍</button> <button>👎</button></div>
+            </div>
+          `;
+        }).join('');
+        tc.innerHTML = html || `<div class="card"><em>No theses available yet.</em></div>`;
+      }
+
+      // evidence
+      const eb = $('#evidence-body');
+      if(eb){
+        const rows = (data.evidence||[]).map(e => `
+          <tr>
+            <td>${esc(e.storyId)}</td>
+            <td>${esc(e.entity)}</td>
+            <td>${esc(e.eventType)}</td>
+            <td>${e?.domain ? `<a href="${esc(e.url||'#')}" rel="noopener" target="_blank">${esc(e.domain)}</a>` : ''}</td>
+          </tr>
+        `).join('');
+        eb.innerHTML = rows || `<tr><td colspan="4">No evidence logs.</td></tr>`;
+        applyDataLabels(eb);
+      }
+    }
+
+    function clearHydration(){
+      $('#blotter-body').innerHTML = '';
+      $('#theses-container').innerHTML = '';
+      $('#evidence-body').innerHTML = '';
+      $('#last-updated').textContent = '';
+    }
+
+    async function hydrateFromFeedChoice(choice){
+      clearHydration();
+      if(choice === 'auto'){
+        const {data,label} = await loadAuto();
+        if(!data){ failHydration('No feed found (add files under /data).'); return; }
+        hydrateFromData(data, label);
+        localStorage.setItem('moods_feed_choice', 'auto');
+        return;
+      }
+      if(choice === 'ensemble'){
+        // fetch all available feeds and merge
+        const pulls = await Promise.all(FEED_ORDER.map(url => tryFetch(url)));
+        const feeds = [];
+        FEED_ORDER.forEach((url, i) => { if(pulls[i]) feeds.push({label:url, data:pulls[i]}); });
+        if(!feeds.length){ failHydration('No feeds available for Ensemble.'); return; }
+        const merged = ensemble(feeds);
+        hydrateFromData(merged, 'Ensemble');
+        localStorage.setItem('moods_feed_choice', 'ensemble');
+        return;
+      }
+      // specific file
+      const data = await tryFetch(choice);
+      if(!data){ failHydration(`Feed not found: ${choice}`); return; }
+      hydrateFromData(data, choice.split('/').pop());
+      localStorage.setItem('moods_feed_choice', choice);
+    }
+
+    function failHydration(msg){
+      console.warn(msg);
+      $('#last-updated').textContent = msg;
+      $('#blotter-body').innerHTML = `<tr><td colspan="7">${msg}</td></tr>`;
+      $('#theses-container').innerHTML = `<div class="card"><em>${msg}</em></div>`;
+      $('#evidence-body').innerHTML = `<tr><td colspan="4">${msg}</td></tr>`;
+    }
+
+    // ===== init
+    (async function init(){
+      // enable sorting clicks
+      const table = $('#blotter-table');
+      table.querySelectorAll('thead th').forEach((th, idx)=>{
+        th.addEventListener('click', ()=>{
+          const asc = !th.classList.contains('th-sort-asc');
+          sortTableByColumn(table, idx, asc);
+        });
+      });
+
+      const selector = $('#feedSelector');
+      const saved = localStorage.getItem('moods_feed_choice') || 'auto';
+      selector.value = saved;
+      selector.addEventListener('change', e => hydrateFromFeedChoice(e.target.value));
+
+      await hydrateFromFeedChoice(saved);
     })();
   </script>
 </body>
 </html>
-
