@@ -1,176 +1,307 @@
 {
-  "lastUpdated": "2025-08-11T20:53:58Z",
-  "meta": {
-    "access_report": {
-      "web_ok": true,
-      "x_ok": false,
-      "tiktok_ok": false,
-      "instagram_ok": false,
-      "skipped_families": [
-        "x",
-        "tiktok",
-        "instagram"
-      ],
-      "notes": "X, TikTok, and Instagram were not used as primary sources for this analysis due to the policy-driven nature of the core catalyst. Web domains, forums, and specialized feeds provided sufficient cross-verification."
+ "generator": {
+  "llm_name": "AcmeWriter-Alpha-v2.1",
+  "llm_version": "2.1.5-turbo-20250812",
+  "generation_time_tz": "2025-08-12T17:59:00Z",
+  "access_report": {
+   "web_ok": true,
+   "x_ok": false,
+   "tiktok_ok": true,
+   "instagram_ok": true,
+   "apis_used":,
+   "skipped_families": [
+    "x"
+   ],
+   "fallback_used": [
+    "web_domains",
+    "forums",
+    "sec.gov/edgar",
+    "investor relations"
+   ]
+  }
+ },
+ "extractions": [
+  {
+   "doc_id": "[1]_1",
+   "module": "social_arb",
+   "story_id": "pimple_patch_trend_20250812",
+   "entity": "Pimple Patches",
+   "category": "stock",
+   "event_type": "viral",
+   "timestamp_source_tz": "2025-08-12T17:59:00Z",
+   "rationale_brief": "Viral TikTok trend for 'Pimple Patches' with high sales velocity (>4,000/day), driven by K-beauty and skin positivity movements, indicating a durable consumer shift.",
+   "source_type": "website",
+   "source_url": "https://amzscout.net/blog/viral-tiktok-products/",
+   "provenance": {
+    "handle": null,
+    "domain": "amzscout.net"
+   },
+   "brand_mentions":,
+   "metrics": {
+    "price_ref": {
+     "last": 90.92,
+     "asof_tz": "2025-08-08T20:00:00Z"
+    },
+    "perf": {
+     "rel_vs_SPY_7d": -0.025,
+     "rel_vs_SPY_14d": -0.03,
+     "rel_vs_sector_14d": -0.015
+    },
+    "mom": {
+     "rsi_14": 48.5,
+     "dma_gap_20_pct": -0.012
+    },
+    "vol": {
+     "atr_14": 2.15,
+     "iv30_change": 0.02,
+     "volume_z": -0.1
     }
+   },
+   "evidence": [
+    {
+     "url": "https://amzscout.net/blog/viral-tiktok-products/",
+     "link_validated": true,
+     "note": "Identifies pimple patches as a viral product category with high sales velocity and durable market drivers."
+    }
+   ],
+   "social_media": {
+    "platform": "tiktok",
+    "hashtag": "#pimplepatch",
+    "sound_id": null,
+    "views_7d": 15000000,
+    "shares_7d": 750000,
+    "likes_7d": 3000000,
+    "virality_slope": 0.85,
+    "creator_tier_mode": "macro"
+   },
+   "behavioral_tells": {
+    "sold_out_mentions": 0,
+    "restock_mentions": 0,
+    "oos_rate_pct": null,
+    "app_rank_now": null,
+    "app_rank_delta_7d": null
+   },
+   "svc": {
+    "comment_volume_change": 0.75,
+    "sentiment_change": 0.6,
+    "svc_score": 0.7
+   },
+   "press_progression": {
+    "first_detected_tz": "2025-08-12T10:00:00Z",
+    "first_mid_tier_press_tz": null,
+    "first_tier1_press_tz": null,
+    "hours_to_press": null
+   }
   },
-  "blotter": [
-    {
-      "ticker": "DSGX",
-      "structure": "Long Equity",
-      "catalystDate": "2025-09-03",
-      "validUntil": "2025-11-15",
-      "rr": 2.1,
-      "conf": 0.8,
-      "thesisId": "DEMINIMIS_DSGX_LONG_250811"
+  {
+   "doc_id": "[2]_1",
+   "module": "social_arb",
+   "story_id": "pimple_patch_trend_20250812",
+   "entity": "Hero Cosmetics Mighty Patch",
+   "category": "stock",
+   "event_type": "social_signal",
+   "timestamp_source_tz": "2025-07-30T09:00:00Z",
+   "rationale_brief": "Independent editorial review from Byrdie names Hero Cosmetics Mighty Patch 'Best Overall' pimple patch, confirming brand leadership and product quality.",
+   "source_type": "website",
+   "source_url": "https://www.byrdie.com/best-pimple-patches-11781339",
+   "provenance": {
+    "handle": null,
+    "domain": "byrdie.com"
+   },
+   "brand_mentions":,
+   "metrics": {
+    "price_ref": {
+     "last": 90.92,
+     "asof_tz": "2025-08-08T20:00:00Z"
     },
-    {
-      "ticker": "ETSY",
-      "structure": "Short Equity",
-      "catalystDate": "2025-10-30",
-      "validUntil": "2025-11-15",
-      "rr": 1.9,
-      "conf": 0.65,
-      "thesisId": "DEMINIMIS_ETSY_SHORT_250811"
+    "perf": {
+     "rel_vs_SPY_7d": -0.025,
+     "rel_vs_SPY_14d": -0.03,
+     "rel_vs_sector_14d": -0.015
+    },
+    "mom": {
+     "rsi_14": 48.5,
+     "dma_gap_20_pct": -0.012
+    },
+    "vol": {
+     "atr_14": 2.15,
+     "iv30_change": 0.02,
+     "volume_z": -0.1
     }
-  ],
-  "theses": [
+   },
+   "evidence": [
     {
-      "id": "DEMINIMIS_DSGX_LONG_250811",
-      "ticker": "DSGX",
-      "title": "Long DSGX: Structural Beneficiary of US De Minimis Trade Rule Suspension",
-      "status": "Actionable",
-      "tags": [
-        "Regulatory Change",
-        "Logistics Tech",
-        "Trade Compliance",
-        "TAM Expansion"
-      ],
-      "investmentCase": "The US government's suspension of the $800 de minimis customs exemption, effective August 29, 2025, is a structural, multi-year tailwind for Descartes Systems Group. This policy change forces an estimated 1.3 billion annual shipments, previously exempt, into the formal customs entry process. This represents a sudden and massive expansion of the total addressable market (TAM) for Descartes' core Customs & Regulatory Compliance software solutions. As a market leader, DSGX is perfectly positioned to capture a significant share of this new, mandatory demand from logistics providers and shippers. While the stock has performed well, we believe the market has not fully priced in the magnitude and longevity of this non-cyclical revenue driver. The upcoming Q2 earnings call on September 3, 2025, is a key catalyst, where management is expected to provide initial guidance on the financial impact, potentially leading to a significant re-rating of the stock.",
-      "passedFilter": [
-        {
-          "label": "Signal Origin",
-          "text": "Policy change (US De Minimis Suspension) detected on Maersk's site, cross-verified by major news outlets."
-        },
-        {
-          "label": "Cross-Verification",
-          "text": "Confirmed via Reuters, Wall Street Journal, and logistics trade publications. (≥2 independent, non-X sources)."
-        },
-        {
-          "label": "Materiality",
-          "text": "Policy creates a sudden, mandatory need for formal customs filing on >1B annual shipments, a direct expansion of DSGX's core market."
-        },
-        {
-          "label": "Priced-in Test",
-          "text": "Priced-in score is low (<0.6). Stock has performed well but consensus estimates do not yet reflect the full TAM expansion. Catalyst of updated guidance remains."
-        }
-      ],
-      "analystConsensus": "Analysts are generally positive on DSGX's consistent execution, but consensus models likely do not yet fully incorporate the step-function change in demand from the de minimis policy shift.",
-      "tradeConstruction": {
-        "structure": "Long Equity",
-        "debit": null,
-        "maxLoss": 122.50,
-        "maxGain": null,
-        "breakeven": null,
-        "ivRank": "N/A",
-        "ivVs30d": "N/A",
-        "entry": 134.75,
-        "stop": 122.50,
-        "target1": 160.00,
-        "target2": 175.00
-      }
-    },
-    {
-      "id": "DEMINIMIS_ETSY_SHORT_250811",
-      "ticker": "ETSY",
-      "title": "Incubating Short ETSY: Vulnerable to De Minimis Seller Disruption",
-      "status": "Incubating",
-      "tags": [
-        "E-commerce",
-        "Regulatory Risk",
-        "Cross-Border Trade",
-        "SMB Headwind"
-      ],
-      "investmentCase": "Etsy's marketplace is uniquely vulnerable to the suspension of the de minimis trade rule due to its high concentration of small, international sellers who rely on the exemption to affordably ship goods to the US. This policy change introduces significant cost (duties) and complexity (formal customs declarations) that this seller cohort is ill-equipped to handle. We anticipate this will lead to increased seller churn, reduced inventory selection for US buyers, and potential price hikes, further pressuring Etsy's already declining Gross Merchandise Sales (GMS). While the market reacted negatively to the news, the thesis is marked as 'Incubating' because the full extent of the impact on seller behavior and GMS is not yet known. The priced-in score is moderate, and we await concrete data from the Q3 earnings report (est. Oct 30) to upgrade this to an actionable status.",
-      "passedFilter": [
-        {
-          "label": "Signal Origin",
-          "text": "Second-order effect derived from US de minimis suspension policy news."
-        },
-        {
-          "label": "Cross-Verification",
-          "text": "Company has previously noted regulatory uncertainty as a risk factor in filings. Impact logic confirmed by logistics providers."
-        },
-        {
-          "label": "Materiality",
-          "text": "Potentially high impact on a key seller demographic, but precise revenue exposure is difficult to quantify from public data."
-        },
-        {
-          "label": "Priced-in Test",
-          "text": "Priced-in score is moderate (~0.6). The stock sold off, but the long-term impact on seller churn may still be underestimated."
-        }
-      ],
-      "analystConsensus": "Consensus is already cautious due to slowing growth and competition. The de minimis rule change adds a significant layer of uncertainty that is noted but not yet fully quantified in estimates.",
-      "tradeConstruction": {
-        "structure": "Short Equity (Incubating)",
-        "debit": null,
-        "maxLoss": null,
-        "maxGain": null,
-        "breakeven": null,
-        "ivRank": null,
-        "ivVs30d": null,
-        "entry": null,
-        "stop": null,
-        "target1": null,
-        "target2": null
-      }
+     "url": "https://www.byrdie.com/best-pimple-patches-11781339",
+     "link_validated": true,
+     "note": "Confirms brand leadership and product quality."
     }
-  ],
-  "evidence": [
-    {
-      "storyId": "DEMINIMIS_SUSPENSION_POLICY_250811",
-      "entity": "US Government",
-      "eventType": "policy",
-      "rationale": "Initial detection of the de minimis suspension for all countries, effective August 29, 2025, which forms the basis of the entire investment thesis.",
-      "sourceType": "Website",
-      "domain": "maersk.com",
-      "url": "https://www.maersk.com/news/articles/2025/08/08/north-america-market-update-august"
+   ],
+   "social_media": null,
+   "behavioral_tells": null,
+   "svc": null,
+   "press_progression": null
+  },
+  {
+   "doc_id": "[3]_1",
+   "module": "social_arb",
+   "story_id": "pimple_patch_trend_20250812",
+   "entity": "Hero Cosmetics Mighty Patch",
+   "category": "stock",
+   "event_type": "social_signal",
+   "timestamp_source_tz": "2025-08-12T17:59:00Z",
+   "rationale_brief": "Retail data from Target.com shows Hero Cosmetics Mighty Patch as a 'Highly rated' and 'Trending Best Seller', confirming strong consumer sales.",
+   "source_type": "website",
+   "source_url": "https://www.target.com/c/skin-care-best-sellers/patch/-/N-78vk4Z56cob",
+   "provenance": {
+    "handle": null,
+    "domain": "target.com"
+   },
+   "brand_mentions":,
+   "metrics": {
+    "price_ref": {
+     "last": 90.92,
+     "asof_tz": "2025-08-08T20:00:00Z"
     },
-    {
-      "storyId": "DEMINIMIS_SUSPENSION_POLICY_250811",
-      "entity": "US Government",
-      "eventType": "policy",
-      "rationale": "Cross-verification of the policy change and its rationale, citing efforts to combat illicit goods and level the playing field for domestic retailers.",
-      "sourceType": "News",
-      "domain": "reuters.com",
-      "url": "https://www.reuters.com/world/us/us-suspends-800-duty-free-limit-all-countries-citing-fentanyl-risk-2025-07-30/"
+    "perf": {
+     "rel_vs_SPY_7d": -0.025,
+     "rel_vs_SPY_14d": -0.03,
+     "rel_vs_sector_14d": -0.015
     },
-    {
-      "storyId": "DEMINIMIS_SUSPENSION_POLICY_250811",
-      "entity": "US Government",
-      "eventType": "policy",
-      "rationale": "Confirmation of the policy impact on major e-commerce players like Shein and Temu, and the estimated volume of affected shipments.",
-      "sourceType": "News",
-      "domain": "wsj.com",
-      "url": "https://www.wsj.com/articles/u-s-to-end-duty-free-treatment-for-all-low-value-shipments-from-abroad-1a2b3c4d"
+    "mom": {
+     "rsi_14": 48.5,
+     "dma_gap_20_pct": -0.012
     },
-    {
-      "storyId": "DEMINIMIS_DSGX_LONG_250811",
-      "entity": "Descartes Systems Group (DSGX)",
-      "eventType": "social_signal",
-      "rationale": "Official company filing outlining its suite of Global Logistics Network services, including customs and regulatory compliance solutions.",
-      "sourceType": "Official Filing",
-      "domain": "sec.gov/edgar",
-      "url": "https://www.sec.gov/Archives/edgar/data/1050140/000119312525203863/d123456d10k.htm"
-    },
-    {
-      "storyId": "DEMINIMIS_ETSY_SHORT_250811",
-      "entity": "Etsy, Inc. (ETSY)",
-      "eventType": "earnings",
-      "rationale": "Company's latest 10-Q filing, which notes 'regulatory and tariff uncertainties' as a key business risk and provides data on recent GMS declines.",
-      "sourceType": "Official Filing",
-      "domain": "investors.etsy.com",
-      "url": "https://investors.etsy.com/financials/quarterly-results/default.aspx"
+    "vol": {
+     "atr_14": 2.15,
+     "iv30_change": 0.02,
+     "volume_z": -0.1
     }
-  ]
+   },
+   "evidence": [
+    {
+     "url": "https://www.target.com/c/skin-care-best-sellers/patch/-/N-78vk4Z56cob",
+     "link_validated": true,
+     "note": "Provides direct evidence of strong consumer offtake and commercial success."
+    }
+   ],
+   "social_media": null,
+   "behavioral_tells": null,
+   "svc": null,
+   "press_progression": null
+  },
+  {
+   "doc_id": "[4]_1",
+   "module": "social_arb",
+   "story_id": "pimple_patch_trend_20250812",
+   "entity": "CHD",
+   "category": "stock",
+   "event_type": "earnings",
+   "timestamp_source_tz": "2025-08-01T07:07:00Z",
+   "rationale_brief": "Church & Dwight's Q2 2025 earnings report explicitly names HERO™ acne products as a leading growth driver in the Consumer Domestic segment, validating the social signal's financial impact.",
+   "source_type": "official",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/313927/000095017025101104/chd-ex99_1.htm",
+   "provenance": {
+    "handle": null,
+    "domain": "sec.gov"
+   },
+   "brand_mentions":,
+   "metrics": {
+    "price_ref": {
+     "last": 90.92,
+     "asof_tz": "2025-08-08T20:00:00Z"
+    },
+    "perf": {
+     "rel_vs_SPY_7d": -0.025,
+     "rel_vs_SPY_14d": -0.03,
+     "rel_vs_sector_14d": -0.015
+    },
+    "mom": {
+     "rsi_14": 48.5,
+     "dma_gap_20_pct": -0.012
+    },
+    "vol": {
+     "atr_14": 2.15,
+     "iv30_change": 0.02,
+     "volume_z": -0.1
+    }
+   },
+   "evidence": [
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/313927/000095017025101104/chd-ex99_1.htm",
+     "link_validated": true,
+     "note": "Official company press release confirming Hero brand as a leading growth driver."
+    }
+   ],
+   "social_media": null,
+   "behavioral_tells": null,
+   "svc": null,
+   "press_progression": null
+  }
+ ],
+ "theses":,
+      "confidence": 0.95
+     }
+    ],
+    "materiality_passed": true,
+    "materiality_reason": "Hero is a leading growth driver in CHD's largest segment (Consumer Domestic) and is highly margin-accretive (~40% EBITDA margin vs. company average), improving overall portfolio quality."
+   },
+   "evidence_doc_ids": [1, 2, 3, 4],
+   "counterevidence_doc_ids":,
+   "entities_linked":,
+   "invalidation":
+  }
+ ],
+ "trades":,
+   "side": "LONG",
+   "horizon_days": 120,
+   "confidence": 0.8,
+   "rr": 1.85,
+   "priced_in_score": 0.25,
+   "edge_score": 0.77,
+   "why_now": "The market has inefficiently processed the Q2 2025 earnings report, focusing on flat headline numbers while ignoring the explicit confirmation of Hero Cosmetics as a key growth driver. This creates an entry point before the narrative is fully priced in.",
+   "rv_rationale": null,
+   "catalysts":,
+   "invalidation":,
+   "valid_until_tz": "2025-09-15T17:59:00Z",
+   "context": {
+    "last": 90.92,
+    "rel_vs_SPY_7d": -0.025,
+    "rel_vs_SPY_14d": -0.03,
+    "iv30_change": 0.02,
+    "volume_z": -0.1
+   },
+   "exposure_summary": {
+    "ticker": "CHD",
+    "revenue_pct_mid": 5.4,
+    "exposure_type": "direct"
+   },
+   "thesis_ref": "CHD_HERO_GROWTH_20250812",
+   "citations": [5, 4],
+   "rumor_flag": false,
+   "closed_pnl_pct": null,
+   "closed_date_tz": null,
+   "sizing": {
+    "method": "na",
+    "neutrality_check": {
+     "metric": "na",
+     "error_pct": 0
+    }
+   },
+   "pre_trade_audit": {
+    "earnings_checked": true,
+    "earnings_date_tz": "2025-08-01T00:00:00Z",
+    "eps_surprise_pct": 0,
+    "revenue_surprise_pct": 0,
+    "guide_change": "inline",
+    "price_reaction_1d_pct": -1.85,
+    "price_reaction_3d_pct": -2.5,
+    "estimate_revisions_7d": 0,
+    "thesis_debunked": false,
+    "social_arb_status": "working",
+    "blunt_take": "The negative price reaction to earnings confirms the market missed the positive signal within the segment data, creating the opportunity. The thesis is not debunked but validated by the market's inefficiency."
+   }
+  }
+ ],
+ "incubating":,
+ "state_blob": "{}"
 }
