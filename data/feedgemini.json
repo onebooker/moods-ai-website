@@ -276,7 +276,7 @@
     "exposure_type": "direct"
    },
    "thesis_ref": "CHD_HERO_GROWTH_20250812",
-   "citations": [5, 4],
+   "citationas": [5, 4],
    "rumor_flag": false,
    "closed_pnl_pct": null,
    "closed_date_tz": null,
