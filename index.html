@@ -1,58 +1,377 @@
-<!DOCTYPE html>
-<html lang="en" style="scroll-behavior:smooth;">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Moods.ai | Actionable Narrative Intelligence</title>
-  <meta name="description" content="We spot under-priced narratives, validate them across web/social, and turn them into risk-defined trades." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moods.ai — Actionable Narrative Intelligence (Updated)</title>
   <style>
-    :root{
-      --primary-color:#0a2342; --secondary-color:#2ca58d; --background-color:#f4f4f9;
-      --card-background:#ffffff; --text-color:#333333; --header-text-color:#ffffff;
-      --border-color:#e0e0e0; --shadow-color:rgba(0,0,0,0.08);
-      --actionable-color:#28a745; --incubating-color:#fd7e14;
-      --success-color:#28a745; --loss-color:#dc3545;
-    }
+    :root{--bg:#0b0c10;--panel:#14161a;--muted:#9aa3af;--text:#e5e7eb;--accent:#4f46e5;--ok:#10b981;--bad:#ef4444;--warn:#f59e0b;--chip:#1f232b}
     *{box-sizing:border-box}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;margin:0;color:var(--text-color);background:var(--background-color);line-height:1.6}
-    .container{max-width:1200px;margin:0 auto;padding:1rem}
-    /* NAV */
-    nav{position:sticky;top:0;z-index:1000;background:var(--primary-color);color:var(--header-text-color);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;box-shadow:0 2px 5px rgba(0,0,0,.2)}
-    .logo{font-weight:800;font-size:1.25rem;color:#fff;text-decoration:none}
-    .nav-left{display:flex;align-items:center;gap:12px}
-    .nav-links{list-style:none;display:flex;gap:1rem;margin:0;padding:0}
-    .nav-links a{color:#fff;text-decoration:none;font-weight:500;padding:.4rem 0;border-bottom:2px solid transparent;transition:border-color .2s}
-    .nav-links a:hover{border-color:var(--secondary-color)}
-    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;z-index:1001}
-    .hamburger .bar{width:25px;height:3px;background:#fff;transition:.3s all}
-    .feedpicker{display:flex;align-items:center;gap:.5rem;color:#fff}
-    .feedpicker select{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:.35rem .5rem}
-    .feedpicker option{color:#000}
-    /* HERO */
-    header{background:#0a2342e0;color:#fff;text-align:center;padding:3rem 1.25rem}
-    header h1{margin:0;font-weight:800;font-size:2.1rem}
-    header p{max-width:760px;margin:.5rem auto 0;color:rgba(255,255,255,.9)}
-    #last-updated{opacity:.85;margin:.5rem 0 0}
-    /* TYPOGRAPHY/CARDS/TABLES */
-    h2{color:var(--primary-color);border-bottom:2px solid var(--secondary-color);padding-bottom:.6rem;margin:2rem 0 1rem;font-size:1.6rem}
-    h3{margin:.25rem 0 0}
-    .card{background:var(--card-background);border:1px solid var(--border-color);border-left:5px solid var(--border-color);border-radius:10px;padding:20px;margin:16px 0;box-shadow:0 8px 16px var(--shadow-color)}
-    .card:hover{border-left-color:var(--secondary-color)}
-    .cta-button{background:var(--secondary-color);color:#fff;border:none;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}
-    .cta-button:hover{opacity:.9}
-    .disclaimer-box{background:#fffbe6;border:1px solid #ffe58f;color:#8b5e00;border-radius:8px;padding:10px 14px;font-size:.92rem;margin:.75rem 0 1rem}
-    .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
-    table{width:100%;border-collapse:collapse;font-size:.95rem}
-    thead th{background:#f8f9fa;color:var(--primary-color);text-align:left;border-bottom:1px solid var(--border-color);padding:12px 12px;cursor:pointer}
-    tbody td{padding:12px 12px;border-bottom:1px solid var(--border-color);vertical-align:middle}
-    tbody tr:hover{background:#f6f7f9}
-    .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:800;color:#fff}
-    .badge.actionable{background:var(--actionable-color)} .badge.incubating{background:var(--incubating-color)}
-    .tag{display:inline-block;background:#e9eef9;color:#0a2342;padding:3px 8px;border-radius:999px;font-size:.75rem;margin:2px 6px 2px 0}
-    .info-box{margin-top:12px;padding:12px;background:#eef2f5;border-left:4px solid var(--secondary-color);border-radius:6px}
-    .kv{display:flex;gap:8px;align-items:flex-start;margin:.25rem 0}
-    .kv strong{min-width:120px}
-    .feedback-prompt{font-size:.9rem;color:#6c757d;margin-top:.5rem}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto;line-height:1.5;color:var(--text);background:linear-gradient(180deg,#0a0b11,#0b0c10)}
+    header{padding:24px 20px;position:sticky;top:0;background:rgba(11,12,16,.7);backdrop-filter:saturate(1.1) blur(12px);border-bottom:1px solid rgba(255,255,255,.06);z-index:10}
+    .container{max-width:1200px;margin:0 auto;padding:24px 20px}
+    h1{font-size:28px;margin:0}
+    h2{font-size:22px;margin:18px 0}
+    h3{font-size:18px;margin:12px 0}
+    p.muted{color:var(--muted)}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .select, .input{appearance:none;background:var(--panel);color:var(--text);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px}
+    .input{min-width:220px}
+    .select{min-width:180px}
+    .btn{background:var(--accent);color:white;border:none;border-radius:10px;padding:10px 14px;cursor:pointer}
+    .grid{display:grid;gap:16px}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    @media(max-width:960px){.grid-3{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+    .card{background:radial-gradient(1200px 400px at -20% -20%,rgba(79,70,229,.12),transparent 40%),var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px}
+    .card h3{margin-top:0}
+    .badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:12px;background:var(--chip);border:1px solid rgba(255,255,255,.08)}
+    .badge.ok{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.35)}
+    .badge.warn{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.35)}
+    .badge.bad{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.35)}
+    .beta{border:1px dashed rgba(255,255,255,.2)}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+    th{color:#cdd5df;font-weight:600}
+    tr:hover td{background:rgba(255,255,255,.02)}
+    .mono{font-variant-numeric:tabular-nums}
+    .pill{border-radius:999px;padding:2px 8px;background:rgba(255,255,255,.06);display:inline-block}
+    .flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .footer{color:var(--muted);font-size:12px;border-top:1px solid rgba(255,255,255,.06);padding-top:16px;margin-top:32px}
+    .tiny{font-size:12px;color:var(--muted)}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0e1116;border:1px solid rgba(255,255,255,.08);padding:2px 6px;border-radius:6px}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0 4px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container row" style="justify-content:space-between">
+      <div>
+        <h1>Moods.ai — Actionable Narrative Intelligence</h1>
+        <div class="tiny">© Moods.ai — BETA. Educational content, not investment advice.</div>
+      </div>
+      <div class="row">
+        <label class="tiny">Feed</label>
+        <select id="feedSelect" class="select">
+          <option>All LLMs</option>
+          <option>This LLM</option>
+          <option>External</option>
+        </select>
+        <input id="search" class="input" placeholder="Search tickers / strategies / companies" />
+      </div>
+    </div>
+  </header>  <main class="container">
+    <section id="blotter">
+      <div class="section-head">
+        <h2>Actionable Trade Blotter</h2>
+        <span class="tiny">Populated by feed selection. Shows ALL actionable <span class="kbd">status=OPEN</span> across feeds.</span>
+      </div>
+      <table id="blotterTable">
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Side / Structure</th>
+            <th>Why Now</th>
+            <th>Valid Until</th>
+            <th>R:R</th>
+            <th>Conf.</th>
+            <th>LLM</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section><section id="track" style="margin-top:28px">
+  <div class="section-head">
+    <h2>Track Record (Closed Trades)</h2>
+    <span class="badge beta">Beta</span>
+  </div>
+  <table id="trackTable">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Strategy</th>
+        <th>Entry</th>
+        <th>Exit</th>
+        <th>Realized P/L</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section id="theses" style="margin-top:28px">
+  <div class="section-head">
+    <h2>Theses</h2>
+    <span class="tiny">Cards include <strong>company name + ticker</strong> and <strong>signal origin date</strong>. Explanations must be detailed (≥120 words).</span>
+  </div>
+  <div id="thesesGrid" class="grid grid-2"></div>
+</section>
+
+<section id="incubating" style="margin-top:28px">
+  <div class="section-head">
+    <h2>Incubating Ideas</h2>
+    <span class="tiny">These don’t meet confirmation/priced-in gates yet.</span>
+  </div>
+  <div id="incubatingGrid" class="grid grid-2"></div>
+</section>
+
+<section id="evidence" style="margin-top:28px">
+  <div class="section-head">
+    <h2>Evidence Log</h2>
+    <span class="tiny">Links are validated at generation time and flagged if not article-level.</span>
+  </div>
+  <table id="evidenceTable">
+    <thead>
+      <tr>
+        <th>Story ID</th>
+        <th>Entity</th>
+        <th>Event</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<div class="footer">Last updated <span id="genTime"></span> • Feed: <span id="feedName">All LLMs</span></div>
+
+  </main>  <script>
+    // === Configuration ===
+    const CURRENT_LLM = "GPT-5 Thinking"; // used for "This LLM" filter
+
+    // === Demo data matching updated schema (replace with your live JSON) ===
+    const DATA = {
+      generator: { llm_name: CURRENT_LLM, llm_version: "5.0", generation_time_tz: "2025-08-12T10:05:00 Europe/Zurich" },
+      theses: [
+        {
+          id: "thesis_chd",
+          story_id: "chd_enzyme_trend",
+          title: "Enzyme Cleaners Momentum Benefits Church & Dwight",
+          company_name: "Church & Dwight Co., Inc.",
+          ticker: "CHD",
+          claim: "Social-driven shift toward enzyme-based cleaning supports OxiClean & specialty portfolio pricing power.",
+          explanation_detail:
+            "Over the last 10 days, social and forum chatter shows a measurable pivot from traditional bleach-based products to enzyme-based cleaners, often citing efficacy on pet stains and odor. Retailer SKU pages for OxiClean and niche enzyme brands show rising review velocity and ‘out-of-stock’ flags in certain sizes. Church & Dwight is uniquely positioned through OxiClean and specialty brands to capture demand. Transcripts from the last two quarters emphasized elasticity-resilient categories and targeted promo pullbacks. With raw material costs stable and shelf resets slated for late Q3, we expect a mix shift that expands gross margin by ~30–50 bps near-term. Risks: trade-down if consumer budgets tighten, and private label encroachment.",
+          forward_catalyst: "Q3 shelf resets at top 3 retailers; retailer promo calendars; CHD investor day commentary.",
+          signal_origin_tz: "2025-08-08T07:30:00 Europe/Zurich",
+          expiry_tz: "2025-10-01T00:00:00 Europe/Zurich",
+          posterior_prob: 0.58,
+          market_implied_prob: 0.42,
+          edge_gap_pp: 16,
+          confidence: 0.64,
+          source_diversity_score: 0.7,
+          confirmation_score: 0.66,
+          priced_in_score: 0.45,
+          novelty_stage: "emerging",
+          hours_to_press_at_creation: 72,
+          exposure: {
+            mapping: [{
+              brand: "OxiClean",
+              company: "Church & Dwight Co., Inc.",
+              ticker: "CHD",
+              exposure_type: "direct",
+              revenue_pct_est: { low: 8, mid: 12, high: 15 },
+              evidence_urls: [
+                "https://investor.churchdwight.com/financials/quarterly-results/default.aspx",
+                "https://www.sec.gov/ixviewer/doc?action=display&source=content&source_url=https%3A%2F%2Fwww.sec.gov%2FArchives%2Fedgar%2Fdata%2F313927%2F0000313927-20240501x10q.htm"
+              ],
+              confidence: 0.55,
+            }],
+            materiality_passed: true,
+            materiality_reason: "Portfolio exposure to enzyme/oxidizer cleaners ≥ 10% with pricing leverage and shelf resets in Q3.",
+          },
+          evidence_doc_ids: ["doc_chd_1", "doc_chd_2"],
+          counterevidence_doc_ids: [],
+          entities_linked: ["Walmart", "Target"],
+          invalidation: ["Promo re-acceleration compresses price/mix","Private label growth surpasses expectations"],
+        },
+        {
+          id: "thesis_dsgx",
+          story_id: "dsgx_border_automation",
+          title: "Regulatory Push for Digital Customs Favors Descartes Systems Group",
+          company_name: "Descartes Systems Group Inc.",
+          ticker: "DSGX",
+          claim: "Heightened border security filings and e-manifest mandates drive module adoption and upsell in Global Logistics Network.",
+          explanation_detail:
+            "Multiple customs authorities (US, EU, UK) have advanced pilots and deadlines for electronic advance data and security filings, increasing compliance complexity for shippers and brokers. Over the last two weeks, gov. portals and trade publications flagged stepped-up enforcement, while forwarder forums highlight capacity constraints among smaller software vendors. Descartes’ GLN and customs/parcel suites are well positioned to capture incremental ARR via new logos and cross-sell to existing TMS/WMS customers. With net revenue retention historically >110% and healthy free cash flow conversion, we see operating leverage as volumes normalize. Watchlist: any delay/rollback in rules or price pressure from point-solution competitors.",
+          forward_catalyst: "EU ICS2 deadlines; US ACE updates; customer wins/press releases.",
+          signal_origin_tz: "2025-08-07T10:15:00 Europe/Zurich",
+          expiry_tz: "2025-10-15T00:00:00 Europe/Zurich",
+          posterior_prob: 0.62,
+          market_implied_prob: 0.45,
+          edge_gap_pp: 17,
+          confidence: 0.68,
+          source_diversity_score: 0.8,
+          confirmation_score: 0.72,
+          priced_in_score: 0.48,
+          novelty_stage: "emerging",
+          hours_to_press_at_creation: 96,
+          exposure: {
+            mapping: [{
+              brand: "GLN / Customs Suite",
+              company: "Descartes Systems Group Inc.",
+              ticker: "DSGX",
+              exposure_type: "direct",
+              revenue_pct_est: { low: 12, mid: 18, high: 25 },
+              evidence_urls: [
+                "https://www.descartes.com/company/investors",
+                "https://ec.europa.eu/taxation_customs/eu-customs-single-window_en"
+              ],
+              confidence: 0.6,
+            }],
+            materiality_passed: true,
+            materiality_reason: "Compliance modules contribute double-digit revenue with sticky upsell dynamics and regulatory tailwinds.",
+          },
+          evidence_doc_ids: ["doc_dsgx_1", "doc_dsgx_2"],
+          counterevidence_doc_ids: [],
+          entities_linked: ["US CBP", "EU DG TAXUD"],
+          invalidation: ["Regulatory delays beyond current fiscal year","Broad-based freight downturn delays seat expansions"],
+        },
+      ],
+      trades: [
+        { id:"t_chd_long", story_id:"chd_enzyme_trend", type:"single", instrument_or_strategy:"Long CHD equity", llm_origin: CURRENT_LLM, status:"OPEN", legs:[{ticker:"CHD", dir:"LONG", weight_pct:100, entry_price:106.4, stop_price:101.8, target_price_1:114.0, target_price_2:118.0}], side:"LONG", horizon_days:20, confidence:0.62, rr:2.1, priced_in_score:0.45, edge_score:0.61, why_now:"Shelf resets + stable inputs + social momentum suggest positive mix", catalysts:["Retail resets","IR commentary"], invalidation:["Promo re-acceleration","Negative elasticity"], valid_until_tz:"2025-08-28T23:59:00 Europe/Zurich", context:{ last:106.4, rel_vs_SPY_7d:0.02, rel_vs_SPY_14d:0.05, iv30_change:0.03, volume_z:1.2 }, exposure_summary:{ ticker:"CHD", revenue_pct_mid:12, exposure_type:"direct" }, thesis_ref:"thesis_chd", citations:[], rumor_flag:false, closed_pnl_pct:null, closed_date_tz:null, sizing:{ method:"na", neutrality_check:{ metric:"na", error_pct:0 } } },
+        { id:"t_dsgx_long", story_id:"dsgx_border_automation", type:"single", instrument_or_strategy:"Long DSGX equity", llm_origin:"External-LLM-A", status:"OPEN", legs:[{ticker:"DSGX", dir:"LONG", weight_pct:100, entry_price:94.3, stop_price:89.2, target_price_1:103.0, target_price_2:108.0}], side:"LONG", horizon_days:20, confidence:0.64, rr:2.0, priced_in_score:0.48, edge_score:0.63, why_now:"Regulatory timelines near; sales cycles accelerating", catalysts:["ICS2 milestones","Customer wins"], invalidation:["Delayed mandates"], valid_until_tz:"2025-08-30T23:59:00 Europe/Zurich", context:{ last:94.3, rel_vs_SPY_7d:0.01, rel_vs_SPY_14d:0.04, iv30_change:0.02, volume_z:1.0 }, exposure_summary:{ ticker:"DSGX", revenue_pct_mid:18, exposure_type:"direct" }, thesis_ref:"thesis_dsgx", citations:[], rumor_flag:false, closed_pnl_pct:null, closed_date_tz:null, sizing:{ method:"na", neutrality_check:{ metric:"na", error_pct:0 } } },
+        { id:"t_popmart_closed", story_id:"popmart_labubu", type:"single", instrument_or_strategy:"Long 9992.HK", llm_origin:"External-LLM-B", status:"CLOSED", legs:[{ticker:"9992.HK", dir:"LONG", weight_pct:100, entry_price:271.2, stop_price:249.0, target_price_1:316.0, target_price_2:340.0}], side:"LONG", horizon_days:20, confidence:0.7, rr:2.0, priced_in_score:0.7, edge_score:0.65, why_now:"Earnings momentum", catalysts:["H1 results"], invalidation:["Trend fades"], valid_until_tz:"2025-08-11T23:59:00 Europe/Zurich", context:{ last:315.0, rel_vs_SPY_7d:0.05, rel_vs_SPY_14d:0.10, iv30_change:-0.05, volume_z:2.5 }, exposure_summary:{ ticker:"9992.HK", revenue_pct_mid:40, exposure_type:"direct" }, thesis_ref:"thesis_popmart", citations:[], rumor_flag:false, closed_pnl_pct:16.1, closed_date_tz:"2025-08-11T16:00:00 Asia/Hong_Kong", sizing:{ method:"na", neutrality_check:{ metric:"na", error_pct:0 } } }
+      ],
+      extractions: [
+        {
+          story_id: "chd_enzyme_trend",
+          entity: "Church & Dwight Co., Inc.",
+          event_type: "social_signal",
+          evidence: [
+            { url: "https://investor.churchdwight.com/financials/quarterly-results/default.aspx", link_validated: true, note: "IR page (quarterly results)" },
+            { url: "https://www.sec.gov/ixviewer/doc?action=display&source=content&source_url=https%3A%2F%2Fwww.sec.gov%2FArchives%2Fedgar%2Fdata%2F313927%2F0000313927-20240501x10q.htm", link_validated: true, note: "10-Q article-level" }
+          ]
+        },
+        {
+          story_id: "dsgx_border_automation",
+          entity: "Descartes Systems Group Inc.",
+          event_type: "policy",
+          evidence: [
+            { url: "https://www.descartes.com/company/investors", link_validated: true, note: "IR page" },
+            { url: "https://ec.europa.eu/taxation_customs/eu-customs-single-window_en", link_validated: true, note: "EU official" }
+          ]
+        }
+      ],
+      incubating: [
+        { id: "inc_meta_rumor", story_id: "meta_short_viral", entity: "Meta Platforms, Inc.", reason: "Viral short campaign lacks non-social corroboration", edge_score: 0.4, priced_in_score: 0.0, what_to_watch: ["Hashtag volume","Press pickup"], review_date_tz: "2025-08-18T00:00:00 Europe/Zurich", rumor_flag: true }
+      ]
+    };
+
+    // === Helpers ===
+    const el = (sel) => document.querySelector(sel);
+    const fmt = (d) => d ? new Date(d).toLocaleString() : "—";
+    const isActionable = (t) => t.status === "OPEN" && t.priced_in_score < 0.6 && !t.rumor_flag;
+    function feedFilter(trade, feed){
+      if(feed === "All LLMs") return true;
+      if(feed === "This LLM") return trade.llm_origin === CURRENT_LLM;
+      if(feed === "External") return trade.llm_origin !== CURRENT_LLM;
+      return true;
+    }
+    function articleLevel(url){
+      try{ const u = new URL(url); return u.pathname.split("/").filter(Boolean).length >= 2; }catch(e){ return false }
+    }
+
+    // === Renderers ===
+    function renderBlotter(){
+      const feed = el('#feedSelect').value; el('#feedName').textContent = feed;
+      const q = el('#search').value.toLowerCase();
+      const rows = DATA.trades
+        .filter(t => isActionable(t) && feedFilter(t, feed))
+        .filter(t => !q || t.instrument_or_strategy.toLowerCase().includes(q) || t.legs.some(l=>l.ticker.toLowerCase().includes(q)))
+        .sort((a,b)=> new Date(b.valid_until_tz) - new Date(a.valid_until_tz))
+        .map(t => {
+          const leg = t.legs[0];
+          const side = `${leg.dir} / ${t.type}`;
+          return `<tr>
+            <td class="mono">${leg.ticker}</td>
+            <td>${side}</td>
+            <td>${t.why_now}</td>
+            <td class="mono">${fmt(t.valid_until_tz)}</td>
+            <td class="mono">${(t.rr||0).toFixed(2)}</td>
+            <td>${Math.round((t.confidence||0)*100)}%</td>
+            <td><span class="pill">${t.llm_origin}</span></td>
+          </tr>`;
+        }).join('');
+      el('#blotterTable tbody').innerHTML = rows || `<tr><td colspan="7" class="tiny">No actionable trades for this feed.</td></tr>`;
+    }
+
+    function renderTrack(){
+      const rows = DATA.trades.filter(t=>t.status==="CLOSED").map(t=>{
+        const leg = t.legs[0];
+        const status = (t.closed_pnl_pct||0) >= 0 ? '<span class="badge ok">Win</span>' : '<span class="badge bad">Loss</span>';
+        return `<tr>
+          <td class="mono">${leg.ticker}</td>
+          <td>${t.instrument_or_strategy}</td>
+          <td class="mono">${fmt(leg.entry_date_tz || t.valid_until_tz)}</td>
+          <td class="mono">${fmt(t.closed_date_tz)}</td>
+          <td class="mono">${(t.closed_pnl_pct ?? 0).toFixed(1)}%</td>
+          <td>${status}</td>
+        </tr>`;
+      }).join('');
+      el('#trackTable tbody').innerHTML = rows || `<tr><td colspan="6" class="tiny">No closed trades yet.</td></tr>`;
+    }
+
+    function renderTheses(){
+      const cards = DATA.theses.map(th=>{
+        const explainOk = (th.explanation_detail||'').split(/\s+/).length >= 120;
+        return `<div class="card">
+          <h3>${th.title}</h3>
+          <div class="tiny">${th.company_name} (<strong>${th.ticker}</strong>) • Signal origin ${fmt(th.signal_origin_tz)}</div>
+          <p style="margin:10px 0">${th.explanation_detail}</p>
+          <div class="flex">${explainOk ? '<span class="badge ok">Explanation: OK</span>' : '<span class="badge warn">Needs more detail (≥120 words)</span>'}
+            <span class="badge">Stage: ${th.novelty_stage}</span>
+            <span class="badge">Edge +${th.edge_gap_pp}pp</span>
+          </div>
+          <div class="flex" style="margin-top:10px">${(th.exposure?.mapping?.[0]?.evidence_urls||[]).map(u=>{
+            const art = articleLevel(u);
+            return `<a href="${u}" target="_blank" rel="noreferrer" class="badge ${art?'ok':'warn'}">${new URL(u).hostname}${art?'':' • not article-level'}</a>`
+          }).join('')}</div>
+        </div>`;
+      }).join('');
+      el('#thesesGrid').innerHTML = cards || '<div class="tiny">No theses yet.</div>';
+    }
+
+    function renderIncubating(){
+      const cards = (DATA.incubating||[]).map(i=>
+        `<div class="card">
+          <h3>${i.entity}</h3>
+          <div class="tiny">Review ${fmt(i.review_date_tz)} • Rumor ${i.rumor_flag? 'Yes':'No'}</div>
+          <p style="margin:10px 0">${i.reason}</p>
+          <div class="flex"><span class="badge">Edge ${i.edge_score}</span><span class="badge">Priced-in ${i.priced_in_score}</span></div>
+        </div>`
+      ).join('');
+      el('#incubatingGrid').innerHTML = cards || '<div class="tiny">No incubating items.</div>';
+    }
+
+    function renderEvidence(){
+      const rows = (DATA.extractions||[]).flatMap(ex => (ex.evidence||[]).map(ev => {
+        const host = (()=>{ try{return new URL(ev.url).hostname}catch(e){return ev.url} })();
+        const badge = ev.link_validated ? '<span class="badge ok">validated</span>' : '<span class="badge warn">unverified</span>';
+        const level = articleLevel(ev.url) ? '' : ' <span class="badge warn">not article-level</span>';
+        return `<tr>
+          <td class="mono">${ex.story_id}</td>
+          <td>${ex.entity}</td>
+          <td>${ex.event_type}</td>
+          <td><a href="${ev.url}" target="_blank" rel="noreferrer">${host}</a> ${badge}${level}</td>
+        </tr>`;
+      }));
+      el('#evidenceTable tbody').innerHTML = rows.length ? rows.join('') : '<tr><td colspan="4" class="tiny">No evidence yet.</td></tr>';
+    }
+
+    function init(){
+      document.getElementById('genTime').textContent = fmt(DATA.generator.generation_time_tz);
+      renderBlotter();
+      renderTrack();
+      renderTheses();
+      renderIncubating();
+      renderEvidence();
+      document.getElementById('feedSelect').addEventListener('change', renderBlotter);
+      document.getElementById('search').addEventListener('input', renderBlotter);
+    }
+    init();
+  </script></body>
+</html>    .feedback-prompt{font-size:.9rem;color:#6c757d;margin-top:.5rem}
     #back-to-top{position:fixed;bottom:20px;right:20px;background:var(--secondary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.2)}
     footer{text-align:center;padding:20px;color:#6c757d}
     /* MOBILE */
